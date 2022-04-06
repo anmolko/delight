@@ -4,10 +4,10 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="@if(!empty(@$setting_data->website_description)) {{ucwords(@$setting_data->website_description)}} @else White Pearl @endif">
-    <meta name="author" content="White Pearl">
-    <link rel="canonical" href="https://canosoft.com.np//" />
-    <title>@yield('title') - @if(!empty(@$setting_data->website_name)) {{ucwords(@$setting_data->website_name)}} @else White Pearl @endif </title>
+    <meta name="description" content="@if(!empty(@$setting_data->website_description)) {{ucwords(@$setting_data->website_description)}} @else Delight Foreign Manpower @endif">
+    <meta name="author" content="Delight Foreign Manpower">
+    <link rel="canonical" href="http://delightforeign.com/" />
+    <title>@yield('title') - @if(!empty(@$setting_data->website_name)) {{ucwords(@$setting_data->website_name)}} @else Delight Foreign Manpower @endif </title>
     <link rel="icon" type="image/x-icon" href="<?php if(@$setting_data->favicon){?>{{asset('/images/uploads/settings/'.@$setting_data->favicon)}}<?php }else{ echo "images/favicon.ico"; }?>">
 
 
