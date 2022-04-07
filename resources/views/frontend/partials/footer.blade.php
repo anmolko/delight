@@ -15,7 +15,7 @@
                             <ul class="contact-list">
                                 <li><span class="fa fa-map-marker"></span>@if(!empty(@$setting_data->address)) {{ucwords(@$setting_data->address)}} @else Putalisadak, Kathmandu, Nepal @endif </li>
                                 <li><span class="fa fa-envelope"></span> <a href="mailto:{{@$setting_data->email}}">@if(!empty(@$setting_data->email)) {{ucwords(@$setting_data->email)}} @else demo@email.com @endif</a></li>
-                                <li><span class="fa fa-phone-volume"></span><a href="tel:{{@$setting_data->viber}}">@if(!empty(@$setting_data->viber)) {{ucwords(@$setting_data->viber)}} @else 987654321 @endif</a></li>
+                                <li><span class="fa fa-phone-volume"></span><a href="tel:{{@$setting_data->phone}}">@if(!empty(@$setting_data->phone)) {{ucwords(@$setting_data->phone)}} @else 987654321 @endif</a></li>
                             </ul>
                         </div>
                     </div>
@@ -31,13 +31,11 @@
                                 <!--Footer Column-->
                                 <div class="widget-content">
                                     <ul class="list-style-two">
-                                        <li><a href="#">All Services</a></li>
-                                        <li><a href="#">General Carpentry</a></li>
-                                        <li><a href="#">Furniture Remod..</a></li>
-                                        <li><a href="#">Hang Paintings</a></li>
-                                        <li><a href="#">Manufactur Furni..</a></li>
-                                        <li><a href="#">Commercial work</a></li>
-                                        <li><a href="#">Furniture Design</a></li>
+                                        @if(!empty($servicesfooter))
+                                            @foreach($servicesfooter as $services)
+                                                <li><a href="{{route('service.single',$services->slug)}}"  >{{ucwords(@$services->name)}}</a></li>
+                                            @endforeach
+                                        @endif
                                     </ul>
                                 </div>
                             </div>
@@ -106,7 +104,8 @@
     <!--Footer Bottom-->
     <div class="footer-bottom">
         <div class="auto-container">
-            <div class="copyright-text">Copyrights 2022. All Rights are Reserved by <a href="/">Bold-touch</a></div>
+            <div class="copyright-text">Copyrights 2022. All Rights are Reserved by <a href="/">@if(!empty(@$setting_data->website_name)) {{ucwords(@$setting_data->website_name)}} @endif</a> | Developed  by <a
+										rel="noopener" target="_blank" href="https://www.canosoft.com.np/">Canosoft Techonology </a></div>
         </div>
     </div>
 </footer>

@@ -17,7 +17,6 @@
     <link rel="icon" href="<?php if(@$setting_data->favicon){?>{{asset('/images/uploads/settings/'.@$setting_data->favicon)}}<?php }?>" type="image/x-icon">
 
 
-
     <!-- Stylesheets -->
     <link href="{{asset('assets/frontend/css/bootstrap.css')}}" rel="stylesheet">
     <link href="{{asset('assets/frontend/css/style.css')}}" rel="stylesheet">
@@ -104,77 +103,55 @@
                         <nav class="main-menu navbar-expand-md navbar-light">
                             <div class="collapse navbar-collapse clearfix" id="navbarSupportedContent">
                                 <ul class="navigation clearfix">
-                                    <li class="current dropdown"><a href="#">Home</a>
-                                        <ul>
-                                            <li class="dropdown"><a href="#">Header Styles</a>
-                                                <ul>
-                                                    <li><a href="#">Header Style One</a></li>
-                                                    <li><a href="#">Header Style Two</a></li>
-                                                    <li><a href="#">Header Style Three</a></li>
-                                                    <li><a href="#">Header Style Four</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="">Home Style One</a></li>
-                                            <li><a href="#">Home Style Two</a></li>
-                                            <li><a href="#">Home Style Three</a></li>
-                                            <li><a href="#">Home One Pager</a></li>
-                                            <li><a href="#">Home Video Banner</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="dropdown"><a href="#">About</a>
-                                        <ul>
-                                            <li><a href="#">About Us</a></li>
-                                            <li><a href="#">FAQ's</a></li>
-                                            <li><a href="#">Team</a></li>
-                                            <li><a href="#">Pricing</a></li>
-                                            <li><a href="#">Coming Soon</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="dropdown"><a href="#">Services</a>
-                                        <ul>
-                                            <li><a href="#">All Services</a></li>
-                                            <li><a href="#">General Carpentry</a></li>
-                                            <li><a href="#">Furniture Remodeling</a></li>
-                                            <li><a href="#">Hang Paintings</a></li>
-                                            <li><a href="#">Manufactur Furniture</a></li>
-                                            <li><a href="#">Commercial work</a></li>
-                                            <li><a href="#">Furniture Design</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="dropdown"><a href="#">Projects</a>
-                                        <ul>
-                                            <li><a href="#">Projects</a></li>
-                                            <li><a href="#">Project Detail</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="dropdown"><a href="#">Blog</a>
-                                        <ul>
-                                            <li><a href="#">Blog with Sidebar</a></li>
-                                            <li><a href="#">Blog Grid View</a></li>
-                                            <li><a href="#">Blog Detail</a></li>
-                                            <li><a href="#">404 Error</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="dropdown"><a href="#">Shop</a>
-                                        <ul>
-                                            <li><a href="#">Shop</a></li>
-                                            <li><a href="#">Product Details</a></li>
-                                            <li><a href="#">Cart Page</a></li>
-                                            <li><a href="#">Checkout Page</a></li>
-                                            <li><a href="#">Registration Page</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="#">Contact</a></li>
+                                    <li class="{{request()->is('/') ? 'current' : ''}} "> <a href="/" >Home</a></li>
+                                    @if(!empty($top_nav_data))
+                                        @foreach($top_nav_data as $nav)
+                                        @if(!empty($nav->children[0]))
+
+                                        <li class="dropdown {{request()->is(@$nav->slug)  ? 'current' : ''}} ">
+                                            <a href="/" >@if(@$nav->name == NULL) {{ucwords(@$nav->title)}} @else {{ucwords(@$nav->name)}} @endif </a>
+
+                                            <ul>
+                                                @foreach($nav->children[0] as $childNav)
+                                                @if($childNav->type == 'custom')
+                                                    <li  class="{{request()->is(@$childNav->slug) ? 'current' : ''}}">
+                                                        <a href="/{{@$childNav->slug}}"  @if(@$childNav->target !== NULL) target="_blank" @endif >@if($childNav->name == NULL) {{@$childNav->title}} @else {{@$childNav->name}} @endif</a></li>
+                                                @elseif($childNav->type == 'post')
+                                                <li  class="{{request()->is('blog/'.@$childNav->slug) ? 'current' : ''}}  ">
+                                                        <a href="{{url('blog')}}/{{@$childNav->slug}}"  >@if(@$childNav->name == NULL) {{@$childNav->title}} @else {{@$childNav->name}} @endif</a></li>
+                                                @else
+                                                <li class="{{request()->is(@$childNav->slug) ? 'current' : ''}} ">
+                                                        <a href="{{url('/')}}/{{@$childNav->slug}}" >@if($childNav->name == NULL) {{@$childNav->title}} @else {{@$childNav->name}} @endif</a></li>
+                                                @endif
+                                                @endforeach
+
+                                            </ul>
+                                        </li>
+
+                                        @else
+                                            @if($nav->type == 'custom')
+                                            <li  class="{{request()->is(@$nav->slug.'*') ? 'current' : ''}} ">
+                                                <a href="/{{$nav->slug}}" @if($nav->target == NULL)  @else target="{{$nav->target}}" @endif>@if($nav->name == NULL) {{$nav->title}} @else {{$nav->name}} @endif</a></li>
+                                            @elseif($nav->type == 'post')
+                                            <li  class="{{request()->is('blog/'.@$nav->slug.'*') ? 'current' : ''}} ">
+                                                <a href="{{url('blog')}}/{{$nav->slug}}"> @if($nav->name == NULL) {{$nav->title}} @else {{$nav->name}} @endif</a></li>
+                                            @else
+                                            <li  class="{{request()->is(@$nav->slug.'*') ? 'current' : ''}} ">
+                                                <a href="{{url('/')}}/{{$nav->slug}}"> @if($nav->name == NULL) {{$nav->title}} @else {{$nav->name}} @endif</a></li>
+                                            @endif
+                                        @endif
+                                        @endforeach
+                                    @endif
+
                                 </ul>
                             </div>
                         </nav>
                         <!-- Main Menu End-->
 
                         <div class="outer-box">
-
                             <!-- Btn Box -->
                             <div class="btn-box">
-                                <a href="#" class="theme-btn btn-style-one"><span class="btn-title">Reach out</span> </a>
+                                <a href="{{route('contact')}}" class="theme-btn btn-style-one"><span class="btn-title">Reach out</span> </a>
                             </div>
                         </div>
                     </div>

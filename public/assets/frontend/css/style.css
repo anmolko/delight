@@ -12073,3 +12073,8 @@ form .response .text-info {
 .box-layout .coming-soon .content {
     position: relative;
 }
+
+.main-menu .navigation>li>ul>li.current>a {
+    color: #ffffff;
+    background-color: #223f98;
+}
