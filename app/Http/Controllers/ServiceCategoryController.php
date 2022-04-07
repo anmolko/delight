@@ -56,7 +56,7 @@ class ServiceCategoryController extends Controller
             $image        = $request->file('image');
             $name         = uniqid().'_'.$image->getClientOriginalName();
             $path         = base_path().'/public/images/uploads/service_categories/';
-            $moved        = Image::make($image->getRealPath())->fit(770, 630)->orientate()->save($path.$name);
+            $moved        = Image::make($image->getRealPath())->fit(770, 450)->orientate()->save($path.$name);
             if ($moved){
                 $data['image']= $name;
             }
@@ -115,7 +115,7 @@ class ServiceCategoryController extends Controller
             $image                = $request->file('image');
             $name                 = uniqid().'_'.$image->getClientOriginalName();
             $path                 = base_path().'/public/images/uploads/service_categories/';
-            $moved                = Image::make($image->getRealPath())->fit(770, 630)->orientate()->save($path.$name);
+            $moved                = Image::make($image->getRealPath())->fit(770, 450)->orientate()->save($path.$name);
             if ($moved){
                 $cat->image = $name;
                 if (!empty($oldimage) && file_exists(public_path().'/images/uploads/service_categories/'.$oldimage)){

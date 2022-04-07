@@ -197,7 +197,7 @@
                                     </div>
                                     <img id="current-img" src="{{asset('/images/uploads/default-placeholder.png')}}" alt="blog_image" class="w-100 current-img">
                                 </div>
-                                <span class="ctm-text-sm">*use image minimum of 770 x 630px for Category</span>
+                                <span class="ctm-text-sm">*use image minimum of 770 x 450px for Category</span>
                             </div>
                         </div>
 
@@ -356,7 +356,7 @@
                                                 </div>
                                                 <img id="current-edit-img" src="{{asset('/images/uploads/default-placeholder.png')}}" alt="category_image" class="w-100 current-img">
                                             </div>
-                                            <span class="ctm-text-sm">*use image minimum of 770 x 630px for Category</span>
+                                            <span class="ctm-text-sm">*use image minimum of 770 x 450px for Category</span>
                                         </div>
 
                                     </div>
