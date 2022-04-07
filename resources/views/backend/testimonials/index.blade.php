@@ -104,7 +104,7 @@
                                     </div>
                                     <img id="current-img" src="{{asset('/images/uploads/default-placeholder.png')}}" alt="blog_image" class="w-100 current-img">
                                 </div>
-                                <span class="ctm-text-sm">*use image minimum of 70 x 70px for testimonial</span>
+                                <span class="ctm-text-sm">*use image minimum of 100 x 100px for testimonial</span>
                             </div>
                         </div>
 
@@ -257,7 +257,7 @@
                                                 </div>
                                                 <img id="current-edit-img" src="{{asset('/images/uploads/profiles/default-profile.png')}}" alt="testimonial_image" class="w-100 current-img">
                                             </div>
-                                            <span class="ctm-text-sm">*use image minimum of 70 x 70px for Testimonial</span>
+                                            <span class="ctm-text-sm">*use image minimum of 100 x 100px for Testimonial</span>
                                         </div>
 
                                     </div>
