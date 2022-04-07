@@ -22,10 +22,7 @@
     <link href="{{asset('assets/frontend/css/bootstrap.css')}}" rel="stylesheet">
     <link href="{{asset('assets/frontend/css/style.css')}}" rel="stylesheet">
     <link href="{{asset('assets/frontend/css/responsive.css')}}" rel="stylesheet">
-    <!--Color Switcher Mockup-->
-    <link href="{{asset('assets/frontend/css/color-switcher-design.css')}}" rel="stylesheet">
-    <!--Color Themes-->
-    <link id="theme-color-file" href="{{asset('assets/frontend/css/color-themes/default-theme.css')}}" rel="stylesheet">
+  
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id={{@$setting_data->google_analytics}}"></script>
@@ -68,6 +65,7 @@
                         <li><span class="icon fa fa-envelope"></span> <a href="mailto:@if(!empty(@$setting_data->email)) {{@$setting_data->email}} @else example@gmail.com @endif">@if(!empty(@$setting_data->email)) {{@$setting_data->email}} @else example@gmail.com @endif</a></li>
                     </ul>
                     <ul class="social-icon-one clearfix">
+
                         @if(!empty(@$setting_data->facebook))
                             <li><a href="@if(!empty(@$setting_data->facebook)) {{@$setting_data->facebook}} @endif"><i class="fab fa-facebook-f"></i></a></li>
                         @endif
@@ -173,10 +171,6 @@
                         <!-- Main Menu End-->
 
                         <div class="outer-box">
-                            <!-- Shoppping Car -->
-{{--                            <div class="cart-btn">--}}
-{{--                                <a href="#"><i class="icon flaticon-shopping-bag"></i> <span class="count">2</span></a>--}}
-{{--                            </div>--}}
 
                             <!-- Btn Box -->
                             <div class="btn-box">

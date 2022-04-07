@@ -64,13 +64,6 @@
                                                 @endif
                                             @endforeach
                                         @endif
-{{--                                        <li><a href="#">About Us</a></li>--}}
-{{--                                        <li><a href="#">Team</a></li>--}}
-{{--                                        <li><a href="#">Pricing</a></li>--}}
-{{--                                        <li><a href="#">FAQ's</a></li>--}}
-{{--                                        <li><a href="#">Portfolio</a></li>--}}
-{{--                                        <li><a href="#">Subscribe</a></li>--}}
-{{--                                        <li><a href="#">Contact Us</a></li>--}}
                                     </ul>
                                 </div>
                             </div>
@@ -85,16 +78,8 @@
                         <div class="widget-content">
                             <div class="text">Follow our social medias to connect with us better.</div>
 
-                            <!--Subscribe Form-->
-{{--                            <div class="subscribe-form">--}}
-{{--                                <form method="post" action="#">--}}
-{{--                                    <div class="form-group">--}}
-{{--                                        <input type="email" name="email" value="" placeholder="Your email" required>--}}
-{{--                                        <button type="submit" class="theme-btn"><i class="fa fa-paper-plane"></i></button>--}}
-{{--                                    </div>--}}
-{{--                                </form>--}}
-{{--                            </div>--}}
                             <ul class="social-links">
+
                                 @if(!empty(@$setting_data->facebook))
                                 <li><a href="@if(!empty(@$setting_data->facebook)) {{@$setting_data->facebook}} @endif"><i class="fab fa-facebook-f"></i></a></li>
                                 @endif
@@ -121,7 +106,7 @@
     <!--Footer Bottom-->
     <div class="footer-bottom">
         <div class="auto-container">
-            <div class="copyright-text">Copyrights 2019. All Rights are Reserved by <a href="#">Bold-touch</a></div>
+            <div class="copyright-text">Copyrights 2022. All Rights are Reserved by <a href="/">Bold-touch</a></div>
         </div>
     </div>
 </footer>
