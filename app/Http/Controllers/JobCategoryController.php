@@ -56,7 +56,7 @@ class JobCategoryController extends Controller
             $image        = $request->file('image');
             $name         = uniqid().'_'.$image->getClientOriginalName();
             $path         = base_path().'/public/images/uploads/job_categories/';
-            $moved        = Image::make($image->getRealPath())->fit(770,400)->orientate()->save($path.$name);
+            $moved        = Image::make($image->getRealPath())->fit(770,350)->orientate()->save($path.$name);
             if ($moved){
                 $data['image']= $name;
             }
@@ -115,7 +115,7 @@ class JobCategoryController extends Controller
             $image                = $request->file('image');
             $name                 = uniqid().'_'.$image->getClientOriginalName();
             $path                 = base_path().'/public/images/uploads/job_categories/';
-            $moved                = Image::make($image->getRealPath())->fit(770,400)->orientate()->save($path.$name);
+            $moved                = Image::make($image->getRealPath())->fit(770,350)->orientate()->save($path.$name);
             if ($moved){
                 $category->image = $name;
                 if (!empty($oldimage) && file_exists(public_path().'/images/uploads/job_categories/'.$oldimage)){

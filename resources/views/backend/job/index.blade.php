@@ -148,7 +148,7 @@
                                                     </div>
                                                     <img id="current-job-img" src="{{asset('/images/uploads/default-placeholder.png')}}" alt="job_image" class="w-100 current-img">
                                                 </div>
-                                                <span class="ctm-text-sm">*use image minimum of 770 x 400px for Job</span>
+                                                <span class="ctm-text-sm">*use image minimum of 770 x 350px for Job</span>
                                             </div>
 
                                         </div>
@@ -403,7 +403,7 @@
                                                 </div>
                                                 <img id="current-img" src="{{asset('/images/uploads/default-placeholder.png')}}" alt="job_image" class="w-100 current-img">
                                             </div>
-                                            <span class="ctm-text-sm">*use image minimum of 770 x 400px for Category</span>
+                                            <span class="ctm-text-sm">*use image minimum of 770 x 350px for Category</span>
                                         </div>
 
                                     </div>
@@ -545,7 +545,7 @@
                                     </div>
                                     <img id="current-cat-img" src="{{asset('/images/uploads/default-placeholder.png')}}" alt="job_image" class="w-100 current-img">
                                 </div>
-                                <span class="ctm-text-sm">*use image minimum of 770 x 400px for Category</span>
+                                <span class="ctm-text-sm">*use image minimum of 770 x 350px for Category</span>
                             </div>
 
                         </div>
@@ -714,7 +714,7 @@
                                     </div>
                                     <img id="current-update-job-img" src="{{asset('/images/uploads/default-placeholder.png')}}" alt="job_image" class="w-100 current-img">
                                 </div>
-                                <span class="ctm-text-sm">*use image minimum of 770 x 400px for Job</span>
+                                <span class="ctm-text-sm">*use image minimum of 770 x 350px for Job</span>
                             </div>
 
                         </div>

@@ -106,7 +106,7 @@
                                     </div>
                                     <img id="current-press-img" src="{{asset('/images/uploads/default-placeholder.png')}}" alt="blog_image" class="w-100 current-img">
                                 </div>
-                                <span class="ctm-text-sm">*use image minimum of 700 * 400px for press release</span>
+                                <span class="ctm-text-sm">*use image minimum of 700 * 350px for press release</span>
                             </div>
 
                         </div>
@@ -249,7 +249,7 @@
                                 </div>
                                 <img id="current-edit-img" src="{{asset('/images/uploads/default-placeholder.png')}}" alt="press_image" class="w-100 current-img">
                             </div>
-                            <span class="ctm-text-sm">*use image minimum of 700 * 400px for press release</span>
+                            <span class="ctm-text-sm">*use image minimum of 700 * 350px for press release</span>
                         </div>
 
                     </div>
