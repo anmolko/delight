@@ -54,6 +54,7 @@ class SliderController extends Controller
             'subheading_one'         => $request->input('subheading_one'),
             'button_one'             => $request->input('button_one'),
             'button_one_link'        => $request->input('button_one_link'),
+            'description'            => $request->input('description'),
             'status'                 => $request->input('status'),
             'created_by'             => Auth::user()->id,
         ];
@@ -115,9 +116,9 @@ class SliderController extends Controller
         $slider->subheading_one      =  $request->input('subheading_one');
         $slider->button_one          =  $request->input('button_one');
         $slider->button_one_link     =  $request->input('button_one_link');
+        $slider->description         =  $request->input('description');
         $slider->status              =  $request->input('status');
         $oldimage                    = $slider->slider_front_image;
-        $oldimage1                   = $slider->slider_back_image;
 
         if (!empty($request->file('slider_front_image'))){
             $image               = $request->file('slider_front_image');

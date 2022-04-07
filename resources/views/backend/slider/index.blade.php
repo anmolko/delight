@@ -132,9 +132,16 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Sub Heading  <span class="text-muted text-danger">*</span></label>
-                                        <input type="text" class="form-control" name="subheading_one" required>
+                                        <input type="text" class="form-control" maxlength="25" name="subheading_one" required>
                                         <div class="invalid-feedback">
-                                            Please enter the slider subheading one.
+                                            Please enter the slider subheading.
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label>Short Description  <span class="text-muted text-danger">*</span></label>
+                                        <textarea class="form-control" rows="6" maxlength="250" name="description"></textarea>
+                                        <div class="invalid-feedback">
+                                            Please write the short description.
                                         </div>
                                     </div>
                                 </div>
@@ -244,9 +251,16 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Sub Heading  <span class="text-muted text-danger">*</span></label>
-                                        <input type="text" class="form-control" name="subheading_one" id="subheading_one" required>
+                                        <input type="text" class="form-control" maxlength="25" name="subheading_one" id="subheading_one" required>
                                         <div class="invalid-feedback">
                                             Please enter the slider subheading one.
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label>Short Description  <span class="text-muted text-danger">*</span></label>
+                                        <textarea class="form-control" rows="6" maxlength="250" name="description" id="description" required></textarea>
+                                        <div class="invalid-feedback">
+                                            Please write the short description.
                                         </div>
                                     </div>
                                 </div>
@@ -366,6 +380,7 @@
                     $('#heading').attr('value',dataResult.heading);
                     $('#subheading_one').attr('value',dataResult.subheading_one);
                     $('#status').attr('value',dataResult.status);
+                    $('#description').text(dataResult.description);
                     $('#current-edit-img').attr("src",'/images/uploads/sliders/'+dataResult.slider_front_image);
                     $('#button_one').attr('value',dataResult.button_one);
                     $('#button_one_link').attr('value',dataResult.button_one_link);
