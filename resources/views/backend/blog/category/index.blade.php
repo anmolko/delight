@@ -90,14 +90,6 @@
                                     </div>
 
                                     <div class="form-group mb-3">
-                                        <label>Summary <span class="text-muted text-danger">*</span></label>
-                                        <textarea class="form-control" rows="6" name="excerpt" id="excerpt" required></textarea>
-                                        <div class="invalid-feedback">
-                                            Please enter the post summary.
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group mb-3">
                                         <label>Description <span class="text-muted text-danger">*</span></label>
                                         <textarea class="form-control" rows="6" name="description" id="editor" required></textarea>
                                         <div class="invalid-feedback">
@@ -132,7 +124,7 @@
                                                 </div>
                                                 <img id="current-img" src="{{asset('/images/uploads/default-placeholder.png')}}" alt="blog_image" class="w-100 current-img">
                                             </div>
-                                            <span class="ctm-text-sm">*use image minimum of 700 * 400px for blog</span>
+                                            <span class="ctm-text-sm">*use image minimum of 700 * 350px for blog</span>
                                         </div>
 
                                     </div>
@@ -402,14 +394,6 @@
                     </div>
 
                     <div class="form-group mb-3">
-                        <label>Summary <span class="text-muted text-danger">*</span></label>
-                        <textarea class="form-control" rows="6" name="excerpt" id="edit-excerpt" required></textarea>
-                        <div class="invalid-feedback">
-                            Please enter the post summary.
-                        </div>
-                    </div>
-
-                    <div class="form-group mb-3">
                         <label>Description <span class="text-muted text-danger">*</span></label>
                         <textarea class="form-control update-descp" rows="6" name="description" id="edit-editor" required></textarea>
                         <div class="invalid-feedback">
@@ -431,7 +415,7 @@
                                 </div>
                                 <img id="current-edit-img" src="{{asset('/images/uploads/default-placeholder.png')}}" alt="blog_image" class="w-100 current-img">
                             </div>
-                            <span class="ctm-text-sm">*use image minimum of 700 * 400px for blog</span>
+                            <span class="ctm-text-sm">*use image minimum of 700 * 350px for blog</span>
                         </div>
 
                     </div>
@@ -707,7 +691,6 @@
                 $("#edit_blog").modal("toggle");
                 $('#edit-title').attr('value',dataResult.title);
                 $('#blog-edit-slug').attr('value',dataResult.slug);
-                $('#edit-excerpt').text(dataResult.excerpt);
                 $('#edit-status').attr('value',dataResult.status);
                 editor.setData( dataResult.description );
                 $('#current-edit-img').attr("src",'/images/uploads/blog/'+dataResult.image );

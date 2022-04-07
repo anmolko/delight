@@ -49,7 +49,6 @@ class BlogController extends Controller
         $data=[
             'title'             => $request->input('title'),
             'slug'              => $request->input('slug'),
-            'excerpt'           => $request->input('excerpt'),
             'description'       => $request->input('description'),
             'status'            => $request->input('status'),
             'blog_category_id'  => $request->input('blog_category_id'),
@@ -62,8 +61,8 @@ class BlogController extends Controller
             $thumb_name     = 'thumb_'.$name;
             $path           = base_path().'/public/images/uploads/blog/';
             $thumb_path     = base_path().'/public/images/uploads/blog/thumb/';
-            $moved          = Image::make($image->getRealPath())->fit(770,400)->orientate()->save($path.$name);
-            $thumb          = Image::make($image->getRealPath())->fit(70,70)->orientate()->save($thumb_path.$thumb_name);
+            $moved          = Image::make($image->getRealPath())->fit(770,350)->orientate()->save($path.$name);
+            $thumb          = Image::make($image->getRealPath())->fit(85,85)->orientate()->save($thumb_path.$thumb_name);
 
             if ($moved && $thumb){
                 $data['image']=$name;
@@ -115,8 +114,7 @@ class BlogController extends Controller
         $blog                      =  Blog::find($id);
         $blog->title               =  $request->input('title');
         $blog->slug                =  $request->input('slug');
-        $blog->excerpt             =  $request->input('excerpt');
-        $blog->description         =  $request->input('description');
+         $blog->description         =  $request->input('description');
         $blog->status              =  $request->input('status');
         $blog->blog_category_id    =  $request->input('blog_category_id');
         $blog->updated_by          = Auth::user()->id;
@@ -130,8 +128,8 @@ class BlogController extends Controller
             $thumb_name  = 'thumb_'.$name1;
             $path        = base_path().'/public/images/uploads/blog/';
             $thumb_path  = base_path().'/public/images/uploads/blog/thumb/';
-            $moved       = Image::make($image->getRealPath())->fit(770,400)->orientate()->save($path.$name1);
-            $thumb       = Image::make($image->getRealPath())->fit(70,70)->orientate()->save($thumb_path.$thumb_name);
+            $moved       = Image::make($image->getRealPath())->fit(770,350)->orientate()->save($path.$name1);
+            $thumb       = Image::make($image->getRealPath())->fit(85,85)->orientate()->save($thumb_path.$thumb_name);
 
             if ($moved && $thumb){
                 $blog->image= $name1;
