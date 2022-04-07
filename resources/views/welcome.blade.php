@@ -1,21 +1,42 @@
 @extends('frontend.layouts.master')
 @section('title') Home  @endsection
 @section('styles')
+<style>
+    .slider-carousel .owl-stage-outer {
+        height: 500px;
+    }
 
+    .auto-container.slider-content {
+        margin-top: -270px;
+    }
+
+    @media only screen and (max-width: 1024px){
+
+        .auto-container.slider-content {
+            margin-top: -270px;
+        }
+    }
+
+    @media only screen and (max-width: 991px){
+        .auto-container.slider-content {
+            margin-top: -100px;
+        }
+    }
+</style>
 @endsection
 @section('content')
 
 <!-- Banner Section -->
     <section class="banner-section">
-        <div class="banner-carousel owl-carousel owl-theme">
+        <div class="banner-carousel slider-carousel owl-carousel owl-theme">
             <!-- Slide Item -->
             <div class="slide-item">
-                <div class="image-layer" style="background-image:url({{asset('assets/frontend/images/main-slider/1.jpg')}})"></div>
+                <div class="image-layer" style="background-image:url({{asset('assets/frontend/chk.png')}})"></div>
                 <div class="content-box">
                     <div class="content">
-                        <div class="auto-container">
+                        <div class="auto-container slider-content">
                             <span class="title">Welcome To Wooder</span>
-                            <h2>Quality Wooden<br> On Your Demond</h2>
+                            <h2>Quality Wooden On Your Demond</h2>
                             <div class="text">From 1984, we have worked tirelessly to earan our reputation for <br>quality and dependability in all wooden products we offer.</div>
                             <div class="btn-box">
                                 <a href="#" class="theme-btn btn-style-two"><span class="btn-title">Check Service</span></a>
@@ -25,22 +46,6 @@
                 </div>
             </div>
 
-            <!-- Slide Item -->
-            <div class="slide-item">
-                <div class="image-layer" style="background-image:url({{asset('assets/frontend/images/main-slider/2.jpg')}})"></div>
-                <div class="content-box">
-                    <div class="content">
-                        <div class="auto-container">
-                            <span class="title">Welcome To Wooder</span>
-                            <h2>We give solution to<br> need your carpenter</h2>
-                            <div class="text">From 1984, we have worked tirelessly to earan our reputation for <br>quality and dependability in all wooden products we offer.</div>
-                            <div class="btn-box">
-                                <a href="#" class="theme-btn btn-style-two"><span class="btn-title">Check Service</span></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
     <!--END Banner Section -->
