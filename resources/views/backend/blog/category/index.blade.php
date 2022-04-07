@@ -63,7 +63,7 @@
             <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                 {{-- Tab content --}}
                 <div class="col-xl-12 col-lg-12 col-md-12">
-                    {!! Form::open(['route' => 'blog.store','method'=>'post','class'=>'needs-validation','novalidate'=>'','enctype'=>'multipart/form-data']) !!}
+                    {!! Form::open(['id'=>'create-form','class'=>'needs-validation','novalidate'=>'','enctype'=>'multipart/form-data']) !!}
                     <div class="row">
                         <div class="col-md-8">
                             <div class="card ctm-border-radius shadow-sm flex-fill">
@@ -145,8 +145,9 @@
                                     </div>
 
                                     <div class="text-center">
-                                        <button type="submit" class="btn btn-theme button-1 text-white ctm-border-radius mt-4" name="status" value="publish">Publish</button>
-                                        <button type="submit" class="btn btn-theme button-1 text-white ctm-border-radius mt-4" name="status" value="draft">Draft</button>
+                                        <input type="text" name="status" id="status"/>
+                                        <button type="button" class="btn btn-theme button-1 text-white ctm-border-radius mt-4 action-submit" name="status" value="publish">Publish</button>
+                                        <button type="button" class="btn btn-theme button-1 text-white ctm-border-radius mt-4 action-submit" name="status" value="draft">Draft</button>
                                     </div>
 
                                 </div>
@@ -309,25 +310,15 @@
                                         </table>
                                     </div>
                                 </div>
-
-
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
-
-
    </div>
 
-
-
-
-
-
-    <div class="modal fade" id="edit_blog_category">
+    <div class="modal fade" id="edit_bl og_category">
         <form action="#" method="post" id="deleted-form" >
             {{csrf_field()}}
             <input name="_method" type="hidden" value="DELETE">
@@ -673,6 +664,42 @@
     // end of blog category
 
     //blog
+
+    $(document).on('click','.action-submit', function (e) {
+            e.preventDefault();
+            var form = $('#create-form')[0];
+            if (!form.reportValidity()) {return false;}
+            var status = $(this).val();
+            $('#status').val(status);
+            var post_url       = "{{route('blog.store')}}";
+            var request_method = 'POST';
+            var form_data      = new FormData(form);
+            // console.log(action)
+            $.ajax({
+                url: post_url,
+                type: request_method,
+                data : form_data,
+                contentType: false,
+                cache: false,
+                processData:false,
+                success: function(dataResult){
+                    if (dataResult == 'duplicate'){
+                        toastr.options =
+                            {
+                                "closeButton" : true,
+                                "progressBar" : true
+                            }
+                        toastr.warning("The slug is already in use. Please write new one");
+                    }else{
+                        window.location.replace(dataResult);
+                        //when the response is received, it will redirect to the dynamic route sent from controller
+                    }
+                },
+                error: function(error){
+                    console.log(error)
+                }
+            });
+        });
 
     $(document).on('click','.action-blog-edit', function (e) {
         e.preventDefault();

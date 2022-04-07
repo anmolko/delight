@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\BlogUpdateRequest;
 use App\Models\Blog;
 use App\Models\BlogCategory;
 use Illuminate\Http\Request;
@@ -46,37 +47,41 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
-        $data=[
-            'title'             => $request->input('title'),
-            'slug'              => $request->input('slug'),
-            'description'       => $request->input('description'),
-            'status'            => $request->input('status'),
-            'blog_category_id'  => $request->input('blog_category_id'),
-            'created_by'        => Auth::user()->id,
-        ];
+        $slug = Blog::where('slug', $request->input('slug'))->first();
+        if ($slug !== null) {
+            return 'duplicate';
+        }else {
+            $data = [
+                'title' => $request->input('title'),
+                'slug' => $request->input('slug'),
+                'description' => $request->input('description'),
+                'status' => $request->input('status'),
+                'blog_category_id' => $request->input('blog_category_id'),
+                'created_by' => Auth::user()->id,
+            ];
 
-        if(!empty($request->file('image'))){
-            $image          = $request->file('image');
-            $name           = uniqid().'_'.$image->getClientOriginalName();
-            $thumb_name     = 'thumb_'.$name;
-            $path           = base_path().'/public/images/uploads/blog/';
-            $thumb_path     = base_path().'/public/images/uploads/blog/thumb/';
-            $moved          = Image::make($image->getRealPath())->fit(770,350)->orientate()->save($path.$name);
-            $thumb          = Image::make($image->getRealPath())->fit(85,85)->orientate()->save($thumb_path.$thumb_name);
+            if (!empty($request->file('image'))) {
+                $image = $request->file('image');
+                $name = uniqid() . '_' . $image->getClientOriginalName();
+                $thumb_name = 'thumb_' . $name;
+                $path = base_path() . '/public/images/uploads/blog/';
+                $thumb_path = base_path() . '/public/images/uploads/blog/thumb/';
+                $moved = Image::make($image->getRealPath())->fit(770, 350)->orientate()->save($path . $name);
+                $thumb = Image::make($image->getRealPath())->fit(85, 85)->orientate()->save($thumb_path . $thumb_name);
 
-            if ($moved && $thumb){
-                $data['image']=$name;
+                if ($moved && $thumb) {
+                    $data['image'] = $name;
+                }
             }
-        }
 
-        $blog = Blog::create($data);
-        if($blog){
-            Session::flash('success','Your Post was Created Successfully');
+            $blog = Blog::create($data);
+            if ($blog) {
+                Session::flash('success', 'Your Post was Created Successfully');
+            } else {
+                Session::flash('error', 'Your Post Creation Failed');
+            }
+            return route('blogcategory.index');
         }
-        else{
-            Session::flash('error','Your Post Creation Failed');
-        }
-        return redirect()->back();
     }
 
     /**
@@ -109,7 +114,7 @@ class BlogController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(BlogUpdateRequest $request, $id)
     {
         $blog                      =  Blog::find($id);
         $blog->title               =  $request->input('title');
