@@ -58,7 +58,7 @@ class ClientController extends Controller
             $image        = $request->file('image');
             $name         = uniqid().'_'.$image->getClientOriginalName();
             $path         = base_path().'/public/images/uploads/clients/';
-            $moved        = Image::make($image->getRealPath())->resize(160, 45)->orientate()->save($path.$name);
+            $moved        = Image::make($image->getRealPath())->resize(160, 80)->orientate()->save($path.$name);
             if ($moved){
                 $data['image']= $name;
             }
@@ -116,7 +116,7 @@ class ClientController extends Controller
             $image                = $request->file('image');
             $name                 = uniqid().'_'.$image->getClientOriginalName();
             $path                 = base_path().'/public/images/uploads/clients/';
-            $moved                = Image::make($image->getRealPath())->resize(160, 45)->orientate()->save($path.$name);
+            $moved                = Image::make($image->getRealPath())->resize(160, 80)->orientate()->save($path.$name);
             if ($moved){
                 $clients->image = $name;
                 if (!empty($oldimage) && file_exists(public_path().'/images/uploads/clients/'.$oldimage)){
