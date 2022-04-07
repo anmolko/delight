@@ -121,7 +121,7 @@
                                     </div>
                                     <img id="current-img" src="{{asset('/images/uploads/profiles/default-profile.png')}}" alt="blog_image" class="w-100 current-img">
                                 </div>
-                                <span class="ctm-text-sm">*use image minimum of 270 x 300px for Team</span>
+                                <span class="ctm-text-sm">*use image minimum of 370 x 400px for Team</span>
                             </div>
                         </div>
 
@@ -309,7 +309,7 @@
                                                 </div>
                                                 <img id="current-edit-img" src="{{asset('/images/uploads/profiles/default-profile.png')}}" alt="teams_image" class="w-100 current-img">
                                             </div>
-                                            <span class="ctm-text-sm">*use image minimum of 270 x 300px for Team</span>
+                                            <span class="ctm-text-sm">*use image minimum of 370 x 400px  for Team</span>
                                         </div>
 
                                     </div>
