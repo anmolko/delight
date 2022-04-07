@@ -145,7 +145,7 @@
                                     </div>
 
                                     <div class="text-center">
-                                        <input type="text" name="status" id="status"/>
+                                        <input type="hidden" name="status" id="status"/>
                                         <button type="button" class="btn btn-theme button-1 text-white ctm-border-radius mt-4 action-submit" name="status" value="publish">Publish</button>
                                         <button type="button" class="btn btn-theme button-1 text-white ctm-border-radius mt-4 action-submit" name="status" value="draft">Draft</button>
                                     </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PressReleaseUpdateRequest;
 use App\Models\PressRelease;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -44,35 +45,38 @@ class PressReleaseController extends Controller
      */
     public function store(Request $request)
     {
-        $data=[
-            'title'             => $request->input('title'),
-            'slug'              => $request->input('slug'),
-            'description'       => $request->input('description'),
-            'status'            => $request->input('status'),
-            'created_by'        => Auth::user()->id,
-        ];
+        $slug = PressRelease::where('slug', $request->input('slug'))->first();
+        if ($slug !== null) {
+            return 'duplicate';
+        }else {
+            $data = [
+                'title' => $request->input('title'),
+                'slug' => $request->input('slug'),
+                'description' => $request->input('description'),
+                'status' => $request->input('status'),
+                'created_by' => Auth::user()->id,
+            ];
 
-        if(!empty($request->file('image'))){
-            $image          = $request->file('image');
-            $originalname   = str_replace(' ','_',$image->getClientOriginalName());
-            $name           = uniqid().'_press_release_'.$originalname;
-            $path           = base_path().'/public/images/uploads/press_releases/';
-            $moved          = Image::make($image->getRealPath())->fit(770,350)->orientate()->save($path.$name);
+            if (!empty($request->file('image'))) {
+                $image = $request->file('image');
+                $originalname = str_replace(' ', '_', $image->getClientOriginalName());
+                $name = uniqid() . '_press_release_' . $originalname;
+                $path = base_path() . '/public/images/uploads/press_releases/';
+                $moved = Image::make($image->getRealPath())->fit(770, 350)->orientate()->save($path . $name);
 
-            if ($moved){
-                $data['image']=$name;
+                if ($moved) {
+                    $data['image'] = $name;
+                }
             }
-        }
 
-        $blog = PressRelease::create($data);
-        if($blog){
-            Session::flash('success','Press Release was created successfully');
+            $blog = PressRelease::create($data);
+            if ($blog) {
+                Session::flash('success', 'Press Release was created successfully');
+            } else {
+                Session::flash('error', 'Press Release was could not be created');
+            }
+            return route('press-release.index');
         }
-        else{
-            Session::flash('error','Press Release was could not be created');
-        }
-        return redirect()->back();
-
     }
 
     /**
@@ -105,15 +109,15 @@ class PressReleaseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PressReleaseUpdateRequest $request, $id)
     {
         $press                      =  PressRelease::find($id);
         $press->title               =  $request->input('title');
         $press->slug                =  $request->input('slug');
         $press->description         =  $request->input('description');
         $press->status              =  $request->input('status');
-        $press->updated_by          = Auth::user()->id;
-        $oldimage                   = $press->image;
+        $press->updated_by          =  Auth::user()->id;
+        $oldimage                   =  $press->image;
 
         if (!empty($request->file('image'))){
             $image          = $request->file('image');
