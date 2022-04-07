@@ -2,16 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>@yield('title') - @if(!empty(@$setting_data->website_name)) {{ucwords(@$setting_data->website_name)}} @else Delight Foreign Manpower @endif </title>
-
-    <meta name="description" content="@if(!empty(@$setting_data->website_description)) {{ucwords(@$setting_data->website_description)}} @else Delight Foreign Manpower @endif ">
+    <meta name="author" content="Delight Foreign Manpower">
     <link rel="canonical" href="https://delightforeign.com/" />
-
-    <meta property="og:title" content="Home" />
-    <meta property="og:type" content="article" />
-    <meta property="og:url" content="https://delightforeign.com/" />
-    <meta property="og:site_name" content=" Delight Foreign Manpower" />
-    <meta property="og:description" content="@if(!empty(@$setting_data->website_description)) {{ucwords(@$setting_data->website_description)}} @else  Delight Foreign Manpower @endif " />
+    @yield('seo')
 
     <link rel="shortcut icon" type="image/x-icon" href="<?php if(@$setting_data->favicon){?>{{asset('/images/uploads/settings/'.@$setting_data->favicon)}}<?php }?>">
     <link rel="icon" href="<?php if(@$setting_data->favicon){?>{{asset('/images/uploads/settings/'.@$setting_data->favicon)}}<?php }?>" type="image/x-icon">

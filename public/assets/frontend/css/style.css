@@ -12078,3 +12078,11 @@ form .response .text-info {
     color: #ffffff;
     background-color: #223f98;
 }
+
+.news-block h4 a {
+    white-space: nowrap;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
+    position: relative;
+    width: -webkit-fill-available;
+}

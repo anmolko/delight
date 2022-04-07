@@ -125,8 +125,7 @@
 <script src="{{asset('assets/frontend/js/wow.js')}}"></script>
 <script src="{{asset('assets/frontend/js/appear.js')}}"></script>
 <script src="{{asset('assets/frontend/js/script.js')}}"></script>
-<!-- Color Setting -->
-<script src="{{asset('assets/frontend/js/color-settings.js')}}"></script>
-
+@yield('js')
+@stack('scripts')
 </body>
 </html>

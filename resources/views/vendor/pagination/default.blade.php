@@ -1,11 +1,11 @@
-
-
 @if ($paginator->hasPages())
-<ul class="pagination clearfix">
+<ul class="clearfix">
 
     @if ($paginator->onFirstPage())
+    <li class="prev-post disabled"><a title="This is the first page of blog"><span class="flaticon-back-1"></span></a></li>
+
     @else
-    <li class="disabled"><a  href="{{ $paginator->previousPageUrl() }}" ><i class="fas fa-angle-left"></i></a></li>
+    <li class="prev-post disabled"><a  href="{{ $paginator->previousPageUrl() }}" ><span class="flaticon-back-1"></span></a></li>
     @endif
 
     @if($paginator->currentPage() > 3)
@@ -19,7 +19,7 @@
     @foreach(range(1, $paginator->lastPage()) as $i)
         @if($i >= $paginator->currentPage() - 2 && $i <= $paginator->currentPage() + 2)
             @if ($i == $paginator->currentPage())
-                <li><a href="#" class="active">{{ $i }}</a></li>
+                <li class="active"><a href="#" >{{ $i }}</a></li>
             @else
                 <li><a href="{{ $paginator->url($i) }}"> {{ $i }}</a></li>
             @endif
@@ -35,7 +35,10 @@
     @endif
 
     @if ($paginator->hasMorePages())
-        <li><a href="{{ $paginator->nextPageUrl() }}"><i class="fas fa-angle-right"></i></a></li>
+        <li class="next-post"><a href="{{ $paginator->nextPageUrl() }}"><span class="flaticon-next-1"></span></a></li>
+    @else
+    <li class="next-post"><a title="This is the last page of blog"><span class="flaticon-next-1"></span></a></li>
+
     @endif
 
 </ul>
