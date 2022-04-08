@@ -4,6 +4,12 @@
 
 <style>
    
+   .contact-details-section-two {
+        position: static;
+        padding-top: 100px;
+        padding-bottom: 70px;
+        background-color: #f1f5f8;
+    }
 
     input.parsley-success,
     select.parsley-success,
@@ -45,7 +51,7 @@
 @endsection
 @section('content')
     <!-- Page Title -->
-    <section class="page-title" style="background-image: url({{asset('assets/frontend/images/background/bg-17.jpg')}});">
+    <section class="page-title" style="background-image: url({{asset('assets/frontend/images/background/7.jpg')}});">
         <div class="auto-container">
             <div class="content-box">
                 <div class="content-wrapper">

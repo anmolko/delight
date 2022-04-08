@@ -132,7 +132,7 @@
 @section('content')
 
     <!-- Page Title -->
-    <section class="page-title" style="background-image: url({{asset('assets/frontend/images/background/bg-17.jpg')}});">
+    <section class="page-title" style="background-image: url({{asset('assets/frontend/images/background/7.jpg')}});">
         <div class="auto-container">
             <div class="content-box">
                 <div class="content-wrapper">
@@ -170,7 +170,7 @@
                     </div>
 
                     <div class="col-md-7">
-                        <button type="submit" class="btn btn-primary confirm-form wpcf7-form-control wpcf7-submit" data-form="submitForm" data-message="Submit your entry for '{{ $form->name }}'?">
+                        <button type="submit" class="btn btn-primary confirm-form btn-style-one" data-form="submitForm" data-message="Submit your entry for '{{ $form->name }}'?">
                             <i class="fa fa-submit"></i> Send Now 
                         </button>
                     </div>
