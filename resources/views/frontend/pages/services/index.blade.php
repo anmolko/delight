@@ -7,58 +7,54 @@
 @endsection
 @section('content')
 
-    <!-- Page Title -->
-    <section class="page-title" style="background-image: url({{asset('assets/frontend/images/background/bg-17.jpg')}});">
-        <div class="auto-container">
-            <div class="content-box">
-                <div class="content-wrapper">
-                    <div class="title">
-                        <h1>Our services</h1>
-                    </div>
-                    <ul class="bread-crumb clearfix">
-                        <li><a href="/">Home</a></li>
-                        <li>Services</li>
-                    </ul>
-                </div>                    
-            </div>
+    <!--Page Title-->
+    <section class="page-title" style="background-image:url('{{asset('assets/frontend/images/background/7.jpg')}}');">
+        <div class="auto-container clearfix">
+            <h1>Our Services</h1>
+            <ul class="bread-crumb clearfix">
+                <li><a href="/">Home</a></li>
+                <li>Services</li>
+            </ul>
         </div>
     </section>
-    <!-- Page Title -->
+    <!--End Page Title-->
 
-    <!-- Services Section Six -->
-    <section class="services-section-six">
+    <!-- Projects Section -->
+    <section class="projects-section-two alternate">
         <div class="auto-container">
             <div class="sec-title text-center">
                 <h2>Our Available Categories</h2>
-                <div class="text-decoration">
-                    <span class="left"></span>
-                    <span class="right"></span>
-                </div>
             </div>
+                                   
             <div class="row">
+                <!-- Portfolio Block -->
                 @if(count(@$service_categories) > 0) 
                     @foreach(@$service_categories as $service_category)
-                    <div class="col-lg-4 service-block-six">
+                    <div class="project-block-two col-lg-4 col-md-6 col-sm-12">
                         <div class="inner-box">
                             <div class="image-box">
-                                <img class="lazy-image owl-lazy" src="{{asset('assets/frontend/images/resource/image-spacer-for-validation.png')}}" data-src="{{ asset('/images/uploads/service_categories/'.$service_category->image) }}" alt="{{@$service_category->slug}}">
-                                <div class="icon-box">
-                                    <h4>{{ucwords(@$service_category->name)}}</h4>              
-                                </div>
-                                <div class="overlay"><a href="{{route('service.single',$service_category->slug)}}"><span class="flaticon-right"></span></a></div>
+                                <figure class="image"><img src="{{ asset('/images/uploads/service_categories/'.$service_category->image) }}" alt="{{@$service_category->slug}}"></figure>
                             </div>
-                            <div class="content">
-                                <div class="text">{{Str::limit($service_category->short_description, 65)}}...</div>
+                            <div class="overlay-box">
+                                <div class="overlay-inner">
+                                    <h4>{{ucwords(@$service_category->name)}}</h4>
+                                    <div class="icon-box">
+                                        <a href="{{ asset('/images/uploads/service_categories/'.$service_category->image) }}" class="lightbox-image" data-fancybox="gallery" ><span class="icon fa fa-expand-arrows-alt"></span></a>
+                                        <a href="{{route('service.single',$service_category->slug)}}"><span class="icon fa fa-search"></span></a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                     @endforeach
                 @endif
-                                                                                
-               
+                         
+
+                
             </div>
+
         </div>
     </section>
-
+    <!-- End Projects Section -->
 
 @endsection
