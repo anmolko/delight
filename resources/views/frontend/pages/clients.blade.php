@@ -9,7 +9,7 @@
 @section('content')
 
     <!-- Page Title -->
-    <section class="page-title" style="background-image: url({{asset('assets/frontend/images/background/bg-17.jpg')}});">
+    <section class="page-title" style="background-image: url({{asset('assets/frontend/images/background/7.jpg')}});">
         <div class="auto-container">
             <div class="content-box">
                 <div class="content-wrapper">
@@ -26,44 +26,53 @@
     </section>
     <!-- Page Title -->
 
-       <!-- Portfolio Section -->
-       <section class="portfolio-section">
+    <!-- Projects Section -->
+    <section class="projects-section-two">
         <div class="auto-container">
-            <!--Sortable Galery-->
+            <!--Sortable Masonry-->
             <div class="sortable-masonry">
                 <!--Filter-->
-                <div class="filters clearfix">
+                <div class="filters">
                     <ul class="filter-tabs filter-btns clearfix">
-                        <li class="filter active" data-role="button" data-filter=".all">All Countries <span class="count">0</span></li>
+                        <li class="active filter" data-role="button" data-filter=".all">All Countries</li>
                         @foreach(@$countrycodes as $country_c)
                             @foreach(@$countries as $key => $value)
                                 @if($key== @$country_c->country)
-                                    <li class="filter" data-role="button" data-filter=".{{@$country_c->country}}">{{ucwords($value)}} <span class="count">0</span></li>
+                                    <li class="filter" data-role="button" data-filter=".{{@$country_c->country}}">{{ucwords($value)}} </li>
                                 @endif
                             @endforeach
                        @endforeach
                     </ul>
                 </div>
-                <div class="items-container row m-0 clearfix">
-                    <!-- Case Block -->
+                                                            
+                <div class="items-container row">
+                    <!-- Portfolio Block -->
+           
                     @foreach(@$client_groups as  $client)
-
-                    <div class="case-block-one masonry-item all {{@$client->country}} col-lg-3 col-md-6 col-sm-12">
+                    
+                    <div class="project-block-two all masonry-item {{@$client->country}} col-lg-3 col-md-6 col-sm-12">
                         <div class="inner-box">
-                            <div class="image">
-                                <a href="{{@$client->link}}" title="{{ucwords(@$client->name)}}" @if(@$client->link) target="_blank"  @endif ><img src="<?php if(@$client->image){?>{{asset('/images/uploads/clients/'.@$client->image)}}<?php }?>" alt="{{ucwords(@$client->name)}}"> </a>
+                            <div class="image-box">
+                                <figure class="image"><img src="<?php if(@$client->image){?>{{asset('/images/uploads/clients/'.@$client->image)}}<?php }?>" alt="{{ucwords(@$client->name)}}"></figure>
                             </div>
-                        
+                            <div class="overlay-box">
+                                <div class="overlay-inner">
+                                    <h4>{{ucwords(@$client->name)}}</h4>
+                                    <div class="icon-box">
+                                        <a href="{{@$client->link}}" target="_blank"><span class="icon fa fa-search"></span></a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     @endforeach
 
+                  
                 </div>
-                   
             </div>
         </div>
     </section>
-
+    <!-- End Projects Section -->
 
 
 
