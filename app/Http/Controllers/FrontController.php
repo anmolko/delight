@@ -14,6 +14,7 @@ use App\Models\Job;
 use App\Models\JobCategory;
 use App\Models\Page;
 use App\Models\PageSection;
+use App\Models\PressRelease;
 use App\Models\SectionElement;
 use App\Models\SectionGallery;
 use App\Models\ServiceCategory;
@@ -46,11 +47,14 @@ class FrontController extends Controller
     protected $album = null;
     protected $album_gallery = null;
     protected $career = null;
+    protected $press = null;
 
 
-    public function __construct(Career $career,AlbumGallery $album_gallery,Album $album,Job $job,JobCategory $jobcategory,PageSection $pagesection,Page $page,Setting $setting,BlogCategory $bcategory,Blog $blog,Slider $slider,ServiceCategory $S_category,Testimonial $testimonial,Client $client,Award $award,Team $team)
+
+    public function __construct(PressRelease $press,Career $career,AlbumGallery $album_gallery,Album $album,Job $job,JobCategory $jobcategory,PageSection $pagesection,Page $page,Setting $setting,BlogCategory $bcategory,Blog $blog,Slider $slider,ServiceCategory $S_category,Testimonial $testimonial,Client $client,Award $award,Team $team)
     {
         $this->bcategory = $bcategory;
+        $this->press = $press;
         $this->blog = $blog;
         $this->slider = $slider;
         $this->S_category = $S_category;
@@ -123,6 +127,25 @@ class FrontController extends Controller
     public function postRequirement(){
         return view('frontend.pages.post_requirement');
     }
+
+    public function press(){
+        $allPress = $this->press->orderBy('created_at', 'DESC')->where('status','publish')->paginate(6);
+        $latestPress = $this->press->orderBy('created_at', 'DESC')->where('status','publish')->take(3)->get();
+        $latestPosts = $this->blog->orderBy('created_at', 'DESC')->where('status','publish')->take(3)->get();
+
+        return view('frontend.pages.press_release.index',compact('allPress','latestPress','latestPosts'));
+
+    }
+
+    public function pressSingle($slug){
+
+        $singlePress   = $this->press->where('slug', $slug)->first();
+        $latestPress   = $this->press->orderBy('created_at', 'DESC')->where('status','publish')->take(3)->get();
+        $latestPosts   = $this->blog->orderBy('created_at', 'DESC')->where('status','publish')->take(3)->get();
+
+        return view('frontend.pages.press_release.single',compact('singlePress','latestPress','latestPosts'));
+    }
+
 
     public function sliderSingle($slug){
 

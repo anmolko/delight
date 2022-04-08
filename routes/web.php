@@ -47,7 +47,7 @@ Route::post('/contact-us', 'App\Http\Controllers\FrontController@contactStore')-
 Route::get('/', 'App\Http\Controllers\FrontController@index')->name('home');
 
 
-Route::get('/post-requirements', 'App\Http\Controllers\FrontController@postRequirement')->name('postRequirement');
+// Route::get('/post-requirements', 'App\Http\Controllers\FrontController@postRequirement')->name('postRequirement');
 
 //jobs
 Route::get('jobs/search/', 'App\Http\Controllers\FrontController@searchJob')->name('searchJob');
@@ -73,6 +73,12 @@ Route::get('blog/{slug}','App\Http\Controllers\FrontController@blogSingle')->nam
 Route::get('/blog/categories/{slug}', 'App\Http\Controllers\FrontController@blogCategories')->name('blog.category');
 Route::get('/blog', 'App\Http\Controllers\FrontController@blogs')->name('blog.frontend');
 //end blog
+
+//press release
+
+Route::get('/press-release', 'App\Http\Controllers\FrontController@press')->name('press.frontend');
+Route::get('press-release/{slug}','App\Http\Controllers\FrontController@pressSingle')->name('press.single');
+
 
 //slider list single page
 Route::get('slider-list/{slug}','App\Http\Controllers\FrontController@sliderSingle')->name('slider.single');
