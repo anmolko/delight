@@ -30,6 +30,6 @@ class ContactDetail extends Mailable
      */
     public function build()
     {
-        return $this->subject('New Customer Enquiry - White Pearl Manpower')->view('frontend.template.email_template');
+        return $this->subject('New Customer Enquiry - Delight Foreign Manpower')->view('frontend.template.email_template');
     }
 }
