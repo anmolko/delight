@@ -50,19 +50,12 @@
            
                     @foreach(@$client_groups as  $client)
                     
-                    <div class="project-block-two all masonry-item {{@$client->country}} col-lg-3 col-md-6 col-sm-12">
+                    <div class="project-block-two all masonry-item {{@$client->country}} col-lg-2 col-md-6 col-sm-12">
                         <div class="inner-box">
                             <div class="image-box">
-                                <figure class="image"><img src="<?php if(@$client->image){?>{{asset('/images/uploads/clients/'.@$client->image)}}<?php }?>" alt="{{ucwords(@$client->name)}}"></figure>
+                                <figure class="image"><a href="{{@$client->link}}" target="_blank" title="{{ucwords(@$client->name)}}"><img src="<?php if(@$client->image){?>{{asset('/images/uploads/clients/'.@$client->image)}}<?php }?>" alt="{{ucwords(@$client->name)}}"></a></figure>
                             </div>
-                            <div class="overlay-box">
-                                <div class="overlay-inner">
-                                    <h4>{{ucwords(@$client->name)}}</h4>
-                                    <div class="icon-box">
-                                        <a href="{{@$client->link}}" target="_blank"><span class="icon fa fa-search"></span></a>
-                                    </div>
-                                </div>
-                            </div>
+                            
                         </div>
                     </div>
                     @endforeach

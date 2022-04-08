@@ -2,14 +2,59 @@
 @section('title') Career @endsection
 @section('styles')
 <style>
- 
+    .time {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        display: block;
+        padding: 0 30px;
+        font-size: 13px;
+        font-weight: 600;
+        text-transform: uppercase;
+        border: 1px solid #e1e5e9;
+        border-radius: 15px;
+        margin-bottom: 10px;
+    }
+
+    .pricing-table .title {
+        font-size: 22px;
+        font-weight: 600;
+        margin-top: 20px;
+    }
+
+    .pricing-table .table-content ul.list li{
+        position: relative;
+        font-size: 16px;
+        font-weight: 500;
+        border-bottom: 1px solid #e1e5e9;
+        padding: 0px;
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+        padding-left: 27px;
+    }
+
+    .pricing-table .table-content ul.list{
+        border-bottom: unset;
+        margin-bottom: 0px;
+    }
+
+    .pricing-table .table-content ul.list li i {
+        color: #84859c;
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+
+    .pricing-table .table-content ul.list li a {
+        color: #0c2957;
+    } 
 </style>
 
 @endsection
 @section('content')
 
     <!-- Page Title -->
-    <section class="page-title" style="background-image: url({{asset('assets/frontend/images/background/bg-17.jpg')}});">
+    <section class="page-title" style="background-image: url({{asset('assets/frontend/images/background/7.jpg')}});">
         <div class="auto-container">
             <div class="content-box">
                 <div class="content-wrapper">
@@ -26,63 +71,61 @@
     </section>
     <!-- Page Title -->
 
-        <!-- Career Section -->
-        <section class="career-section">
-        <div class="auto-container">
-            <div class="sec-title text-center">
-                <h2>We encourage all candidates <br> to seek opportunities for employment</h2>
-                <div class="text-decoration">
-                    <span class="left"></span>
-                    <span class="right"></span>
-                </div>
-            </div>
-            <div class="row">
-                @if(count(@$careers) > 0)
-                    @foreach(@$careers as $career)
-                    <div class="career-block col-lg-3 col-md-6">
-                        <div class="inner-box">
-                            @if(@$career->name == "full_time")
-                                <div class="time">Full time</div>
-                            @else
-                                <div class="time">Part time</div>
-                            @endif
-                            <h4>{{ucwords(@$career->name)}}</h4>
 
-                            <a href="{{@$career->from_link}}" class="theme-btn btn-style-one">
-                                <span class="btn-title">Apply Now</span>
-                            </a>
-                            <ul class="list">
-                                <li><a href="#"><i class="flaticon-suitcase"></i>{{@$career->open_position}} Open Position</a></li>
-                                <li><a href="#"><i class="flaticon-clock-2"></i>Apply until {{date('M j, Y',strtotime(@$career->end_date))}}</a></li>
-                                @if(@$career->salary)
-                                    <li><a href="#"><i class="flaticon-money"></i>Package: {{@$career->salary}}</a></li>
-                                    @else
-                                    <li><a href="#"><i class="flaticon-money"></i>Package: Negotiable</a></li>
+    <!-- Career Sectioin -->
+    <section class="pricing-section">
+        <div class="auto-container">
+           
+            <!--Pricing Tabs-->
+            <div class="pricing-tabs tabs-box clearfix">                    
+      
+                <div class="row">
+                    <!-- Pricing Table -->
+                    @if(count(@$careers) > 0)
+                        @foreach(@$careers as $career)
+                       
+                        <div class="pricing-table col-lg-4 col-md-6 col-sm-12">
+                            <div class="inner-box">
+                                @if(@$career->type == "full_time")
+                                    <div class="time">Full time</div>
+                                @else
+                                    <div class="time">Part time</div>
                                 @endif
-                            </ul>
+                                <div class="title">{{ucwords(@$career->name)}}</div>
+                                
+                                <div class="table-content">
+                                    <ul class="list">
+                                        <li><a href="#"><i class="fas fa-suitcase"></i>{{@$career->open_position}} Open Position</a></li>
+                                        <li><a href="#"><i class="fas fa-clock"></i>Apply until {{date('M j, Y',strtotime(@$career->end_date))}}</a></li>
+                                        @if(@$career->salary)
+                                            <li><a href="#"><i class="fas fa-search-dollar"></i>Package: {{@$career->salary}}</a></li>
+                                            @else
+                                            <li><a href="#"><i class="fas fa-search-dollar"></i>Package: Negotiable</a></li>
+                                        @endif
+                                    </ul>
+                                </div>
+                                <div class="table-footer">
+                                    <a href="{{@$career->from_link}}" class="theme-btn btn-style-one"><span class="btn-title">Apply Now</span> </a>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    @endforeach
-                @endif
-                
+                        @endforeach
+                    @else
+                        <section class="no-results not-found">
+                            <header class="page-header">
+                                <h1>Job Not Posted Yet !!</h1>
+                            </header>
+                            <div class="page-content">
+                                <p>It seems we cannot find what you are looking for.</p>
+                            </div>
+                        </section>
+                    @endif
+                   
+              
+                </div>
+              
             </div>
         </div>
     </section>
-
-        <!-- Meet Up Section -->
-    <section class="meet-up-section" style="background-image: url({{asset('assets/frontend/images/background/bg-10.jpg')}});">
-        <div class="auto-container">
-            <div class="content-box">
-                <div class="icon"><span class="flaticon-team-1"></span></div>
-                <h3>Start Here</h3>
-                <h1>Get in touch with Us</h1>
-                <div class="text">@if(!empty(@$setting_data->address)) {{@$setting_data->address}} @else Kathmandu, Nepal @endif</div>
-                <ul>
-                    <li><a href="tel:+@if(!empty(@$setting_data->phone)) {{@$setting_data->phone}} @endif"><i class="flaticon-phone"></i>@if(!empty(@$setting_data->phone)) {{@$setting_data->phone}} @endif</a></li>
-                    <li><a href="mailto:@if(!empty(@$setting_data->email)) {{@$setting_data->email}} @else example@gmail.com @endif"><i class="flaticon-mail-1"></i>@if(!empty(@$setting_data->email)) {{@$setting_data->email}} @else example@gmail.com @endif</a></li>
-                </ul>
-                <div class="link-btn"><a href="{{route('contact')}}" class="theme-btn btn-style-two"><span class="btn-title">Contact Us <i class="flaticon-right"></i></span></a></div>
-            </div>
-        </div>
-    </section>
+    <!-- End Career Section -->
 @endsection
