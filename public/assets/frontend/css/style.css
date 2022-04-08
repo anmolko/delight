@@ -8877,14 +8877,14 @@ form .response .text-info {
 }
 
 .latest-news .post:hover h3 a {
-    color: #c08c4d;
+    color: #223f98;
 }
 
 .latest-news .post .post-info {
     position: relative;
     font-size: 14px;
     line-height: 24px;
-    color: #c08c4d;
+    color: #223f98;
     font-weight: 400;
 }
 

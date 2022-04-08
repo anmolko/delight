@@ -2,17 +2,12 @@
 @section('title') Search - Jobs @endsection
 @section('styles')
     <style>
-        .category a:hover {
-            color: #fff;
-        }
-        .news-block-two .inner-box:hover .category a{
-            color: #fff;
-        }
+
     </style>
 @endsection
 @section('content')
     <!-- Page Title -->
-    <section class="page-title" style="background-image: url('{{asset('assets/frontend/images/background/bg-17.jpg')}}');">
+    <section class="page-title" style="background-image: url('{{asset('assets/frontend/images/background/7.jpg')}}');">
         <div class="auto-container">
             <div class="content-box">
                 <div class="content-wrapper">
@@ -31,64 +26,67 @@
     </section>
     <!-- Page Title -->
 
-   <!-- sidebar-page-container -->
-   <section class="sidebar-page-container">
-        <div class="auto-container">
-            <div class="row">
-                @if(count($alljobs) > 0)
 
-                <div class="col-lg-8 content-side">
-                    <div class="row">
+    <!-- News Section -->
+    <section class="news-section">
+        <div class="auto-container">
+            <div class="row clearfix">
+
+                <div class="content-side col-lg-8 order-2">
+                    <div class="row ">
+                        <!-- News Block -->
+                        @if(count($alljobs) > 0)
                             @foreach($alljobs as $job)
-                            <div class="col-md-6 news-block-two">
+
+                            <div class="news-block col-md-6 ">
                                 <div class="inner-box">
-                                    <div class="image">
-                                        <a href="{{route('job.single',@$job->slug)}}"><img class="lazy-image owl-lazy" src="{{asset('assets/frontend/images/resource/image-spacer-for-validation.png')}}" data-src="<?php if(@$job->image){?>{{asset('/images/uploads/jobs/'.@$job->image)}}<?php }?>" alt="{{@$job->slug}}"></a>
+                                    <div class="image-box">
+                                        <figure class="image">
+                                            <a href="{{route('job.single',@$job->slug)}}"><img src="<?php if(@$job->image){?>{{asset('/images/uploads/jobs/'.@$job->image)}}<?php }?>" alt="{{@$job->slug}}"></a>
+                                        </figure>
                                     </div>
                                     <div class="lower-content">
-                                        <div class="category"><a href="#">{{ucwords(@$job->category->name)}}</a></div>
-                                        <ul class="post-meta">
-                                            <li><a href="{{route('job.single',@$job->slug)}}">{{date('M j, Y',strtotime(@$job->start_date))}} - {{date('M j, Y',strtotime(@$job->end_date))}}</a></li>
-                                        
+                                        <div class="post-date"><span class="far fa-calendar"></span> {{date('M j, Y',strtotime(@$job->start_date))}} - {{date('M j, Y',strtotime(@$job->end_date))}}</div>
+                                        <ul class="post-info">
+                                            <li><a href="#">{{ucwords(@$job->category->name)}}</a></li>
                                         </ul>
-                                        <h4><a href="{{route('job.single',$job->slug)}}">{{ucwords($job->name)}}</a></h4>
-                                        <?php if($job->formlink){?>    
-                                            <a href="{{@$job->formlink}}" class="read-more-link"><i class="flaticon-right-arrow"></i>Apply Now</a>
+                                        <h4><a href="{{route('job.single',@$job->slug)}}">{{ucwords($job->name)}}</a></h4>
+                                        <?php if(@$job->formlink){?>    
+                                            <div class="btn-box"><a href="{{@$job->formlink}}" class="read-more">Apply Now <span class="fa fa-arrow-right"></span></a></div>
                                         <?php }else{?>
-
-                                            <a href="#" class="read-more-link"><i class="flaticon-right-arrow"></i>Apply Now</a>
-
+                                            <div class="btn-box"><a href="{{route('job.single',@$job->slug)}}" class="read-more">Read More<span class="fa fa-arrow-right"></span></a></div>
                                         <?php } ?>
                                     </div>
                                 </div>
                             </div>
                             @endforeach
-                     
-                    </div>
-                    <div class="pagination-wrapper text-center mt-4">
-                    {{ $alljobs->links('vendor.pagination.default') }}
+                        @else
+                            <section class="no-results not-found">
+                                <header class="page-header">
+                                    <h1 >Nothing Found</h1>
+                                </header>
+                                <div class="page-content">
+                                    <p>It seems we cannot find what you are looking for.</p>
+                                </div>
+                            </section>
+                        @endif
+                                                    
                         
                     </div>
-                </div>
-                @else
-                    <div class="col-lg-8">
-                        <section class="no-results not-found">
-                            <header class="page-header">
-                                <h1 >Nothing Found</h1>
-                            </header>
-                            <div class="page-content">
-                                <p>It seems we cannot find what you are looking for.</p>
-                            </div>
-                        </section>
+                    <div class="styled-pagination text-center">
+                        
+                        {{ $alljobs->links('vendor.pagination.default') }}
                     </div>
-                @endif
-                <aside class="col-lg-4 sidebar">
+                </div>
+                <!--Sidebar Side-->
+                <div class="sidebar-side col-lg-4 ">
                     @include('frontend.pages.jobs.index_sidebar')            
+            
+                    
+                </div>
 
-                   
-                </aside>
             </div>
         </div>
     </section>
-    <!-- sidebar-page-container end -->
+    <!--End News Section Two -->
 @endsection

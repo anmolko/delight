@@ -1,10 +1,24 @@
-@extends('frontend.layouts.master')
-@section('title') {{ucwords(@$singleJob->name)}}@endsection
+@extends('frontend.layouts.seo_master')
+@section('seo')
+    <title>{{ucfirst(@$singleJob->name)}} - @if(!empty(@$setting_data->website_name)) {{ucwords(@$setting_data->website_name)}} @else Delight Foreign Manpower @endif </title>
+    <meta name='description' itemprop='description'  content='{{ucfirst(@$singleJob->description)}}' />
+    <meta name='keywords' content='{{ucfirst(@$singleJob->description)}}' />
+    <meta property='article:published_time' content='<?php if(@$singleJob->updated_at !=''){?>{{@$singleJob->updated_at}} <?php }else {?> {{@$singleJob->created_at}} <?php }?>' />
+    <meta property='article:section' content='article' />
+    <meta property="og:description" content="{{ucfirst(@$singleJob->description)}}" />
+    <meta property="og:title" content="{{ucfirst(@$singleJob->name)}}" />
+    <meta property="og:url" content="{{url()->current()}}" />
+    <meta property="og:type" content="recruit" />
+    <meta property="og:locale" content="en-us" />
+    <meta property="og:locale:alternate"  content="en-us" />
+    <meta property="og:site_name" content="@if(!empty(@$setting_data->website_name)) {{ucwords(@$setting_data->website_name)}} @else White Pearl @endif" />
+    <meta property="og:image" content="<?php if(@$singleJob->image){?>{{asset('/images/uploads/jobs/'.@$singleJob->image)}}<?php }?>" />
+    <meta property="og:image:url" content="<?php if(@$singleJob->image){?>{{asset('/images/uploads/jobs/'.@$singleJob->image)}}<?php }?>" />
+    <meta property="og:image:size" content="300" />
+@endsection
 @section('styles')
 <style>
-        .blog-single-post .image {
-            margin-bottom: 30px;
-        }
+       
         .row.features-job {
             margin-bottom: 0 !important;
         }
@@ -37,7 +51,7 @@
         }
 
         .portfolio-meta-title-wrap h6 {
-            width: 160px;
+            width: 165px;
         }
         span.portfolio-meta-icon {
             color: #2782f9;
@@ -54,7 +68,7 @@
 @section('content')
  
     <!-- Page Title -->
-    <section class="page-title" style="background-image: url('{{asset('assets/frontend/images/background/bg-17.jpg')}}');">
+    <section class="page-title" style="background-image: url('{{asset('assets/frontend/images/background/7.jpg')}}');">
         <div class="auto-container">
             <div class="content-box">
                 <div class="content-wrapper">
@@ -72,104 +86,124 @@
     </section>
     <!-- Page Title -->
 
-        <!-- sidebar-page-container -->
-        <section class="sidebar-page-container">
+    <!-- Sidebar Page Container -->
+    <div class="sidebar-page-container">
         <div class="auto-container">
-            <div class="row">
-                <div class="col-lg-8 content-side">
-                    <div class="blog-single-post">
-                        <div class="image"><img src="{{ asset('/images/uploads/jobs/'.@$singleJob->image) }}" alt="{{@$singleJob->slug}}"></div>
+            <div class="row clearfix">
+                <!--Content Side-->
+                <div class="content-side col-lg-8 col-md-12 col-sm-12 order-2">
+                    <div class="blog-detail">
+                        <div class="news-block-two">
+                            <div class="inner-box">
+                                <div class="image-box">
+                                    <figure class="image"><img src="{{ asset('/images/uploads/jobs/'.@$singleJob->image) }}" alt="{{@$singleJob->slug}}"></figure>
+                                </div>
+                                <div class="post-share-options clearfix">
+                                    <div class="pull-left">
+                                        <p>Category : </p>
+                                        <ul class="tags">
+                                            <li><a href="#">{{ucwords($singleJob->category->name)}}</a></li>
+                                        </ul>                               
+                                    </div>
+                                    <div class="pull-right">
+                                        <p>Share : </p>
+                                        <ul class="social-icon">
+                                            <li><a href="#" onclick='fbShare("{{route('blog.single',$singleJob->slug)}}")'  ><span class="fab fa-facebook"></span></a></li>
+                                            <li><a href="#" onclick='twitShare("{{route('blog.single',$singleJob->slug)}}","{{ $singleJob->name }}")' ><span class="fab fa-twitter"></span></a></li>
+                                            <li><a href="#" onclick='whatsappShare("{{route('blog.single',$singleJob->slug)}}","{{ $singleJob->name }}")' ><span class="fab fa-whatsapp"></span></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="auto-container">
 
-                        <h3>{{ucwords(@$singleJob->name)}}</h3>
+                                    <div class="row features-job">
 
-                        <div class="row features-job">
-                            <div class="col">
-                                <ul class="portfolio-meta-list">
-                                    <li>
-                                        <div class="portfolio-meta-title-wrap">
-                                            <h6><span class="portfolio-meta-icon"><i class="fa fa-building"></i></span>Company</h6>
-                                        </div> <span class="entry-date">{{ucwords(@$singleJob->client->name)}}</span>
-                                        </li>
-                                    <li>
-                                
-                                        <div class="portfolio-meta-title-wrap">
-                                            <h6><span class="portfolio-meta-icon"><i class="fas fa-sack-dollar"></i></span>Salary</h6>
-                                        </div> <span class="entry-estimation">{{@$singleJob->salary}}</span>
-                                    </li>
-                                
-                                </ul>
-                            </div>
-                            <div class="col">
-                                <ul class="portfolio-meta-list">
-                                    
-                                    <li>
-                                        <div class="portfolio-meta-title-wrap">
-                                            <h6><span class="portfolio-meta-icon"><i class="fas fa-globe"></i></span>Place</h6>
-                                        </div> <span class="entry-place">
-                                        <?php
-                                            if(!empty($singleJob->country)){
-                                                foreach ($countries as $key=>$value){
-                                                    if($singleJob->country == $key){
-                                                        echo $value;
-                                                    }
-                                                }
-                                            }
-                                        ?>
-                                        </span></li>
-                                    <li>
-                                        <div class="portfolio-meta-title-wrap">
-                                            <h6><span class="portfolio-meta-icon"><i class="fas fa-users"></i></span>Required No.</h6>
-                                        </div> <span class="entry-client">{{ucwords(@$singleJob->required_number)}}</span></li>
-                                
-                                    
-                                    
-                                
-                                </ul>
+                                            <div class="col-lg-6 col-md-12 col-sm-12 ">
+                                                <ul class="portfolio-meta-list">
+                                                    <li>
+                                                        <div class="portfolio-meta-title-wrap">
+                                                            <h6><span class="portfolio-meta-icon"><i class="fa fa-building"></i></span>Company</h6>
+                                                        </div> <span class="entry-date">{{ucwords(@$singleJob->client->name)}}</span>
+                                                        </li>
+                                                    <li>
+                                                
+                                                        <div class="portfolio-meta-title-wrap">
+                                                            <h6><span class="portfolio-meta-icon"><i class="fas fa-hand-holding-usd"></i></span>Salary</h6>
+                                                        </div> <span class="entry-estimation">{{@$singleJob->salary}}</span>
+                                                    </li>
+                                                
+                                                </ul>
+                                            </div>
+                                            <div class="col-lg-6 col-md-12 col-sm-12 ">
+                                                <ul class="portfolio-meta-list">
+                                                    
+                                                    <li>
+                                                        <div class="portfolio-meta-title-wrap">
+                                                            <h6><span class="portfolio-meta-icon"><i class="fas fa-globe"></i></span>Place</h6>
+                                                        </div> <span class="entry-place">
+                                                        <?php
+                                                            if(!empty($singleJob->country)){
+                                                                foreach ($countries as $key=>$value){
+                                                                    if($singleJob->country == $key){
+                                                                        echo $value;
+                                                                    }
+                                                                }
+                                                            }
+                                                        ?>
+                                                        </span></li>
+                                                    <li>
+                                                        <div class="portfolio-meta-title-wrap">
+                                                            <h6><span class="portfolio-meta-icon"><i class="fas fa-users"></i></span>Required No.</h6>
+                                                        </div> <span class="entry-client">{{ucwords(@$singleJob->required_number)}}</span></li>
+                                                
+                                                    
+                                                    
+                                                
+                                                </ul>
+                                            </div>
+                                    </div>
+                                    <div class="row qualification">
+                                        <div class="col">
+                                            <ul class="portfolio-meta-list">
+                                                <li>
+                                                    <div class="portfolio-meta-title-wrap">
+                                                        <h6><span class="portfolio-meta-icon"><i class="fas fa-graduation-cap"></i></span>Min. Qualification</h6>
+                                                    </div> <span class="entry-duration">{{ucwords(@$singleJob->min_qualification)}}</span>
+                                                </li>
+                                                
+                                            
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="lower-content">
+                                    {!! @$singleJob->description !!}
+                                    <?php if($singleJob->formlink){  ?>  
+                                        <div class="col-lg-12 col-md-12 col-sm-12 form-group text-center">
+                                            <a class="theme-btn btn-style-one" href="{{@$singleJob->formlink}}" ><span class="btn-title">Apply Now</span></a>
+                                        </div>
+                                    <?php } ?>
+                                </div>
+
                             </div>
                         </div>
 
-                        <div class="row qualification">
-                            <div class="col">
-                                <ul class="portfolio-meta-list">
-                                    <li>
-                                        <div class="portfolio-meta-title-wrap">
-                                            <h6><span class="portfolio-meta-icon"><i class="fas fa-graduation-cap"></i></span>Min. Qualification</h6>
-                                        </div> <span class="entry-duration">{{ucwords(@$singleJob->min_qualification)}}</span>
-                                    </li>
-                                    
-                                
-                                </ul>
-                            </div>
-                        </div>
+                        <!-- Other Options -->
 
-                        <div class="text">
-                        {!! $singleJob->description !!}
-                        </div>
-                        <?php if($singleJob->formlink){  ?>  
-                            <div class="col-lg-12 col-md-12 col-sm-12 form-group text-center">
-                                <a class="theme-btn btn-style-one" href="{{@$singleJob->formlink}}" ><span class="btn-title">Apply Now</span></a>
-                            </div>
-                        <?php } ?>
- 
-                        <div class="share-icon">
-                            <h5>Share this job</h5>
-                            <ul class="social-links">
-                                <li><a href="#" onclick='fbShare("{{route('job.single',$singleJob->slug)}}")'  class="facebook"><i class="fab fa-facebook-f"></i>Facebook</a></li>
-                                <li><a href="#" onclick='twitShare("{{route('job.single',$singleJob->slug)}}","{{ $singleJob->name }}")' class="twitter"><i class="fab fa-twitter"></i>Twiter</a></li>
-                                <li><a href="#" onclick='whatsappShare("{{route('job.single',$singleJob->slug)}}","{{ $singleJob->name }}")' class="whatsapp"><i class="fab fa-whatsapp"></i>Whatsapp</a></li>
-                            </ul>
-                        </div>
-  
+
                     </div>
                 </div>
-                <aside class="col-lg-4 sidebar">
+
+                <!--Sidebar Side-->
+                <div class="sidebar-side col-lg-4 col-md-12 col-sm-12">
                     @include('frontend.pages.jobs.index_sidebar')            
 
-                </aside>
+                </div>
             </div>
         </div>
-    </section>
-    <!-- sidebar-page-container end -->
+    </div>
+    <!-- End Sidebar Container -->
 
 @endsection
 

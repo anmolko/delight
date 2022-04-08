@@ -36,8 +36,8 @@
     </section>
     <!--End Page Title-->
 
-        <!-- Sidebar Page Container -->
-        <div class="sidebar-page-container">
+    <!-- Sidebar Page Container -->
+    <div class="sidebar-page-container">
         <div class="auto-container">
             <div class="row clearfix">
                 <!--Content Side-->
@@ -48,6 +48,23 @@
                                 <div class="image-box">
                                     <figure class="image"><img src="{{ asset('/images/uploads/blog/'.@$singleBlog->image) }}" alt="{{@$singleBlog->slug}}"></figure>
                                 </div>
+                                    <!-- Other Options -->
+                                    <div class="post-share-options clearfix">
+                                        <div class="pull-left">
+                                            <p>Category : </p>
+                                            <ul class="tags">
+                                                <li><a href="{{route('blog.category',$singleBlog->category->slug)}}">{{ucwords($singleBlog->category->name)}}</a></li>
+                                            </ul>                               
+                                        </div>
+                                        <div class="pull-right">
+                                            <p>Share : </p>
+                                            <ul class="social-icon">
+                                                <li><a href="#" onclick='fbShare("{{route('blog.single',$singleBlog->slug)}}")'  ><span class="fab fa-facebook"></span></a></li>
+                                                <li><a href="#" onclick='twitShare("{{route('blog.single',$singleBlog->slug)}}","{{ $singleBlog->title }}")' ><span class="fab fa-twitter"></span></a></li>
+                                                <li><a href="#" onclick='whatsappShare("{{route('blog.single',$singleBlog->slug)}}","{{ $singleBlog->title }}")' ><span class="fab fa-whatsapp"></span></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
                                 <div class="lower-content">
                                    
                                     {!! @$singleBlog->description !!}
@@ -55,23 +72,7 @@
                             </div>
                         </div>
 
-                        <!-- Other Options -->
-                        <div class="post-share-options clearfix">
-                            <div class="pull-left">
-                                <p>Category : </p>
-                                <ul class="tags">
-                                    <li><a href="{{route('blog.category',$singleBlog->category->slug)}}">{{ucwords($singleBlog->category->name)}}</a></li>
-                                </ul>                               
-                            </div>
-                            <div class="pull-right">
-                                <p>Follow Us : </p>
-                                <ul class="social-icon">
-                                    <li><a href="#" onclick='fbShare("{{route('blog.single',$singleBlog->slug)}}")'  ><span class="fab fa-facebook"></span></a></li>
-                                    <li><a href="#" onclick='twitShare("{{route('blog.single',$singleBlog->slug)}}","{{ $singleBlog->title }}")' ><span class="fab fa-twitter"></span></a></li>
-                                    <li><a href="#" onclick='whatsappShare("{{route('blog.single',$singleBlog->slug)}}","{{ $singleBlog->title }}")' ><span class="fab fa-whatsapp"></span></a></li>
-                                </ul>
-                            </div>
-                        </div>
+
 
                      
 
