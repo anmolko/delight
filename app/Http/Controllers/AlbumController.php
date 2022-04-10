@@ -67,7 +67,7 @@ class AlbumController extends Controller
         $destinationPath = base_path().'/public/images/uploads/albums/';
         $extension = $file->getClientOriginalExtension();
         $filename=$random_name.'_cover.'.$extension;
-        $uploadSuccess = Image::make($file->getRealPath())->fit(370, 260)->orientate()->save($destinationPath.$filename);
+        $uploadSuccess = Image::make($file->getRealPath())->fit(370, 270)->orientate()->save($destinationPath.$filename);
         $album = Album::create(array(
           'name' => $request->get('name'),
           'slug' => $request->get('slug'),
@@ -139,7 +139,7 @@ class AlbumController extends Controller
             $image       = $request->file('cover_image');
             $name1       = uniqid().'_cover.'.$image->getClientOriginalExtension();
             $path        = base_path().'/public/images/uploads/albums/';
-            $moved       = Image::make($image->getRealPath())->resize(370, 260)->orientate()->save($path.$name1);
+            $moved       = Image::make($image->getRealPath())->resize(370, 270)->orientate()->save($path.$name1);
 
             if ($moved){
                 $album->cover_image= $name1;

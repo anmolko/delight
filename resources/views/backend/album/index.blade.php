@@ -59,7 +59,7 @@
                                     </div>
                                     <img id="current-img" src="{{asset('/images/uploads/default-placeholder.png')}}" alt="album_image" class="w-100 current-img">
                                 </div>
-                                <span class="ctm-text-sm">*use image minimum of 370 x 260px for Album</span>
+                                <span class="ctm-text-sm">*use image minimum of 370 x 270px for Album</span>
                             </div>
                         </div>
                     </div>
@@ -198,7 +198,7 @@
                                                 </div>
                                                 <img id="current-edit-img" src="{{asset('/images/uploads/default-placeholder.png')}}" alt="album_image" class="w-100 current-img">
                                             </div>
-                                            <span class="ctm-text-sm">*use image minimum of 370 x 260px for Album</span>
+                                            <span class="ctm-text-sm">*use image minimum of 370 x 270px for Album</span>
                                         </div>
 
                                     </div>
