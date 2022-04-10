@@ -2,349 +2,364 @@
 @section('title') {{ucwords(@$page_detail->name)}}  @endsection
 @section('styles')
     <style>
-        .tel{
-            color: #fff;
+        .about-us .content-column ol, .about-us .content-column ul, .tabs-content ul, .tabs-content ol,
+        .sidebar-page-container .blog-detail ul, .sidebar-page-container .blog-detail ol{
+            margin-bottom: 40px;
+            position: relative;
+            display: block;
         }
-        .sec-title h2 {
-            padding-bottom: 10px;
-        }
-
-        .text > p{
-            font-size: 18px;
-            font-weight: 500;
-        }
-
-        .career-section ul li, ol li {
+        .about-us .content-column ol li ,.about-us .content-column ul li,
+        .tabs-content ul li, .tabs-content ol li, .sidebar-page-container .blog-detail ul li, .sidebar-page-container .blog-detail ol li {
+            margin-bottom: 5px;
             position: relative;
             font-size: 18px;
-            font-weight: 400;
-            margin-bottom: 10px;
+            line-height: 1.6em;
+            color: #353535;
+            font-weight: 500;
+            padding-left: 25px;
         }
 
-        .career-section ul li:before, ol li:before{
-            content: "\f00c";
-            color: #fd4a36;
-            line-height: inherit;
-            font-family: 'Font Awesome 5 Pro';
+        .about-us .content-column ol li:before,.about-us .content-column ul li:before,
+        .tabs-content ul li:before, .tabs-content ol li:before,
+        .sidebar-page-container .blog-detail ul li:before, .sidebar-page-container .blog-detail ol li:before
+        {
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-size: 14px;
+            line-height: 25px;
+            color: #223f98;
             font-weight: 900;
-            display: inline-block;
-            font-variant: normal;
-            text-rendering: auto;
-            margin-right: 8px;
-            font-size: 15px;
+            font-family: "Font Awesome 5 Free";
+            content: "\f00c";
         }
 
-        .process-section-four{
-            background-color: #13182b;
+        .pricing-tabs blockquote, .service-detail-section blockquote{
+            position: relative;
+            border-left: 4px solid #223f98;
+            background-color: #f5f5f5;
+            font-size: 18px;
+            line-height: 1.8em;
+            padding: 25px 40px;
+            margin-bottom: 20px;
+            margin-top: 20px;
+
         }
 
-        .faq-section-two{
-            padding: 50px 0 70px;
+
+        .pricing-tabs .tab-buttons {
+            margin-top: 40px;
+            margin-bottom: 40px;
         }
 
-        .owl-carousel .owl-item .slider-list-image img {
+        .tabs-content h3 {
+            position: relative;
             display: block;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+            font-size: 28px;
+            line-height: 1.2em;
+            color: #252525;
+            font-weight: 500;
+            margin-bottom: 20px;
         }
 
-        .service-block-three .image.slider-list-image {
-            height: 300px;
+        .tabs-content .text p, .tabs-content .text, .sidebar-page-container .blog-detail p {
+            font-size: 16px;
+            line-height: 30px;
         }
 
-        .text .media {
-            display: block;
+        .pricing-section {
+             padding: 0 0 100px;
+        }
+        .service-detail-section {
+            padding: 90px 0 80px;
+        }
+        .sidebar-page-container .blog-detail ul{
+            margin-bottom: 15px;
+            margin-top: 15px;
         }
 
     </style>
 @endsection
 @section('content')
     <!-- Page Title -->
-    <section class="page-title" style="background-image: url({{asset('assets/frontend/images/background/bg-17.jpg')}});">
-        <div class="auto-container">
-            <div class="content-box">
-                <div class="content-wrapper">
-                    <div class="title">
-                        <h1>{{ucwords(@$page_detail->name)}}</h1>
-                    </div>
-                    <ul class="bread-crumb clearfix">
-                        <li><a href="/">Home</a></li>
-                        <li>{{ucwords(@$page_detail->name)}}</li>
-                    </ul>
-                </div>
-            </div>
+    <section class="page-title" style="background-image:url({{asset('assets/frontend/images/background/7.jpg')}});">
+        <div class="auto-container clearfix">
+            <h1>{{ucwords(@$page_detail->name)}}</h1>
+            <ul class="bread-crumb clearfix">
+                <li><a href="/">Home</a></li>
+                <li>{{ucwords(@$page_detail->name)}}</li>
+            </ul>
         </div>
     </section>
-    <!-- Page Title -->
 
     @foreach($sorted_sections as $key=>$value)
 
         @if($value == "basic_section")
-            <!-- About Section Seven -->
-            <section class="about-section-seven">
-            <div class="auto-container">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="image-block">
-                            <div class="image-box"><img class="lazy-image owl-lazy" src="{{asset('assets/frontend/images/resource/image-spacer-for-validation.png')}}" data-src="{{asset('images/uploads/section_elements/basic_section/'.@$basic_elements->image)}}" alt=""></div>
-                            <div class="shape-one"><img src="{{asset('assets/frontend/images/shape/shape-19.png')}}" alt=""></div>
-                            <div class="shape-two"><img src="{{asset('assets/frontend/images/shape/shape-20.png')}}" alt=""></div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="sec-title">
-                            <h2>{{@$basic_elements->heading}}</h2>
-                            <div class="text-decoration">
-                                <span class="left"></span>
-                                <span class="right"></span>
+            <section class="about-us">
+                <div class="auto-container">
+                    <div class="row clearfix">
+                        <!-- Content Column -->
+                        <div class="content-column col-lg-6 col-md-12 col-sm-12">
+                            <div class="inner-column">
+                                <div class="sec-title">
+                                    <h2>{{ucwords(@$basic_elements->heading)}}</h2>
+                                </div>
+                                <div class="about-years"><h3>{{ucfirst(@$basic_elements->subheading)}}</h3></div>
+                                <div class="text-box">
+                                    {!! @$basic_elements->description !!}
+                                </div>
+                                @if(@$basic_elements->button_link)
+                                <div class="bottom-box clearfix">
+                                    <div class="btn-box">
+                                        <a href="{{@$basic_elements->button_link}}" class="theme-btn btn-style-one"><span class="btn-title">{{ucwords(@$basic_elements->button)}}</span></a>
+                                    </div>
+                                </div>
+                                @endif
                             </div>
-
                         </div>
-                        <div class="text-block">
-                            <div class="text">{!!  @$basic_elements->description !!}</div>
+
+                        <div class="image-column col-lg-6 col-md-12 col-sm-12">
+                            <div class="inner-column">
+                                <div class="video-box wow fadeIn animated" style="visibility: visible; animation-name: fadeIn;">
+                                    <figure class="image"><img src="{{asset('/images/uploads/section_elements/basic_section/'.@$basic_elements->image) }}" alt=""></figure>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
         @endif
 
         @if($value == "call_to_action_1")
 
-            <!-- CTA Section Two -->
-            <section class="cta-section-two mb-4" style="background-image: url({{asset('assets/frontend/images/background/bg-5.jpg')}});">
-            <div class="auto-container">
-                <div class="row align-items-center">
-                    <div class="col-lg-7">
-                        <h2><span class="flaticon-team"></span>{{@$call1_elements->heading}}</h2>
-                    </div>
-                    <div class="col-lg-5">
-                        <div class="wrapper-box">
-                            <div class="contact-info">
-                                <div class="icon"><span class="flaticon-call-1"></span></div>
-                                <h4><a class="tel" href="tel:{{@$call1_elements->subheading}}">{{@$call1_elements->subheading}}</a> </h4>
-                                <div class="text"><a class="tel" href="mailto:{{@$call1_elements->description}}">{{@$call1_elements->description}}</a></div>
-                            </div>
-                            <a href="{{@$call1_elements->button_link}}" class="theme-btn btn-style-four"><span class="btn-title">{{@$call1_elements->button}}</span></a>
+            <section class="call-to-action" style="background-image: url({{(@$call1_elements->image !== null) ? asset('/images/uploads/section_elements/call_1/'.@$call1_elements->image) : asset('assets/frontend/images/background/13.jpg')}}); padding: 30px 0 20px;">
+                <div class="auto-container" style="padding-bottom: 15px; max-width: 960px;">
+                    <div class="content-box">
+                        <h2>{{ucfirst(@$call1_elements->heading)}}</h2>
+                        <div class="link-box">
+                            <a href="{{@$call1_elements->button_link}}" class="theme-btn btn-style-three">
+                                <span class="btn-title">{{ucwords(@$call1_elements->button)}}</span>
+                            </a>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
         @endif
 
         @if($value == "call_to_action_2")
-        <section class="timeline-section" style="padding: 100px 0 45px 70px;">
-            <div class="sec-bg" style="background-image: url({{asset('assets/frontend/images/background/bg-6.jpg')}});"></div>
-            <div class="auto-container">
-                <div class="sec-title text-center light">
-                    <h2>{{@$call2_elements->heading}}</h2>
-                    <div class="text-decoration">
-                        <span class="left"></span>
-                        <span class="right"></span>
+            <section class="projects-section-three" style="background-image: url({{(@$call2_elements->image !== null) ? asset('/images/uploads/section_elements/call_1/'.@$call2_elements->image) : asset('assets/frontend/images/background/2.jpg')}});padding: 60px 0px 40px 0;">
+                <div class="auto-container">
+                    <div class="upper-box">
+                        <div class="sec-title light">
+                            <h2>{{ucwords(@$call2_elements->heading)}}</h2>
+                            <div class="text">
+                                {{ucwords(@$call2_elements->description)}}
+                            </div>
+                        </div>
+                        @if(@$call2_elements->button)
+                            <a href="{{@$call2_elements->button_link}}" class="theme-btn btn-style-three view-all">
+                                <span class="btn-title">{{ucwords(@$call2_elements->button)}}</span>
+                            </a>
+                        @endif
                     </div>
-                    <button class="theme-btn btn-style-one" style="margin-top: 20px;"><span class="btn-title">START HERE</span></button>
                 </div>
-
-            </div>
-        </section>
+            </section>
         @endif
 
         @if($value == "simple_tab_list")
-            <section class="services-details">
+            <section class="pricing-section">
             <div class="auto-container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h2>{{ucwords(@$bgimage_elements[0]->heading)}}</h2>
-                        <div class="text"></div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <ul class="nav nav-tabs tab-btn-style-one mr-md-4" role="tablist">
-                                    @foreach(@$bgimage_elements as $key=>$value)
-                                    <li class="nav-item">
-                                        <a class="nav-link {{(@$key==0 ) ? 'active':''}}" id="price-tab-{{@$key}}-area" data-toggle="tab" href="#price-tab-{{@$key}}" role="tab" aria-controls="price-tab-{{@$key}}" aria-selected="{{(@$key==0 ) ? 'true':'false'}}">
-                                            0{{@$key+1}}. {{@$value->list_header}}
-                                        </a>
-                                    </li>
-                                    @endforeach
-                                </ul>
+                <div class="sec-title text-center" style="margin-bottom: 0px">
+                    <h2>{{@$bgimage_elements[0]->heading}}</h2>
+                    <div class="text" style="word-break: break-all;width: 60%;margin: auto;padding-top: 40px;">
+                        {{@$bgimage_elements[0]->subheading}}
+                    </div>
+                </div>
+                <div class="pricing-tabs tabs-box clearfix">
+                    <!--Tab Btns-->
+                    <div class="tab-buttons">
+                        <ul class="tab-btns clearfix" style="width: 350px;">
+                            <li data-tab="#monthly" class="tab-btn active-btn">{{@$bgimage_elements[0]->list_header}}</li>
+                            <li data-tab="#annual" class="tab-btn">{{@$bgimage_elements[1]->list_header}}</li>
+                        </ul>
+                    </div>
+                    <!--Tabs Container-->
+                    <div class="tabs-content">
+
+                        <!--Tab / Active Tab-->
+                        <div class="tab active-tab animated fadeIn" id="monthly">
+                            <div class="content">
+                                <div class="row">
+                                    <h3>{{@$bgimage_elements[0]->description}}</h3>
+                                    <div class="text">
+                                        {!! @$bgimage_elements[0]->list_description !!}
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-md-6">
-                                <!-- Tab panes -->
-                                <div class="tab-content wow fadeInUp animated" data-wow-delay="200ms" data-wow-duration="1200ms" style="visibility: visible; animation-duration: 1200ms; animation-delay: 200ms; animation-name: fadeInUp;">
-                                    @foreach(@$bgimage_elements as $key=>$value)
-                                        <div class="tab-pane fadeInUp animated {{(@$key==0 ) ? 'active':''}}" id="price-tab-{{@$key}}" role="tabpanel" aria-labelledby="price-tab-{{@$key}}">
-                                            <h4>{{@$value->subheading}}</h4>
-                                            <div class="text">{{@$value->list_description}}</div>
-                                        </div>
-                                    @endforeach
+                        </div>
+
+                        <!--Tab-->
+                        <div class="tab" id="annual">
+                            <div class="content">
+                                <div class="row">
+                                    <h3>{{@$bgimage_elements[1]->description}}</h3>
+                                    <div class="text">
+                                        {!! @$bgimage_elements[1]->list_description !!}
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
+
                 </div>
             </div>
         </section>
-        @endif
-
-        @if($value == "simple_header_and_description")
-            <section class="career-section">
-                <div class="auto-container">
-                    <div class="sec-title text-center">
-                        <h2>{{$header_descp_elements->heading}}</h2>
-                        <div class="text-decoration">
-                            <span class="left"></span>
-                            <span class="right"></span>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="text" style="font-size: 18px!important; font-weight: 500;">
-                           {!! $header_descp_elements->description !!}
-                        </div>
-                    </div>
-
-                </div>
-            </section>
         @endif
 
         @if($value == "flash_cards")
-            <section class="process-section-four">
-            <div class="auto-container">
-                <div class="row">
-                    @foreach($flash_elements as $key=>$flash)
-                    <div class="col-lg-4 process-block-four">
-                        <div class="inner-box">
-                            <?php if($key == 0){$icon = 'icon-29.png';}elseif ($key == 1){$icon = 'icon-28.png';}else{$icon = 'icon-30.png';} ?>
-                            <div class="icon" style="background: transparent;"><img src="{{asset('assets/frontend/images/icons/'.$icon)}}" alt=""></div>
-                            <h4>{{ucwords(@$flash->list_header)}}</h4>
-                            <div class="text">{{@$flash->list_description}}</div>
+            <div class="service-detail-section">
+                <div class="auto-container">
+                    <div class="row">
+
+                        <div class="content-side col-lg-12 col-md-12 col-sm-12">
+                            <div class="service-detail">
+                                <div class="content-box">
+                                    <h2 style="text-align: center;">{{$flash_elements[0]->heading}}</h2>
+                                    <p style="text-align: center;">{{$flash_elements[0]->subheading}}</p>
+                                    <div class="service-tabs tabs-box">
+                                        <!--Tab Btns-->
+                                        <ul class="tab-btns tab-buttons clearfix">
+                                            @foreach(@$flash_elements as $key=>$flash_element)
+                                                <li data-tab="#service-tab-{{$key}}" class="tab-btn {{($key==0) ? 'active-btn':''}}">
+                                                    {{ $flash_element->list_header }}
+                                                </li>
+
+                                            @endforeach
+                                        </ul>
+
+                                        <!--Tabs Container-->
+                                        <div class="tabs-content">
+
+                                            <!--Tab active-tab-->
+                                            @foreach(@$flash_elements as $key=>$flash_element)
+
+                                            <div class="tab {{($key==0) ? 'active-tab':''}}" id="service-tab-{{$key}}">
+                                                <div class="tab-inner">
+                                                    <div class="text">
+                                                        {!! $flash_element->list_description !!}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    @endforeach
                 </div>
-                <div class="bottom-text">Interested to Know more? <a href="/about-us">see here <i class="fa fa-caret-right"></i></a>  </div>
+            </div>
+
+        @endif
+
+        @if($value == "accordion_section_1")
+        <section class="faqs-section alternate">
+            <div class="auto-container">
+                <div class="sec-title text-center">
+                    <h2>{{ucwords(@$accordian1_elements[0]->heading)}}</h2>
+                    <div class="text" style="word-break: break-all;width: 60%;margin: auto;padding-top: 40px;">
+                        {{@$accordian1_elements[0]->description}}</div>
+                </div>
+                <div class="row">
+                    <!-- FAQ Column -->
+                    <div class="faq-column col-lg-12 col-md-12 col-sm-12">
+                        <ul class="accordion-box">
+                            <!--Block-->
+                            @foreach($accordian1_elements as $key=>$value)
+                                <li class="accordion block {{($key==0) ? 'active-block':''}}">
+                                    <div class="acc-btn {{($key==0) ? 'active':''}}">
+                                        {{$value->list_header}}<div class="icon fa fa-plus-circle"></div></div>
+                                    <div class="acc-content" style="display: {{($key==0) ? 'block':'none'}};">
+                                        <div class="content">
+                                            <div class="text">
+                                                {{$value->list_description}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            @endforeach
+
+                        </ul>
+                    </div>
+                </div>
             </div>
         </section>
         @endif
 
-        @if($value == "accordion_section_1")
-            <!-- Faq Section Four -->
-            <section class="faq-section-four">
+        @if($value == "accordion_section_2")
+            <section class="faqs-section alternate" style="background-color: #fff">
                 <div class="auto-container">
                     <div class="sec-title text-center">
-                        <h2 style="margin: auto; width: 60%; word-wrap: break-word;">{{ucwords(@$accordian1_elements[0]->heading)}}</h2>
-                        <div class="text mb-4 mt-2" style="color: inherit; margin: auto; width: 80%; word-wrap: break-word;">
-                            {{@$accordian1_elements[0]->description}}
-                        </div>
-                        <div class="text-decoration">
-                            <span class="left"></span>
-                            <span class="right"></span>
+                        <h2>{{ucwords(@$accordian2_elements[0]->heading)}}</h2>
+                        <div class="text" style="word-break: break-all;width: 60%;margin: auto;padding-top: 40px;">
+                            {{ucwords(@$accordian2_elements[0]->description)}}
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-8 offset-lg-2">
-                            <ul class="accordion-box style-two mb-30">
-                                <!--Accordion Block-->
-                                @foreach(@$accordian1_elements as $key=>$value)
-                                    <li class="accordion block">
-                                        <div class="acc-btn {{($key == 0) ? 'active':''}}"><div class="icon-outer"><span class="icon icon_plus flaticon-right"></span> <span class="icon icon_minus flaticon-right"></span></div>
-                                            {{($key+1 < 10) ? "0":''}}{{$key+1}}. {{ucwords($value->list_header)}}</div>
-                                        <div class="acc-content {{($key == 0) ? 'current':''}}">
+                        @foreach(@$accordian2_chunks as $chunks)
+
+                        <div class="faq-column col-lg-6 col-md-12 col-sm-12">
+                            <ul class="accordion-box">
+                                @foreach(@$chunks  as $key=>$accordian2_element)
+                                    <li class="accordion block {{(@$key==0 || @$key==3) ? 'active-block':''}} active-block">
+                                        <div class="acc-btn {{($key==0 || $key==3) ? 'active':''}}">
+                                            {{ucwords(@$accordian2_element->list_header)}}
+                                            <div class="icon fa fa-plus-circle"></div></div>
+                                        <div class="acc-content {{(@$key==0 || @$key==3) ? 'current':''}}">
                                             <div class="content">
-                                                <div class="text">
-                                                    {!! ucfirst(@$value->list_description) !!}
-                                                </div>
+                                                <div class="text">How all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth.</div>
                                             </div>
                                         </div>
                                     </li>
                                 @endforeach
+
                             </ul>
                         </div>
-                    </div>
-                </div>
-            </section>
-        @endif
-
-        @if($value == "accordion_section_2")
-            <!-- Faq Section -->
-            <section class="faq-section-two">
-                <div class="auto-container">
-                    <div class="top-content text-center">
-                        <div class="icon"><img src="{{asset('assets/frontend/images/icons/icon-40.png')}}" alt=""></div>
-                        <h2>{{ucwords(@$accordian2_elements[0]->heading)}}</h2>
-                        <div class="text mb-5" style="color: inherit; margin: auto; width: 80%; word-wrap: break-word;"> {{@$accordian2_elements[0]->description}}</div>
-                    </div>
-
-                    <div class="row">
-                        @foreach(@$accordian2_chunks as $key=>$chunks)
-
-                            <div class="col-lg-6">
-                                <ul class="accordion-box style-two mb-30">
-                                    <!--Accordion Block-->
-                                    @foreach($chunks as $secondkey=>$chunk)
-                                    <li class="accordion block">
-                                        <div class="acc-btn {{($secondkey == 0 || $secondkey == 3) ? 'active':''}}"><div class="icon-outer"><span class="icon icon_plus flaticon-right"></span> <span class="icon icon_minus flaticon-right"></span></div>
-                                            {{($secondkey+1 < 10) ? "0":''}}{{$secondkey+1}}.  {{ucwords(@$chunk->list_header)}}</div>
-                                        <div class="acc-content {{($secondkey == 0 || $secondkey == 3) ? 'current':''}}">
-                                            <div class="content">
-                                                <div class="text">{!! ucfirst(@$chunk->list_description) !!}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    @endforeach
-                                </ul>
-                            </div>
                         @endforeach
+
                     </div>
                 </div>
             </section>
 
         @endif
 
-        @if($value == "slider_list")
-            <!-- Features Section Five -->
-            <section class="services-section-three">
+        @if($value == "simple_header_and_description")
+            <div class="sidebar-page-container">
                 <div class="auto-container">
-                    <div class="sec-title style-four">
-                        <h2>{{ucwords(@$slider_list_elements[0]->heading)}}</h2>
-                        <span class="text-decoration-two"></span>
-                    </div>
-                    <div class="row">
-                        <!--Theme Carousel-->
-                        <div class="theme_carousel owl-theme owl-carousel" data-options='{"loop": true, "margin": 0, "autoheight":true, "lazyload":true, "nav": true, "dots": true, "autoplay": false, "autoplayTimeout": 6000, "smartSpeed": 300, "responsive":{ "0" :{ "items": "1" }, "600" :{ "items" : "2" }, "768" :{ "items" : "2" } , "1075":{ "items" : "3" }, "1200":{ "items" : "3" }}}'>
-                            @for ($i = 1; $i <=@$list_3; $i++)
-                                <div class="service-block-three">
-                                    <div class="inner-box">
-                                        <div class="image slider-list-image"><img src="{{ asset('/images/uploads/section_elements/list_1/'.@$slider_list_elements[$i-1]->list_image) }}" alt="{{@$slider_list_elements[$i-1]->subheading}}"></div>
-                                        <div class="content">
-                                            <h4>{{ucwords(@$slider_list_elements[$i-1]->list_header)}}</h4>
-                                            <div class="icon"><span class="flaticon-question"></span></div>
-                                            <a href="{{route('slider.single',@$slider_list_elements[$i-1]->subheading)}}" class="read-more-link">Read More <i class="fa fa-caret-right"></i></a>
-                                        </div>
-                                        <div class="overlay-content">                                
-                                            <div class="content-wrapper">
-                                                <div class="icon-box">
-                                                    <div class="icon"><span class="flaticon-question"></span></div>
-                                                    <h4>{{ucwords(@$slider_list_elements[$i-1]->list_header)}}</h4>
+                    <div class="row clearfix">
+                        <!--Content Side-->
+                        <div class="col-lg-12 col-md-12 col-sm-12 order-2">
+                            <div class="blog-detail">
+                                <div class="inner-box">
+                                    <div class="lower-content">
+                                        @if($header_descp_elements->heading !== null)
+                                            <div class="sec-title text-center">
+                                                <h3>{{ucwords(@$header_descp_elements->heading)}}</h3>
                                                 </div>
-                                                <div class="outer-box">
-                                                    <div class="text">{{ucfirst(Str::limit(@$slider_list_elements[$i-1]->list_description, 75))}}...</div>
-                                                    <a href="{{route('slider.single',@$slider_list_elements[$i-1]->subheading)}}" class="read-more-link">Read More <i class="fa fa-caret-right"></i></a>
-                                                </div>         
                                             </div>
-                                        </div>                            
+                                        @endif
+                                        {!! @$header_descp_elements->description !!}
                                     </div>
                                 </div>
-                            @endfor
-                           
+                            </div>
                         </div>
-                    </div>                
+                    </div>
                 </div>
-            </section>
+            </div>
+
         @endif
+
     @endforeach
 
 

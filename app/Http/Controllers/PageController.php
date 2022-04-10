@@ -299,6 +299,13 @@ class PageController extends Controller
                                 @unlink(public_path().'/images/uploads/section_elements/basic_section/'.$basic_element->image);
                             }
                         }
+                        if($section->section_slug == 'call_to_action_1'){
+                            $call1_element = SectionElement::where('page_section_id', $section->id)
+                                ->first();
+                            if (!empty($call1_element->image) && file_exists(public_path().'/images/uploads/section_elements/call_1/'.$call1_element->image)){
+                                @unlink(public_path().'/images/uploads/section_elements/call_1/'.$call1_element->image);
+                            }
+                        }
                         if($section->section_slug == 'slider_list'){
                             $list1_element = SectionElement::where('page_section_id', $section->id)
                                 ->get();
@@ -353,6 +360,13 @@ class PageController extends Controller
                     ->first();
                 if (!empty($basic_element->image) && file_exists(public_path().'/images/uploads/section_elements/basic_section/'.$basic_element->image)){
                     @unlink(public_path().'/images/uploads/section_elements/basic_section/'.$basic_element->image);
+                }
+            }
+            if($section->section_slug == 'call_to_action_1'){
+                $call1_element = SectionElement::where('page_section_id', $section->id)
+                    ->first();
+                if (!empty($call1_element->image) && file_exists(public_path().'/images/uploads/section_elements/call_1/'.$call1_element->image)){
+                    @unlink(public_path().'/images/uploads/section_elements/call_1/'.$call1_element->image);
                 }
             }
 

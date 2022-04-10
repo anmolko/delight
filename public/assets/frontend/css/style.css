@@ -12087,3 +12087,39 @@ form .response .text-info {
     position: relative;
     width: -webkit-fill-available;
 }
+
+.sec-title h3{
+    position: relative;
+    display: inline-block;
+    font-size: 55px;
+    line-height: 1em;
+    font-weight: 600;
+    color: transparent;
+    cursor: default;
+    -webkit-text-stroke: 1px #353535;
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+}
+
+.sec-title.text-center h3:before {
+    left: auto;
+    right: 100%;
+    margin-right: 15px;
+    margin-left: 0;
+}
+
+.sec-title h3:before, .sec-title h3:after {
+    position: absolute;
+    left: 100%;
+    bottom: 20%;
+    height: 2px;
+    width: 50px;
+    background-color: #223f98;
+    content: "";
+    margin-left: 15px;
+}
+
+.sec-title h3:hover {
+    color: #353535;
+    -webkit-text-stroke: 1px transparent;
+}
