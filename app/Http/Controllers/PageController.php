@@ -310,8 +310,13 @@ class PageController extends Controller
                             $list1_element = SectionElement::where('page_section_id', $section->id)
                                 ->get();
                             foreach ($list1_element as $elements){
+                                $thumb_name   = 'thumb_'.$elements->list_image;
+
                                 if (!empty($elements->list_image) && file_exists(public_path().'/images/uploads/section_elements/list_1/'.$elements->list_image)){
                                     @unlink(public_path().'/images/uploads/section_elements/list_1/'.$elements->list_image);
+                                }
+                                if (!empty($thumbimage) && file_exists(public_path().'/images/uploads/section_elements/list_1/thumb/'.$thumbimage)){
+                                    @unlink(public_path().'/images/uploads/section_elements/list_1/thumb/'.$thumbimage);
                                 }
                             }
                         }
@@ -374,8 +379,12 @@ class PageController extends Controller
                 $list1_element = SectionElement::where('page_section_id', $section->id)
                     ->get();
                 foreach ($list1_element as $elements){
+                    $thumb_name   = 'thumb_'.$elements->list_image;
                     if (!empty($elements->list_image) && file_exists(public_path().'/images/uploads/section_elements/list_1/'.$elements->list_image)){
                         @unlink(public_path().'/images/uploads/section_elements/list_1/'.$elements->list_image);
+                    }
+                    if (!empty($thumbimage) && file_exists(public_path().'/images/uploads/section_elements/list_1/thumb/'.$thumbimage)){
+                        @unlink(public_path().'/images/uploads/section_elements/list_1/thumb/'.$thumbimage);
                     }
                 }
             }

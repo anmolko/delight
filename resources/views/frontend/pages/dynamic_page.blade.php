@@ -360,6 +360,49 @@
 
         @endif
 
+        @if($value == "slider_list")
+        <section class="services-section">
+            <div class="auto-container">
+                <div class="row">
+                    <div class="col-lg-8 col-md-12">
+                        <div class="sec-title">
+                            <h2>{{ucwords(@$slider_list_elements[0]->heading)}}</h2>
+                            <div class="text"  style="word-break: break-all;width: 80%;">{{ucwords(@$slider_list_elements[0]->image)}}</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-12">
+                        <div class="right-btn text-right">
+                            <a href="/" class="theme-btn btn-style-two"><span class="btn-title">View All</span></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carousel-outer">
+
+                    <div class="services-carousel owl-carousel owl-theme">
+
+                        @foreach($slider_list_elements as $list)
+                        <div class="service-block">
+                            <div class="inner-box">
+                                <div class="image-box">
+                                    <figure class="image"><a href="{{route('slider.single',@$list->subheading)}}"><img src="{{asset('/images/uploads/section_elements/list_1/thumb/thumb_'.@$list->list_image)}}" alt="{{@$list->subheading}}"></a></figure>
+                                </div>
+                                <div class="lower-content">
+                                    <h4><a href="{{route('slider.single',@$list->subheading)}}">{{@$list->list_header}}</a></h4>
+                                    <div class="text">{{ucfirst(Str::limit(@$list->list_description, 80))}}</div>
+                                    <div class="btn-box"><a href="/" class="read-more">Read More <span class="fa fa-arrow-right"></span></a></div>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        @endif
+
     @endforeach
 
 

@@ -847,9 +847,16 @@
                                                             <div class="card-body">
                                                                 <div class="form-group mb-3">
                                                                     <label>Heading <span class="text-muted text-danger">*</span></label>
-                                                                    <input type="text" class="form-control" name="heading[]" value="{{@$slider_list_elements[0]->heading}}" required>
+                                                                    <input type="text" class="form-control" maxlength="20" name="heading[]" value="{{@$slider_list_elements[0]->heading}}" required>
                                                                     <div class="invalid-feedback">
                                                                         Please enter the heading.
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group mb-3">
+                                                                    <label>Sub Heading <span class="text-muted text-danger">*</span></label>
+                                                                    <input type="text" class="form-control" maxlength="70" name="image[]" value="{{@$slider_list_elements[0]->image}}" required>
+                                                                    <div class="invalid-feedback">
+                                                                        Please enter the subheading.
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -923,7 +930,7 @@
                                                                                                     <img id="current-sliderlist-{{$i}}-img" src="<?php if(!empty(@$slider_list_elements[$i-1]->list_image)){ echo '/images/uploads/section_elements/list_1/'.@$slider_list_elements[$i-1]->list_image; } else{  echo '/images/uploads/default-placeholder.png'; } ?>"  alt="sliderlist_{{$i}}_section_image" class="current-img w-100">
                                                                                                 </div>
                                                                                                 <span class="ctm-text-sm text-danger"> {{(@$slider_list_elements[$i-1]->id !== null) ? "":"*required" }}</span>
-                                                                                                <span class="ctm-text-sm">*use image minimum of 770 x 400px for  Slider list {{$i}} element</span>
+                                                                                                <span class="ctm-text-sm">*use image minimum of 770 x 450px for  Slider list {{$i}} element</span>
                                                                                             </div>
 
                                                                                         </div>
