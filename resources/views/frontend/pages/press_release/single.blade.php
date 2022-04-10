@@ -28,55 +28,70 @@
     <meta property="og:image:size" content="300" />
 @endsection
 @section('content')
-    <!-- Page Title -->
-    <section class="page-title-two" style="background-image: url({{asset('assets/frontend/images/background/bg-26.jpg')}});">
+
+    <!--Page Title-->
+    <section class="page-title" style="background-image:url('{{asset('assets/frontend/images/background/7.jpg')}}');">
+
+    <div class="auto-container clearfix">
+        <h1>{{ucwords(@$singlePress->title)}}</h1>
+        <ul class="bread-crumb clearfix">
+            <li><a href="/">Home</a></li>
+            <li><a href="{{route('press.frontend')}}">Press Release</a></li>
+            <li>{{ucwords(@$singlePress->title)}}</li>
+        </ul>
+    </div>
+    </section>
+    <!--End Page Title-->
+
+    <!-- Sidebar Page Container -->
+    <div class="sidebar-page-container">
         <div class="auto-container">
-            <div class="content-box">
-                <div class="content-wrapper">
-                    <ul class="post-meta">
-                        <li><a href="#">{{date('j F, Y',strtotime(@$singlePress->created_at))}}</a></li>
-                    </ul>
-                    <div class="title">
-                        <h1>{{ucwords(@$singlePress->title)}}</h1>
+            <div class="row clearfix">
+                <!--Content Side-->
+                <div class="content-side col-lg-8 col-md-12 col-sm-12 order-2">
+                    <div class="blog-detail">
+                        <div class="news-block-two">
+                            <div class="inner-box">
+                                <div class="image-box">
+                                    <figure class="image"><img src="{{ asset('/images/uploads/press_releases/'.@$singlePress->image) }}" alt="{{@$singlePress->slug}}"></figure>
+                                </div>
+                                    <!-- Other Options -->
+                                    <div class="post-share-options clearfix">
+                                        <div class="pull-left">
+                                            <p>Press Release On : </p>
+                                            <ul class="tags">
+                                                <li><a href="#">{{date('F j, Y',strtotime(@$singlePress->created_at))}}</a></li>
+                                            </ul>                               
+                                        </div>
+                                        <div class="pull-right">
+                                            <p>Share : </p>
+                                            <ul class="social-icon">
+                                                <li><a href="#" onclick='fbShare("{{route('press.single',$singlePress->slug)}}")'  ><span class="fab fa-facebook"></span></a></li>
+                                                <li><a href="#" onclick='twitShare("{{route('press.single',$singlePress->slug)}}","{{ $singlePress->title }}")' ><span class="fab fa-twitter"></span></a></li>
+                                                <li><a href="#" onclick='whatsappShare("{{route('press.single',$singlePress->slug)}}","{{ $singlePress->title }}")' ><span class="fab fa-whatsapp"></span></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                <div class="lower-content">
+                                   
+                                    {!! @$singlePress->description !!}
+                                </div>
+                            </div>
+                        </div>
+
+
                     </div>
+                </div>
+
+                <!--Sidebar Side-->
+                <div class="sidebar-side col-lg-4 col-md-12 col-sm-12">
+                    @include('frontend.pages.press_release.sidebar')            
+                   
                 </div>
             </div>
         </div>
-    </section>
-    <!-- Page Title -->
-
-    <!-- sidebar-page-container -->
-    <section class="sidebar-page-container">
-        <div class="auto-container">
-            <div class="row">
-                <div class="col-lg-8 content-side">
-                    <div class="blog-single-post">
-                        <div class="image"><img src="{{ asset('/images/uploads/press_releases/'.@$singlePress->image) }}" alt=""></div>
-
-                        <h3>{{ucwords(@$singlePress->title)}}</h3>
-                        <div class="text">
-                            {!! @$singlePress->description !!}
-                        </div>
-
-                        <div class="share-icon">
-                            <h5>Share this Press Release</h5>
-                            <ul class="social-links">
-                                <li><a href="#" onclick='fbShare("{{route('press.single',$singlePress->slug)}}")'  class="facebook"><i class="fab fa-facebook-f"></i>Facebook</a></li>
-                                <li><a href="#" onclick='twitShare("{{route('press.single',$singlePress->slug)}}","{{ $singlePress->title }}")' class="twitter"><i class="fab fa-twitter"></i>Twitter</a></li>
-                                <li><a href="#" onclick='whatsappShare("{{route('press.single',$singlePress->slug)}}","{{ $singlePress->title }}")' class="whatsapp"><i class="fab fa-whatsapp"></i>Whatsapp</a></li>
-                            </ul>
-                        </div>
-
-                    </div>
-                </div>
-                <aside class="col-lg-4 sidebar">
-                    @include('frontend.pages.press_release.sidebar')
-
-                </aside>
-            </div>
-        </div>
-    </section>
-    <!-- sidebar-page-container end -->
+    </div>
+    <!-- End Sidebar Container -->
 
 @endsection
 

@@ -62,8 +62,10 @@ class PressReleaseController extends Controller
                 $originalname = str_replace(' ', '_', $image->getClientOriginalName());
                 $name = uniqid() . '_press_release_' . $originalname;
                 $path = base_path() . '/public/images/uploads/press_releases/';
+                $thumb_path     = base_path().'/public/images/uploads/press_releases/thumb/';
+                $thumb_name     = 'thumb_'.$name;
                 $moved = Image::make($image->getRealPath())->fit(770, 350)->orientate()->save($path . $name);
-
+                $thumb          = Image::make($image->getRealPath())->fit(70,70)->orientate()->save($thumb_path.$thumb_name);
                 if ($moved) {
                     $data['image'] = $name;
                 }
@@ -123,8 +125,12 @@ class PressReleaseController extends Controller
             $image          = $request->file('image');
             $originalname   = str_replace(' ','_',$image->getClientOriginalName());
             $name1           = uniqid().'_press_release_'.$originalname;
+            $thumb_path     = base_path().'/public/images/uploads/press_releases/thumb/';
+            $thumb_name     = 'thumb_'.$name1;
             $path        = base_path().'/public/images/uploads/press_releases/';
             $moved         = Image::make($image->getRealPath())->fit(770,350)->orientate()->save($path.$name1);
+            $thumb          = Image::make($image->getRealPath())->fit(70,70)->orientate()->save($thumb_path.$thumb_name);
+
 
             if ($moved){
                 $press->image= $name1;
