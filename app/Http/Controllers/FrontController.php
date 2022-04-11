@@ -80,14 +80,8 @@ class FrontController extends Controller
         $service_categories =$this->S_category->orderBy('name', 'asc')->take('4')->get();
         $testimonials =$this->testimonial->orderBy('title', 'asc')->get();
         $client_groups =$this->client->orderBy('created_at', 'asc')->get()->groupBy('country');
-        $countclients =$this->client->orderBy('created_at', 'asc')->get();
-        if(count($countclients) > 7){
-            $clients = $this->client->orderBy('created_at', 'asc')->take('8')->get();
-        }elseif(count($countclients) > 3){
-            $clients = $this->client->orderBy('created_at', 'asc')->take('4')->get();
-        }else{
-            $clients = null;
-        }
+        $clients = $this->client->orderBy('created_at', 'asc')->take('8')->get();
+       
         $countries  = CountryState::getCountries();
         $awards =$this->award->orderBy('name', 'asc')->get();
         $welcome_settings = $this->setting->first();

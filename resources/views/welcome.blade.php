@@ -22,6 +22,9 @@
             margin-top: -100px;
         }
     }
+    .news-section{
+        background-color: #fafafa;
+    }
 </style>
 @endsection
 @section('content')
@@ -254,164 +257,76 @@
     </section>
     <!-- End Fluid Section -->
 
-    <!-- Team Section -->
-    <section class="team-section">
-        <div class="auto-container">
-            <div class="sec-title text-center">
-                <h2>Expert Worker</h2>
-                <div class="text">We have Expert Worker <br>They provide Quality Work For Customer</div>
-            </div>
 
-            <div class="row">
-
-                <!-- Team Block -->
-                <div class="team-block col-lg-4 col-md-6 col-sm-12 wow fadeInUp">
-                    <div class="image-box">
-                        <figure class="image"><img src="{{asset('assets/frontend/images/resource/team-1.jpg')}}" alt=""></figure>
-                        <div class="info-box">
-                            <h4 class="name">Tiny Moleski</h4>
-                            <span class="designation">Project Manager</span>
-                            <ul class="social-links">
-                                <li><a href="#"><span class="fab fa-facebook-f"></span></a></li>
-                                <li><a href="#"><span class="fab fa-twitter"></span></a></li>
-                                <li><a href="#"><span class="fab fa-pinterest"></span></a></li>
-                                <li><a href="#"><span class="fab fa-dribbble"></span></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Team Block -->
-                <div class="team-block col-lg-4 col-md-6 col-sm-12 wow fadeInUp" data-wow-delay="300ms">
-                    <div class="image-box">
-                        <figure class="image"><img src="{{asset('assets/frontend/images/resource/team-2.jpg')}}" alt=""></figure>
-                        <div class="info-box">
-                            <h4 class="name">Buffy Edelen</h4>
-                            <span class="designation">Deliver Manager</span>
-                            <ul class="social-links">
-                                <li><a href="#"><span class="fab fa-facebook-f"></span></a></li>
-                                <li><a href="#"><span class="fab fa-twitter"></span></a></li>
-                                <li><a href="#"><span class="fab fa-pinterest"></span></a></li>
-                                <li><a href="#"><span class="fab fa-dribbble"></span></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Team Block -->
-                <div class="team-block col-lg-4 col-md-6 col-sm-12 wow fadeInUp" data-wow-delay="600ms">
-                    <div class="image-box">
-                        <figure class="image"><img src="{{asset('assets/frontend/images/resource/team-3.jpg')}}" alt=""></figure>
-                        <div class="info-box">
-                            <h4 class="name">Jack Monika</h4>
-                            <span class="designation">Technical Specialist</span>
-                            <ul class="social-links">
-                                <li><a href="#"><span class="fab fa-facebook-f"></span></a></li>
-                                <li><a href="#"><span class="fab fa-twitter"></span></a></li>
-                                <li><a href="#"><span class="fab fa-pinterest"></span></a></li>
-                                <li><a href="#"><span class="fab fa-dribbble"></span></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!--End Team Section -->
-
+    @if(count(@$testimonials) > 0)
     <!-- Testimonial Section -->
     <section class="testimonial-section" style="background-image: url({{asset('assets/frontend/images/background/2.jpg')}});">
         <div class="auto-container">
             <div class="sec-title light text-center">
                 <h2>What Clients Says</h2>
-                <div class="text">You read our clients review <br>check this now</div>
             </div>
 
             <!-- Testimonial Carousel -->
             <div class="testimonial-carousel owl-carousel owl-theme">
                 <!-- Testimonial Block -->
-                <div class="testimonial-block">
-                    <div class="inner-box">
-                        <div class="thumb"><img src="{{asset('assets/frontend/images/resource/testi-thumb.jpg')}}" alt=""></div>
-                        <div class="text">
-                            <div class="inner">
-                                <p>Today we can tell you, thanks to your passion, hard work creativity, and expertise, you delivered us the most beautiful house ever! It’s been a beautiful ride, there were up’s and down’s, frustrations, delays at the same time great looks. keep touch with them.</p>
+                @foreach(@$testimonials as $testimonial)
+                    <div class="testimonial-block">
+                        <div class="inner-box">
+                            <div class="thumb"><img src="{{ asset('/images/uploads/testimonials/'.$testimonial->image) }}" alt="{{ucwords(@$testimonial->title)}}"></div>
+                            <div class="text">
+                                <div class="inner">
+                                    <p>{{@$testimonial->testimonial}}</p>
+                                </div>
+                            </div>
+                            <div class="info-box">
+                                <span class="icon fa fa-quote-left"></span>
+                                <h5 class="name">{{ucwords(@$testimonial->title)}}</h5>
+                                <span class="city">{{ucwords(@$testimonial->subtitle)}}</span>
                             </div>
                         </div>
-                        <div class="info-box">
-                            <span class="icon fa fa-quote-left"></span>
-                            <h5 class="name">Jhon Zabrilla</h5>
-                            <span class="city">Newyark City</span>
-                        </div>
                     </div>
-                </div>
-
-                <!-- Testimonial Block -->
-                <div class="testimonial-block">
-                    <div class="inner-box">
-                        <div class="thumb"><img src="{{asset('assets/frontend/images/resource/testi-thumb.jpg')}}" alt=""></div>
-                        <div class="text">
-                            <div class="inner">
-                                <p>Today we can tell you, thanks to your passion, hard work creativity, and expertise, you delivered us the most beautiful house ever! It’s been a beautiful ride, there were up’s and down’s, frustrations, delays at the same time great looks. keep touch with them.</p>
-                            </div>
-                        </div>
-                        <div class="info-box">
-                            <span class="icon fa fa-quote-left"></span>
-                            <h5 class="name">Jhon Zabrilla</h5>
-                            <span class="city">Newyark City</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Testimonial Block -->
-                <div class="testimonial-block">
-                    <div class="inner-box">
-                        <div class="thumb"><img src="{{asset('assets/frontend/images/resource/testi-thumb.jpg')}}" alt=""></div>
-                        <div class="text">
-                            <div class="inner">
-                                <p>Today we can tell you, thanks to your passion, hard work creativity, and expertise, you delivered us the most beautiful house ever! It’s been a beautiful ride, there were up’s and down’s, frustrations, delays at the same time great looks. keep touch with them.</p>
-                            </div>
-                        </div>
-                        <div class="info-box">
-                            <span class="icon fa fa-quote-left"></span>
-                            <h5 class="name">Jhon Zabrilla</h5>
-                            <span class="city">Newyark City</span>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
+              
             </div>
         </div>
     </section>
     <!--End Testimonial Section -->
+    @endif
 
+    @if(count(@$clients) > 3)
     <!--Clients Section-->
     <section class="clients-section">
         <div class="auto-container">
             <!--Sponsors Carousel-->
             <ul class="sponsors-carousel owl-carousel owl-theme">
-                <li class="slide-item"><figure class="image-box"><a href="#"><img src="{{asset('assets/frontend/images/clients/1.png')}}" alt=""></a></figure></li>
-                <li class="slide-item"><figure class="image-box"><a href="#"><img src="{{asset('assets/frontend/images/clients/2.png')}}" alt=""></a></figure></li>
-                <li class="slide-item"><figure class="image-box"><a href="#"><img src="{{asset('assets/frontend/images/clients/3.png')}}" alt=""></a></figure></li>
-                <li class="slide-item"><figure class="image-box"><a href="#"><img src="{{asset('assets/frontend/images/clients/4.png')}}" alt=""></a></figure></li>
-                <li class="slide-item"><figure class="image-box"><a href="#"><img src="{{asset('assets/frontend/images/clients/5.png')}}" alt=""></a></figure></li>
-                <li class="slide-item"><figure class="image-box"><a href="#"><img src="{{asset('assets/frontend/images/clients/1.png')}}" alt=""></a></figure></li>
-                <li class="slide-item"><figure class="image-box"><a href="#"><img src="{{asset('assets/frontend/images/clients/2.png')}}" alt=""></a></figure></li>
-                <li class="slide-item"><figure class="image-box"><a href="#"><img src="{{asset('assets/frontend/images/clients/3.png')}}" alt=""></a></figure></li>
-                <li class="slide-item"><figure class="image-box"><a href="#"><img src="{{asset('assets/frontend/images/clients/4.png')}}" alt=""></a></figure></li>
-                <li class="slide-item"><figure class="image-box"><a href="#"><img src="{{asset('assets/frontend/images/clients/5.png')}}" alt=""></a></figure></li>
+                @foreach(@$clients as $client)
+                    <li class="slide-item"><figure class="image-box"><a href="{{@$client->link}}" title="{{ucwords(@$client->name)}}"><img src="{{ asset('/images/uploads/clients/'.$client->image) }}" alt="{{ucwords(@$client->name)}}"></a></figure></li>
+                @endforeach
+               
             </ul>
         </div>
     </section>
     <!--End Clients Section-->
+    @endif
 
     @if(count(@$latestPosts) > 2)
 
     <!-- News Section -->
     <section class="news-section">
         <div class="auto-container">
-            <div class="sec-title">
-                <h2>News & Updates</h2>
-                <div class="text">You read now our latest blogs</div>
+            <div class="row">
+
+                <div class="col-lg-8 col-md-12">
+                    <div class="sec-title">
+                    <h2>News & Updates</h2>
+                    <div class="text">You read now our latest blogs</div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-12">
+                    <div class="right-btn text-right">
+                        <a href="{{route('blog.frontend')}}" class="theme-btn btn-style-two"><span class="btn-title">All Blog</span></a>
+                    </div>
+                </div>
             </div>
 
             <div class="row">

@@ -72,7 +72,7 @@
 
                         <div class="form-group mb-3">
                             <label>Description <span class="text-muted text-danger">*</span></label>
-                            <textarea class="form-control" maxlength="100" rows="8" name="testimonial" id="editor" required></textarea>
+                            <textarea class="form-control" maxlength="250" rows="8" name="testimonial" id="editor" required></textarea>
                             <div class="invalid-feedback">
                                 Please enter the testimonial.
                             </div>
@@ -226,7 +226,7 @@
 
                                     <div class="form-group mb-3">
                                         <label>Testimonial <span class="text-muted text-danger">*</span></label>
-                                        <textarea class="form-control" rows="8" maxlength="100" name="testimonial" id="edit-editor" required></textarea>
+                                        <textarea class="form-control" rows="8" maxlength="250" name="testimonial" id="edit-editor" required></textarea>
                                         <div class="invalid-feedback">
                                             Please enter the testimonial.
                                         </div>
