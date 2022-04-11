@@ -880,64 +880,61 @@
                                                                     <div id="processelect-heading-{{$i}}" class="{{($i==1) ? 'collapse show ctm-padding':'collapse ctm-padding'}}" aria-labelledby="processelect{{$i}}" data-parent="#accordion-details" >
 
                                                                         <div class="row">
-                                                                            <div class="col-md-7">
-                                                                                <div class="card ctm-border-radius shadow-sm flex-fill">
-                                                                                    <div class="card-body">
-                                                                                        <div class="form-group mb-3">
-                                                                                            <label>Heading <span class="text-muted text-danger">*</span></label>
-                                                                                            <input type="hidden" class="form-control" value="{{$key}}"    name="page_section_id" required>
-                                                                                            <input type="hidden" class="form-control" value="{{$value}}"  name="section_name" required>
-                                                                                            <input type="hidden" class="form-control" value="{{$list_3}}" name="list_number_3" required>
-                                                                                            <input type="hidden" class="form-control" value="{{@$slider_list_elements[$i-1]->id}}" name="id[]">
-                                                                                            <input type="text" class="form-control" name="list_header[]" id="slider_title_{{$i-1}}" onclick="slugMaker('slider_title_{{$i-1}}','slider_slug_{{$i-1}}')" value="{{@$slider_list_elements[$i-1]->list_header}}"  required>
-                                                                                            <div class="invalid-feedback">
-                                                                                                Please enter the heading.
-                                                                                            </div>
-                                                                                        </div>
-                                                                                        <div class="form-group mb-3">
-                                                                                            <label>Slug </label>
-                                                                                            <input type="text" class="form-control" name="subheading[]" id="slider_slug_{{$i-1}}"  value="{{@$slider_list_elements[$i-1]->subheading}}" >
-                                                                                            <div class="invalid-feedback">
-                                                                                                Please enter the slug.
-                                                                                            </div>
-                                                                                        </div>
-                                                                                        <div class="form-group mb-3">
-                                                                                            <label>Long Description <span class="text-muted text-danger">*</span></label>
-                                                                                            <textarea class="form-control" rows="6" name="list_description[]" required>{{@$slider_list_elements[$i-1]->list_description}}</textarea>
-                                                                                            <span class="ctm-text-sm">*please write a long description</span>
-                                                                                            <div class="invalid-feedback">
-                                                                                                Please write the long description.
-                                                                                            </div>
-                                                                                        </div>
+                                                                            <div class="col-md-8">
+
+                                                                                <div class="form-group mb-3">
+                                                                                    <label>Heading <span class="text-muted text-danger">*</span></label>
+                                                                                    <input type="hidden" class="form-control" value="{{$key}}"    name="page_section_id" required>
+                                                                                    <input type="hidden" class="form-control" value="{{$value}}"  name="section_name" required>
+                                                                                    <input type="hidden" class="form-control" value="{{$list_3}}" name="list_number_3" required>
+                                                                                    <input type="hidden" class="form-control" value="{{@$slider_list_elements[$i-1]->id}}" name="id[]">
+                                                                                    <input type="text" class="form-control" name="list_header[]" id="slider_title_{{$i-1}}" onclick="slugMaker('slider_title_{{$i-1}}','slider_slug_{{$i-1}}')" value="{{@$slider_list_elements[$i-1]->list_header}}"  required>
+                                                                                    <div class="invalid-feedback">
+                                                                                        Please enter the heading.
                                                                                     </div>
                                                                                 </div>
+                                                                                <div class="form-group mb-3">
+                                                                                    <label>Slug </label>
+                                                                                    <input type="text" class="form-control" name="subheading[]" id="slider_slug_{{$i-1}}"  value="{{@$slider_list_elements[$i-1]->subheading}}" >
+                                                                                    <div class="invalid-feedback">
+                                                                                        Please enter the slug.
+                                                                                    </div>
+                                                                                </div>
+
                                                                             </div>
-                                                                            <div class="col-md-5">
-                                                                                <div class="card ctm-border-radius shadow-sm flex-fill">
-                                                                                    <div class="card-body">
-                                                                                        <div class="row justify-content-center">
-                                                                                            <div class="col-9 mb-4">
-                                                                                                <div class="custom-file h-auto">
-                                                                                                    <div class="avatar-upload">
-                                                                                                        <div class="avatar-edit">
-                                                                                                            <input type="file" class="custom-file-input" hidden id="sliderlist-{{$i}}-image" onchange="loadbasicFile('sliderlist-{{$i}}-image','current-sliderlist-{{$i}}-img',event)" name="list_image[]" {{(@$slider_list_elements[$i-1]->id !== null) ? "":"required" }}>
-                                                                                                            <label for="sliderlist-{{$i}}-image"></label>
-                                                                                                            <div class="invalid-feedback" style="position: absolute; width: 45px;">
-                                                                                                                Please select a image.
-                                                                                                            </div>
-                                                                                                        </div>
+                                                                            <div class="col-md-4">
+                                                                                <div class="row justify-content-center">
+                                                                                    <div class="col-9 mb-4">
+                                                                                        <div class="custom-file h-auto">
+                                                                                            <div class="avatar-upload">
+                                                                                                <div class="avatar-edit">
+                                                                                                    <input type="file" class="custom-file-input" hidden id="sliderlist-{{$i}}-image" onchange="loadbasicFile('sliderlist-{{$i}}-image','current-sliderlist-{{$i}}-img',event)" name="list_image[]" {{(@$slider_list_elements[$i-1]->id !== null) ? "":"required" }}>
+                                                                                                    <label for="sliderlist-{{$i}}-image"></label>
+                                                                                                    <div class="invalid-feedback" style="position: absolute; width: 45px;">
+                                                                                                        Please select a image.
                                                                                                     </div>
-                                                                                                    <img id="current-sliderlist-{{$i}}-img" src="<?php if(!empty(@$slider_list_elements[$i-1]->list_image)){ echo '/images/uploads/section_elements/list_1/'.@$slider_list_elements[$i-1]->list_image; } else{  echo '/images/uploads/default-placeholder.png'; } ?>"  alt="sliderlist_{{$i}}_section_image" class="current-img w-100">
                                                                                                 </div>
-                                                                                                <span class="ctm-text-sm text-danger"> {{(@$slider_list_elements[$i-1]->id !== null) ? "":"*required" }}</span>
-                                                                                                <span class="ctm-text-sm">*use image minimum of 770 x 450px for  Slider list {{$i}} element</span>
                                                                                             </div>
-
+                                                                                            <img id="current-sliderlist-{{$i}}-img" src="<?php if(!empty(@$slider_list_elements[$i-1]->list_image)){ echo '/images/uploads/section_elements/list_1/'.@$slider_list_elements[$i-1]->list_image; } else{  echo '/images/uploads/default-placeholder.png'; } ?>"  alt="sliderlist_{{$i}}_section_image" class="current-img w-100">
                                                                                         </div>
+                                                                                        <span class="ctm-text-sm text-danger"> {{(@$slider_list_elements[$i-1]->id !== null) ? "":"*required" }}</span>
+                                                                                        <span class="ctm-text-sm">*use image minimum of 770 x 450px for  Slider list {{$i}} element</span>
+                                                                                    </div>
 
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-12">
+                                                                                <div class="form-group mb-3">
+                                                                                    <label>Long Description <span class="text-muted text-danger">*</span></label>
+                                                                                    <textarea class="form-control" rows="6" name="list_description[]" id="slider-list-{{$i}}" required>{{@$slider_list_elements[$i-1]->list_description}}</textarea>
+                                                                                    <span class="ctm-text-sm">*please write a long description</span>
+                                                                                    <div class="invalid-feedback">
+                                                                                        Please write the long description.
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
+
+
                                                                         </div>
 
                                                                     </div>
@@ -1189,12 +1186,12 @@
                 createEditor('goal_one');
             }
 
-            {{--if(section_list.includes("accordion_section_2")){--}}
-            {{--    var list2 = "{{$list_2}}";--}}
-            {{--    for ($i = 1; $i <=list2; $i++){--}}
-            {{--        createEditor('accordian_two_editor_'+$i);--}}
-            {{--    }--}}
-            {{--}--}}
+            if(section_list.includes("slider_list")){
+                var list3 = "{{$list_3}}";
+                for ($i = 1; $i <=list3; $i++){
+                    createEditor('slider-list-'+$i);
+                }
+            }
 
         });
 

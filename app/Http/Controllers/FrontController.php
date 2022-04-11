@@ -81,7 +81,7 @@ class FrontController extends Controller
         $testimonials =$this->testimonial->orderBy('title', 'asc')->get();
         $client_groups =$this->client->orderBy('created_at', 'asc')->get()->groupBy('country');
         $clients = $this->client->orderBy('created_at', 'asc')->take('8')->get();
-       
+
         $countries  = CountryState::getCountries();
         $awards =$this->award->orderBy('name', 'asc')->get();
         $welcome_settings = $this->setting->first();
@@ -348,6 +348,7 @@ class FrontController extends Controller
                     ->get();
             }
         }
+
 
         return view('frontend.pages.dynamic_page', compact('sorted_sections','accordian2_chunks','page_detail','list_1','list_2','list_3','basic_elements','call1_elements','call2_elements','bgimage_elements','flash_elements','header_descp_elements','accordian1_elements','accordian2_elements','slider_list_elements'));
 

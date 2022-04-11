@@ -45,6 +45,9 @@
             margin-top: 20px;
 
         }
+        .sidebar-page-container {
+            padding: 100px 0 75px;
+        }
 
 
         .pricing-tabs .tab-buttons {
@@ -68,7 +71,7 @@
         }
 
         .pricing-section {
-             padding: 0 0 100px;
+             padding: 90px 0 100px;
         }
         .service-detail-section {
             padding: 90px 0 80px;
@@ -132,7 +135,7 @@
 
         @if($value == "call_to_action_1")
 
-            <section class="call-to-action" style="background-image: url({{(@$call1_elements->image !== null) ? asset('/images/uploads/section_elements/call_1/'.@$call1_elements->image) : asset('assets/frontend/images/background/13.jpg')}}); padding: 30px 0 20px;">
+            <section class="call-to-action" style="background-image:url({{(@$call1_elements->image !== null) ? asset('images/uploads/section_elements/call_1/'.@$call1_elements->image) : asset('assets/frontend/images/background/13.jpg')}})!important; padding: 30px; margin-bottom: 0">
                 <div class="auto-container" style="padding-bottom: 15px; max-width: 960px;">
                     <div class="content-box">
                         <h2>{{ucfirst(@$call1_elements->heading)}}</h2>
@@ -189,7 +192,7 @@
                         <!--Tab / Active Tab-->
                         <div class="tab active-tab animated fadeIn" id="monthly">
                             <div class="content">
-                                <div class="row">
+                                <div class="row" style="display: block">
                                     <h3>{{@$bgimage_elements[0]->description}}</h3>
                                     <div class="text">
                                         {!! @$bgimage_elements[0]->list_description !!}
@@ -201,7 +204,7 @@
                         <!--Tab-->
                         <div class="tab" id="annual">
                             <div class="content">
-                                <div class="row">
+                                <div class="row"  style="display: block">
                                     <h3>{{@$bgimage_elements[1]->description}}</h3>
                                     <div class="text">
                                         {!! @$bgimage_elements[1]->list_description !!}
@@ -370,11 +373,6 @@
                             <div class="text"  style="word-break: break-all;width: 80%;">{{ucwords(@$slider_list_elements[0]->image)}}</div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-12">
-                        <div class="right-btn text-right">
-                            <a href="/" class="theme-btn btn-style-two"><span class="btn-title">View All</span></a>
-                        </div>
-                    </div>
                 </div>
 
                 <div class="carousel-outer">
@@ -383,14 +381,14 @@
 
                         @foreach($slider_list_elements as $list)
                         <div class="service-block">
-                            <div class="inner-box">
+                            <div class="inner-box" >
                                 <div class="image-box">
                                     <figure class="image"><a href="{{route('slider.single',@$list->subheading)}}"><img src="{{asset('/images/uploads/section_elements/list_1/thumb/thumb_'.@$list->list_image)}}" alt="{{@$list->subheading}}"></a></figure>
                                 </div>
-                                <div class="lower-content">
+                                <div class="lower-content" style="height: 16em;">
                                     <h4><a href="{{route('slider.single',@$list->subheading)}}">{{@$list->list_header}}</a></h4>
-                                    <div class="text">{{ucfirst(Str::limit(@$list->list_description, 80))}}</div>
-                                    <div class="btn-box"><a href="/" class="read-more">Read More <span class="fa fa-arrow-right"></span></a></div>
+                                    <div class="text">{!! ucfirst(Str::limit(@$list->list_description, 80)) !!}</div>
+                                    <div class="btn-box"><a href="{{route('slider.single',@$list->subheading)}}" class="read-more">Read More <span class="fa fa-arrow-right"></span></a></div>
                                 </div>
                             </div>
                         </div>
