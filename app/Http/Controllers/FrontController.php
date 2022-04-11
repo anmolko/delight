@@ -77,7 +77,7 @@ class FrontController extends Controller
     {
         $latestPosts = $this->blog->orderBy('created_at', 'DESC')->where('status','publish')->take(3)->get();
         $sliders =$this->slider->where('status','active')->orderBy('created_at', 'asc')->get();
-        $service_categories =$this->S_category->orderBy('name', 'asc')->get();
+        $service_categories =$this->S_category->orderBy('name', 'asc')->take('4')->get();
         $testimonials =$this->testimonial->orderBy('title', 'asc')->get();
         $client_groups =$this->client->orderBy('created_at', 'asc')->get()->groupBy('country');
         $countclients =$this->client->orderBy('created_at', 'asc')->get();

@@ -26,29 +26,36 @@
 @endsection
 @section('content')
 
-<!-- Banner Section -->
+    @if(count($sliders)>0)
+
+    <!-- Banner Section -->
     <section class="banner-section">
         <div class="banner-carousel slider-carousel owl-carousel owl-theme">
             <!-- Slide Item -->
-            <div class="slide-item">
-                <div class="image-layer" style="background-image:url({{asset('assets/frontend/chk.png')}})"></div>
-                <div class="content-box">
-                    <div class="content">
-                        <div class="auto-container slider-content">
-                            <span class="title">Welcome To Wooder</span>
-                            <h2>Quality Wooden On Your Demond</h2>
-                            <div class="text">From 1984, we have worked tirelessly to earan our reputation for <br>quality and dependability in all wooden products we offer.</div>
-                            <div class="btn-box">
-                                <a href="#" class="theme-btn btn-style-two"><span class="btn-title">Check Service</span></a>
+            @foreach($sliders as $slider)
+
+                <div class="slide-item">
+                    <div class="image-layer" style="background-image:url({{asset('images/uploads/sliders/'.@$slider->slider_front_image)}})"></div>
+                    <div class="content-box">
+                        <div class="content">
+                            <div class="auto-container slider-content">
+                                <span class="title">{{@$slider->heading}}</span>
+                                <h2>{{@$slider->subheading_one}}</h2>
+                                <div class="text">{{@$slider->description}}</div>
+                                <div class="btn-box">
+                                    <a href="{{!empty(@$slider->button_one_link) ? $slider->button_one_link:'/contact-us'}}" class="theme-btn btn-style-two"><span class="btn-title">{{!empty(@$slider->button_one) ? $slider->button_one:'Reach Out'}}</span></a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            @endforeach
+
 
         </div>
     </section>
     <!--END Banner Section -->
+    @endif
 
     <!-- About Us -->
     <section class="about-us">
@@ -92,6 +99,7 @@
     </section>
     <!-- End About Us -->
 
+    @if(count($service_categories) > 3)
     <!-- Services Section -->
     <section class="services-section">
         <div class="auto-container">
@@ -104,7 +112,7 @@
                 </div>
                 <div class="col-lg-4 col-md-12">
                     <div class="right-btn text-right">
-                        <a href="#" class="theme-btn btn-style-two"><span class="btn-title">All Services</span></a>
+                        <a href="{{route('service.frontend')}}" class="theme-btn btn-style-two"><span class="btn-title">All Services</span></a>
                     </div>
                 </div>
             </div>
@@ -113,206 +121,77 @@
                 <!-- Services Carousel -->
                 <div class="services-carousel owl-carousel owl-theme">
                     <!-- service Block -->
-                    <div class="service-block">
-                        <div class="inner-box">
-                            <div class="image-box">
-                                <figure class="image"><a href="#"><img src="{{asset('assets/frontend/images/resource/service-1.jpg')}}" alt=""></a></figure>
-                            </div>
-                            <div class="lower-content">
-                                <h4><a href="#">General Carpentry</a></h4>
-                                <div class="text">Professionals work with a variety of all materials, in a variety of settings–indoor and outdoor.</div>
-                                <div class="btn-box"><a href="#" class="read-more">Read More <span class="fa fa-arrow-right"></span></a></div>
+                    @foreach(@$service_categories as $service_category)
+                        <div class="service-block">
+                            <div class="inner-box">
+                                <div class="image-box">
+                                    <figure class="image"><a href="{{route('service.single',@$service_category->slug)}}"><img src="{{ asset('/images/uploads/service_categories/'.$service_category->image) }}" alt="{{ucwords(@$service_category->slug)}}"></a></figure>
+                                </div>
+                                <div class="lower-content">
+                                    <h4><a href="{{route('service.single',@$service_category->slug)}}">{{ucwords(@$service_category->name)}}</a></h4>
+                                    <div class="text">{{Str::limit($service_category->short_description, 80)}}</div>
+                                    <div class="btn-box"><a href="{{route('service.single',@$service_category->slug)}}" class="read-more">Read More <span class="fa fa-arrow-right"></span></a></div>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    @endforeach
 
-                    <!-- service Block -->
-                    <div class="service-block">
-                        <div class="inner-box">
-                            <div class="image-box">
-                                <figure class="image"><a href="#"><img src="{{asset('assets/frontend/images/resource/service-2.jpg')}}" alt=""></a></figure>
-                            </div>
-                            <div class="lower-content">
-                                <h4><a href="#">Furniture Remodeling</a></h4>
-                                <div class="text">Professionals work with a variety of all materials, in a variety of settings–indoor and outdoor.</div>
-                                <div class="btn-box"><a href="#" class="read-more">Read More <span class="fa fa-arrow-right"></span></a></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- service Block -->
-                    <div class="service-block">
-                        <div class="inner-box">
-                            <div class="image-box">
-                                <figure class="image"><a href="#"><img src="{{asset('assets/frontend/images/resource/service-3.jpg')}}" alt=""></a></figure>
-                            </div>
-                            <div class="lower-content">
-                                <h4><a href="#">Manufactur Furniture</a></h4>
-                                <div class="text">Professionals work with a variety of all materials, in a variety of settings–indoor and outdoor.</div>
-                                <div class="btn-box"><a href="#" class="read-more">Read More <span class="fa fa-arrow-right"></span></a></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- service Block -->
-                    <div class="service-block">
-                        <div class="inner-box">
-                            <div class="image-box">
-                                <figure class="image"><a href="#"><img src="{{asset('assets/frontend/images/resource/service-4.jpg')}}" alt=""></a></figure>
-                            </div>
-                            <div class="lower-content">
-                                <h4><a href="#">Hang Paintings</a></h4>
-                                <div class="text">Professionals work with a variety of all materials, in a variety of settings–indoor and outdoor.</div>
-                                <div class="btn-box"><a href="#" class="read-more">Read More <span class="fa fa-arrow-right"></span></a></div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
             </div>
         </div>
     </section>
     <!-- End service Section -->
+    @endif
 
-
-    <!-- Projects Section -->
-    <section class="projects-section-two">
+    <!-- Call To Action -->
+    <section class="call-to-action alternate" style="background-image: url({{asset('assets/frontend/images/background/13.jpg')}});">
         <div class="auto-container">
-            <div class="sec-title text-center">
-                <h2>Latest Projects</h2>
-                <div class="text">Always honest rules of cooperation <br>We Follow them</div>
+            <div class="content-box">
+                <h2>Find your dream job with us! <br>That Meets Your Expectation.</h2>
+                <div class="link-box"><a href="{{route('contact')}}" class="theme-btn btn-style-three"><span class="btn-title">Send us a message</span></a></div>
             </div>
-            <!--Sortable Masonry-->
-            <div class="sortable-masonry">
-                <!--Filter-->
-                <div class="filters">
-                    <ul class="filter-tabs filter-btns clearfix">
-                        <li class="active filter" data-role="button" data-filter=".all">All Cases</li>
-                        <li class="filter" data-role="button" data-filter=".office-renovation">Office Renovation</li>
-                        <li class="filter" data-role="button" data-filter=".exterior-design">Exterior Design</li>
-                        <li class="filter" data-role="button" data-filter=".interior-design">Interior Design</li>
-                        <li class="filter" data-role="button" data-filter=".modeling-flooring">Modeling Flooring</li>
-                        <li class="filter" data-role="button" data-filter=".celing-roofing">Celing & Roofing</li>
-                    </ul>
-                </div>
 
-                <div class="items-container row">
-                    <!-- Portfolio Block -->
-                    <div class="project-block-two all masonry-item exterior-design modeling-flooring col-lg-4 col-md-6 col-sm-12">
-                        <div class="inner-box">
-                            <div class="image-box">
-                                <figure class="image"><img src="{{asset('assets/frontend/images/gallery/2-1.jpg')}}" alt=""></figure>
-                            </div>
-                            <div class="overlay-box">
-                                <div class="overlay-inner">
-                                    <h4>Wooden Godown</h4>
-                                    <div class="icon-box">
-                                        <a href="{{asset('assets/frontend/images/gallery/2-1.jpg')}}" class="lightbox-image" data-fancybox="gallery" ><span class="icon fa fa-expand-arrows-alt"></span></a>
-                                        <a href="#"><span class="icon fa fa-search"></span></a>
-                                    </div>
-                                </div>
-                            </div>
+            <!-- Fact Counter -->
+            <div class="fact-counter">
+                <div class="row clearfix">
+                    <!--Column-->
+                    <div class="counter-column col-lg-3 col-md-6 col-sm-12 wow fadeInUp">
+                        <div class="inner-column">
+                            <div class="count-box"><span class="count-text" data-speed="3000" data-stop="@if(!empty(@$setting_data->customer_served)) {{@$setting_data->customer_served}} @else 1892 @endif"></span>+</div>
+                            <h4 class="counter-title">Customer Served</h4>
                         </div>
                     </div>
 
-                    <!-- Portfolio Block -->
-                    <div class="project-block-two all masonry-item interior-design office-renovation col-lg-4 col-md-6 col-sm-12">
-                        <div class="inner-box">
-                            <div class="image-box">
-                                <figure class="image"><img src="{{asset('assets/frontend/images/gallery/2-2.jpg')}}" alt=""></figure>
-                            </div>
-                            <div class="overlay-box">
-                                <div class="overlay-inner">
-                                    <h4>Wooden Godown</h4>
-                                    <div class="icon-box">
-                                        <a href="{{asset('assets/frontend/images/gallery/2-2.jpg')}}" class="lightbox-image" data-fancybox="gallery" ><span class="icon fa fa-expand-arrows-alt"></span></a>
-                                        <a href="#"><span class="icon fa fa-search"></span></a>
-                                    </div>
-                                </div>
-                            </div>
+                    <!--Column-->
+                    <div class="counter-column col-lg-3 col-md-6 col-sm-12 wow fadeInUp" data-wow-delay="300ms">
+                        <div class="inner-column">
+                            <div class="count-box"><span class="count-text" data-speed="3000" data-stop="@if(!empty(@$setting_data->visa_approved)) {{@$setting_data->visa_approved}} @else 250 @endif"></span>+</div>
+                            <h4 class="counter-title">Visa Approved</h4>
                         </div>
                     </div>
 
-                    <!-- Portfolio Block -->
-                    <div class="project-block-two all masonry-item celing-roofing office-renovation col-lg-4 col-md-6 col-sm-12">
-                        <div class="inner-box">
-                            <div class="image-box">
-                                <figure class="image"><img src="{{asset('assets/frontend/images/gallery/2-3.jpg')}}" alt=""></figure>
-                            </div>
-                            <div class="overlay-box">
-                                <div class="overlay-inner">
-                                    <h4>Wooden Godown</h4>
-                                    <div class="icon-box">
-                                        <a href="{{asset('assets/frontend/images/gallery/2-3.jpg')}}" class="lightbox-image" data-fancybox="gallery" ><span class="icon fa fa-expand-arrows-alt"></span></a>
-                                        <a href="#"><span class="icon fa fa-search"></span></a>
-                                    </div>
-                                </div>
-                            </div>
+                    <!--Column-->
+                    <div class="counter-column col-lg-3 col-md-6 col-sm-12 wow fadeInUp" data-wow-delay="600ms">
+                        <div class="inner-column">
+                            <div class="count-box"><span class="count-text" data-speed="3000" data-stop="@if(!empty(@$setting_data->success_stories)) {{@$setting_data->success_stories}} @else 1502 @endif"></span>+</div>
+                            <h4 class="counter-title">Success Stories</h4>
                         </div>
                     </div>
 
-                    <!-- Portfolio Block -->
-                    <div class="project-block-two all masonry-item modeling-flooring interior-design exterior-design col-lg-8 col-md-6 col-sm-12">
-                        <div class="inner-box">
-                            <div class="image-box">
-                                <figure class="image"><img src="{{asset('assets/frontend/images/gallery/2-4.jpg')}}" alt=""></figure>
-                            </div>
-                            <div class="overlay-box">
-                                <div class="overlay-inner">
-                                    <h4>Wooden Godown</h4>
-                                    <div class="icon-box">
-                                        <a href="{{asset('assets/frontend/images/gallery/2-4.jpg')}}" class="lightbox-image" data-fancybox="gallery" ><span class="icon fa fa-expand-arrows-alt"></span></a>
-                                        <a href="#"><span class="icon fa fa-search"></span></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Portfolio Block -->
-                    <div class="project-block-two all masonry-item celing-roofing office-renovation col-lg-6 col-md-6 col-sm-12">
-                        <div class="inner-box">
-                            <div class="image-box">
-                                <figure class="image"><img src="{{asset('assets/frontend/images/gallery/2-5.jpg')}}" alt=""></figure>
-                            </div>
-                            <div class="overlay-box">
-                                <div class="overlay-inner">
-                                    <h4>Wooden Godown</h4>
-                                    <div class="icon-box">
-                                        <a href="{{asset('assets/frontend/images/gallery/2-5.jpg')}}" class="lightbox-image" data-fancybox="gallery" ><span class="icon fa fa-expand-arrows-alt"></span></a>
-                                        <a href="#"><span class="icon fa fa-search"></span></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Portfolio Block -->
-                    <div class="project-block-two all masonry-item celing-roofing modeling-flooring interior-design exterior-design col-lg-6 col-md-6 col-sm-12">
-                        <div class="inner-box">
-                            <div class="image-box">
-                                <figure class="image"><img src="{{asset('assets/frontend/images/gallery/2-6.jpg')}}" alt=""></figure>
-                            </div>
-                            <div class="overlay-box">
-                                <div class="overlay-inner">
-                                    <h4>Wooden Godown</h4>
-                                    <div class="icon-box">
-                                        <a href="{{asset('assets/frontend/images/gallery/2-6.jpg')}}" class="lightbox-image" data-fancybox="gallery" ><span class="icon fa fa-expand-arrows-alt"></span></a>
-                                        <a href="#"><span class="icon fa fa-search"></span></a>
-                                    </div>
-                                </div>
-                            </div>
+                    <!--Column-->
+                    <div class="counter-column col-lg-3 col-md-6 col-sm-12 wow fadeInUp" data-wow-delay="900ms">
+                        <div class="inner-column">
+                            <div class="count-box"><span class="count-text" data-speed="3000" data-stop="@if(!empty(@$setting_data->happy_customers)) {{@$setting_data->happy_customers}} @else 1000 @endif"></span>+</div>
+                            <h4 class="counter-title">Happy Customers</h4>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="btn-box text-center">
-                <a href="#" class="theme-btn btn-style-two"><span class="btn-title">All Projects</span></a>
             </div>
         </div>
     </section>
-    <!-- End Projects Section -->
+    <!--End Call To Action -->
+
 
     <!--Fluid Section One-->
     <section class="fluid-section-one">
@@ -525,152 +404,43 @@
     </section>
     <!--End Clients Section-->
 
-    <!-- Offer Section -->
-    <section class="offer-section">
-        <div class="auto-container">
-            <div class="sec-title">
-                <h2>Get in touch</h2>
-                <div class="text">What We Provide For You check now and deside it<br> do you want now this</div>
-            </div>
-            <div class="row no-gutters">
-                <div class="content-column col-xl-7 col-lg-6 col-md-12 col-sm-12 order-2">
-                    <div class="inner-column">
-                        <span class="title">Special Offer</span>
-                        <h2>How to save <span class="discount">50%</span> <br>of money on repairs</h2>
-                        <div class="text">Not everyone Knows and where but there are 10 very importent tips, how each it is to save up to 50% on repairs, and on the money saved to buy new applicances.</div>
-                        <div class="fact-counter">
-                            <div class="row clearfix">
-                                <!--Column-->
-                                <div class="counter-column col-lg-4 col-md-4 col-sm-12 wow fadeInUp">
-                                    <div class="inner-column">
-                                        <span class="icon flaticon-carpentry"></span>
-                                        <div class="count-box"><span class="count-text" data-speed="3000" data-stop="10">0</span></div>
-                                        <h4 class="counter-title">Years of Carpenting <br>Experience</h4>
-                                    </div>
-                                </div>
-
-                                <!--Column-->
-                                <div class="counter-column col-lg-4 col-md-4 col-sm-12 wow fadeInUp" data-wow-delay="300ms">
-                                    <div class="inner-column">
-                                        <span class="icon flaticon-door-1"></span>
-                                        <div class="count-box"><span class="count-text" data-speed="3000" data-stop="58">0</span></div>
-                                        <h4 class="counter-title">Local Branches in <br>City New York</h4>
-                                    </div>
-                                </div>
-
-                                <!--Column-->
-                                <div class="counter-column col-lg-4 col-md-4 col-sm-12 wow fadeInUp" data-wow-delay="600ms">
-                                    <div class="inner-column">
-                                        <span class="icon flaticon-team"></span>
-                                        <div class="count-box"><span class="count-text" data-speed="3000" data-stop="8">0</span>k</div>
-                                        <h4 class="counter-title">Happy Customer <br>with our work</h4>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-column col-xl-5 col-lg-6 col-md-12 col-sm-12">
-                    <div class="inner-column">
-                        <div class="discount-form">
-                            <div class="text">Fill out the form, Our manager will contact you for further details.</div>
-                            <!--Comment Form-->
-                            <form action="#" method="post" id="email-form">
-                                <div class="form-group">
-                                    <div class="response"></div>
-                                </div>
-
-                                <div class="form-group">
-                                    <input type="text" name="username" class="username" placeholder="Your Name *">
-                                </div>
-
-                                <div class="form-group">
-                                    <input type="email" name="email" class="email" placeholder="Your Email *">
-                                </div>
-
-                                <div class="form-group">
-                                    <textarea name="contact_message" class="message" placeholder="Text Message"></textarea>
-                                </div>
-
-                                <div class="form-group">
-                                    <button class="theme-btn btn-style-two" type="button" id="submit" name="submit-form"><span class="btn-title">Submit Now</span> </button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!--End Offer Section -->
+    @if(count(@$latestPosts) > 2)
 
     <!-- News Section -->
     <section class="news-section">
         <div class="auto-container">
             <div class="sec-title">
-                <h2>News & Artical</h2>
-                <div class="text">You read now our latest news and artical</div>
+                <h2>News & Updates</h2>
+                <div class="text">You read now our latest blogs</div>
             </div>
 
             <div class="row">
                 <!-- News Block -->
-                <div class="news-block col-lg-4 col-md-6 col-sm-12">
-                    <div class="inner-box">
-                        <div class="image-box">
-                            <figure class="image"><a href="#"><img src="{{asset('assets/frontend/images/resource/news-1.jpg')}}" alt=""></a></figure>
-                        </div>
-                        <div class="lower-content">
-                            <div class="post-date"><span class="far fa-calendar"></span> Jan 01, 2020</div>
-                            <ul class="post-info">
-                                <li><span class="far fa-user"></span> By Admin | </li>
-                                <li><a href="#">General Carpentry</a></li>
-                            </ul>
-                            <h4><a href="#">Woodworker treak truned into furniture for exhibition.</a></h4>
-                            <div class="btn-box"><a href="#" class="read-more">Read More <span class="fa fa-arrow-right"></span></a></div>
-                        </div>
-                    </div>
-                </div>
+                @foreach($latestPosts as $latest)
 
-                <!-- News Block -->
-                <div class="news-block col-lg-4 col-md-6 col-sm-12">
-                    <div class="inner-box">
-                        <div class="image-box">
-                            <figure class="image"><a href="#"><img src="{{asset('assets/frontend/images/resource/news-2.jpg')}}" alt=""></a></figure>
-                        </div>
-                        <div class="lower-content">
-                            <div class="post-date"><span class="far fa-calendar"></span> Jan 02, 2020</div>
-                            <ul class="post-info">
-                                <li><span class="far fa-user"></span> By Admin | </li>
-                                <li><a href="#">General Carpentry</a></li>
-                            </ul>
-                            <h4><a href="#">Home Repair and Maintain safe now in the rantain.</a></h4>
-                            <div class="btn-box"><a href="#" class="read-more">Read More <span class="fa fa-arrow-right"></span></a></div>
+                    <div class="news-block col-lg-4 col-md-6 col-sm-12">
+                        <div class="inner-box">
+                            <div class="image-box">
+                                <figure class="image"><a href="{{route('blog.single',@$latest->slug)}}"><img src="<?php if(@$latest->image){?>{{asset('/images/uploads/blog/'.@$latest->image)}}<?php }?>" alt="{{@$latest->slug}}"></a></figure>
+                            </div>
+                            <div class="lower-content">
+                                <div class="post-date"><span class="far fa-calendar"></span> {{date('M j, Y',strtotime(@$latest->created_at))}}</div>
+                                <ul class="post-info">
+                                    <li><a href="#">{{ucwords(@$latest->category->name)}}</a></li>
+                                </ul>
+                                <h4><a href="{{route('blog.single',@$latest->slug)}}">{{ucwords(@$latest->title)}}</a></h4>
+                                <div class="btn-box"><a href="{{route('blog.single',@$latest->slug)}}" class="read-more">Read More <span class="fa fa-arrow-right"></span></a></div>
+                            </div>
                         </div>
                     </div>
-                </div>
+                @endforeach
 
-                <!-- News Block -->
-                <div class="news-block col-lg-4 col-md-6 col-sm-12">
-                    <div class="inner-box">
-                        <div class="image-box">
-                            <figure class="image"><a href="#"><img src="{{asset('assets/frontend/images/resource/news-3.jpg')}}" alt=""></a></figure>
-                        </div>
-                        <div class="lower-content">
-                            <div class="post-date"><span class="far fa-calendar"></span> Jan 03, 2020</div>
-                            <ul class="post-info">
-                                <li><span class="far fa-user"></span> By Admin | </li>
-                                <li><a href="#">General Carpentry</a></li>
-                            </ul>
-                            <h4><a href="#">Good furniture is now on persale in showroom in Dec.</a></h4>
-                            <div class="btn-box"><a href="#" class="read-more">Read More <span class="fa fa-arrow-right"></span></a></div>
-                        </div>
-                    </div>
-                </div>
+              
             </div>
         </div>
     </section>
     <!--End News Section Two -->
+    @endif
 
 @endsection
 
