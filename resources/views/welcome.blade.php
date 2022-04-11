@@ -71,7 +71,7 @@
     }
     .award-block .inner-box .name {
         position: relative;
-        font-size: 22px;
+        font-size: 18px;
         font-weight: 500;
         color: #223f98;
     }
