@@ -161,6 +161,95 @@
                             {!! Form::close() !!}
                         @endif
 
+                        @if($value == 'image_description_section')
+                                @if($image_des_elements !== null)
+                                    {!! Form::open(['url'=>route('section-elements.update', @$image_des_elements->id),'id'=>'image_description_section-form','class'=>'needs-validation','method'=>'PUT','novalidate'=>'','enctype'=>'multipart/form-data']) !!}
+                                @else
+                                    {!! Form::open(['route' => 'section-elements.store','method'=>'post','class'=>'needs-validation','id'=>'image_description_section-form','novalidate'=>'','enctype'=>'multipart/form-data']) !!}
+                                @endif
+                                <div class="row" id="image_description_section-form-ajax">
+
+                                    <div class="col-md-7">
+                                        <div class="card ctm-border-radius shadow-sm flex-fill">
+                                            <div class="card-header">
+                                                <h4 class="card-title mb-0">
+                                                    Image Description Section Details
+                                                </h4>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="form-group mb-3">
+                                                    <label>Heading <span class="text-muted text-danger">*</span></label>
+                                                    <input type="text" class="form-control" maxlength="15" name="heading" value="{{@$image_des_elements->heading}}" required>
+                                                    <input type="hidden" class="form-control" value="{{$key}}" name="page_section_id" required>
+                                                    <input type="hidden" class="form-control" value="{{$value}}" name="section_name" required>
+                                                    <div class="invalid-feedback">
+                                                        Please enter the heading.
+                                                    </div>
+                                                </div>
+                                                <div class="form-group mb-3">
+                                                    <label>Sub Heading </label>
+                                                    <input type="text" class="form-control" maxlength="120" name="subheading" value="{{@$image_des_elements->subheading}}">
+                                                    <div class="invalid-feedback">
+                                                        Please enter the Sub heading.
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group mb-3">
+                                                    <label>Inner Sub Title </label>
+                                                    <input type="text" maxlength="45" class="form-control" value="{{@$image_des_elements->list_header}}" name="list_header">
+                                                    <div class="invalid-feedback">
+                                                        Please enter the inner sub title.
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group mb-3">
+                                                    <label>Description <span class="text-muted text-danger">*</span></label>
+                                                    <textarea class="form-control" maxlength="790" rows="6" name="description" id="image_section_editor" required>{!! @$image_des_elements->description !!}</textarea>
+                                                    <div class="invalid-feedback">
+                                                        Please write the description.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="card ctm-border-radius shadow-sm flex-fill">
+                                            <div class="card-header">
+                                                <h4 class="card-title mb-0">
+                                                    Image <span class="text-muted text-danger">*</span>
+                                                </h4>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="row justify-content-center">
+                                                    <div class="col-9 mb-4">
+                                                        <div class="custom-file h-auto">
+                                                            <div class="avatar-upload">
+                                                                <div class="avatar-edit">
+                                                                    <input type="file" class="custom-file-input" hidden id="image-des-sec" onchange="loadbasicFile('image-des-sec','current-image-des-img',event)" name="image" {{(@$image_des_elements !== null)? "":"required"}}>
+                                                                    <label for="image-des-sec"></label>
+                                                                    <div class="invalid-feedback" style="position: absolute; width: 45px;">
+                                                                        Please select a image.
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <img id="current-image-des-img" src="<?php if(!empty(@$image_des_elements->image)){ echo '/images/uploads/section_elements/basic_section/'.@$image_des_elements->image; } else{  echo '/images/uploads/default-placeholder.png'; } ?>" alt="image_des_section_image" class="current-img w-100">
+                                                        </div>
+                                                        <span class="ctm-text-sm">*use image minimum of 570 x 730px for Image Description</span>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-center mt-3" id="image_description_section-form-button">
+                                    <button id="image_description_section-button-submit" class="btn btn-theme button-1 ctm-border-radius text-white">
+                                        {{(@$image_des_elements !==null)? "Update Details":"Add Details"}}</button>
+                                </div>
+                                {!! Form::close() !!}
+                            @endif
+
                         @if($value == 'call_to_action_1')
                                 @if($call1_elements !== null)
                                     {!! Form::open(['url'=>route('section-elements.update', @$call1_elements->id),'id'=>'call-action1-form','class'=>'needs-validation','novalidate'=>'','method'=>'PUT','enctype'=>'multipart/form-data']) !!}
@@ -1172,6 +1261,7 @@
             if(section_list.includes("basic_section")) {
                 createEditor('basic_editor');
             }
+
             if(section_list.includes("simple_header_and_description")){
                 createEditor('header_descp_editor');
             }
@@ -1198,6 +1288,22 @@
         if($.inArray("basic_section", section_list) !== -1) {
 
             $("#basic-form").submit(function(event){
+                event.preventDefault(); //prevent default action
+                if (!this.checkValidity()) { return false; }
+                var post_url       = $(this).attr("action"); //get form action url
+                var request_method = $(this).attr("method"); //get form GET/POST method
+                var form_data      = new FormData(this); //Creates new FormData object
+                var divID          = $(this).attr('id')+'-ajax';
+                var buttonID       = $(this).attr('id')+'-button';
+                ElementData(post_url,request_method,form_data,divID,buttonID);
+
+            });
+
+        }
+
+        if($.inArray("image_description_section", section_list) !== -1) {
+
+            $("#image_description_section-form").submit(function(event){
                 event.preventDefault(); //prevent default action
                 if (!this.checkValidity()) { return false; }
                 var post_url       = $(this).attr("action"); //get form action url

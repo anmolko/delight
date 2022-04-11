@@ -291,6 +291,7 @@ class FrontController extends Controller
         $header_descp_elements = "";
         $accordian1_elements = "";
         $accordian2_elements = "";
+        $image_des_elements = "";
         $slider_list_elements = "";
         $accordian2_chunks = "";
 
@@ -299,6 +300,11 @@ class FrontController extends Controller
             $sorted_sections[$section->id] = $section->section_slug;
             if($section->section_slug == 'basic_section'){
                 $basic_elements = SectionElement::with('section')
+                    ->where('page_section_id', $section->id)
+                    ->first();
+            }
+            elseif ($section->section_slug == 'image_description_section'){
+                $image_des_elements = SectionElement::with('section')
                     ->where('page_section_id', $section->id)
                     ->first();
             }
@@ -350,7 +356,7 @@ class FrontController extends Controller
         }
 
 
-        return view('frontend.pages.dynamic_page', compact('sorted_sections','accordian2_chunks','page_detail','list_1','list_2','list_3','basic_elements','call1_elements','call2_elements','bgimage_elements','flash_elements','header_descp_elements','accordian1_elements','accordian2_elements','slider_list_elements'));
+        return view('frontend.pages.dynamic_page', compact('sorted_sections','image_des_elements','accordian2_chunks','page_detail','list_1','list_2','list_3','basic_elements','call1_elements','call2_elements','bgimage_elements','flash_elements','header_descp_elements','accordian1_elements','accordian2_elements','slider_list_elements'));
 
     }
 

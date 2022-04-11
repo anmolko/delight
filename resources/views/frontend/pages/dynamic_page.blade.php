@@ -133,6 +133,41 @@
             </section>
         @endif
 
+        @if($value == "image_description_section")
+            <section class="offer-section">
+                <div class="bg-pattern"></div>
+                <div class="auto-container">
+                    <div class="sec-title">
+                        <h2>{{@$image_des_elements->heading}}</h2>
+                        <div class="text" style="word-break: break-all;width: 60%;">{{@$image_des_elements->subheading}}</div>
+                    </div>
+                    <div class="row no-gutters">
+                        <div class="content-column col-xl-7 col-lg-6 col-md-12 col-sm-12 order-2">
+                            <div class="inner-column" style="height: 34rem;">
+                                <h2 style="font-size: 29px;word-break: break-all;width: 60%;">{{@$image_des_elements->list_header}}</h2>
+                                <div class="text" style="font-size: 17px;">
+                                    {{@$image_des_elements->description}}
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="form-column col-xl-5 col-lg-6 col-md-12 col-sm-12">
+                            <div class="inner-column" style="padding-right: 10px;">
+                                <div class="discount-form" style="padding:0">
+                                    <figure class="image" style="margin: 0">
+                                        <img src="{{asset('/images/uploads/section_elements/basic_section/'.@$image_des_elements->image) }}" alt="">
+                                    </figure>
+                                    <!--Comment Form-->
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        @endif
+
         @if($value == "call_to_action_1")
 
             <section class="call-to-action" style="background-image:url({{(@$call1_elements->image !== null) ? asset('images/uploads/section_elements/call_1/'.@$call1_elements->image) : asset('assets/frontend/images/background/13.jpg')}})!important; padding: 30px; margin-bottom: 0">
@@ -400,6 +435,8 @@
             </div>
         </section>
         @endif
+
+
 
     @endforeach
 

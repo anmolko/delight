@@ -138,6 +138,22 @@
                 </div>
                 <div class="card shadow-none">
                     <div class="card-header">
+                        <h5 class="card-title text-primary mb-0">Image Description Section</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label class="image-checkbox">
+                                    <img class="img-responsive" src="{{asset('assets/backend/img/page_sections/image_description_section.png')}}" />
+                                    <input type="checkbox" name="section[]" value="image_description_section" id="image_description_section.png"/>
+                                    <i class="fa fa-check hidden"></i>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card shadow-none">
+                    <div class="card-header">
                         <h5 class="card-title text-primary mb-0">Call to Action: option 1</h5>
                     </div>
                     <div class="card-body">

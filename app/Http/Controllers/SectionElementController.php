@@ -54,6 +54,7 @@ class SectionElementController extends Controller
         $bgimage_elements = "";
         $flash_elements = "";
         $header_descp_elements = "";
+        $image_des_elements = "";
         $accordian1_elements = "";
         $accordian2_elements = "";
         $slider_list_elements = "";
@@ -61,6 +62,11 @@ class SectionElementController extends Controller
             $sections[$section->id] = $section->section_slug;
             if($section->section_slug == 'basic_section'){
                 $basic_elements = SectionElement::with('section')
+                    ->where('page_section_id', $section->id)
+                    ->first();
+            }
+            if($section->section_slug == 'image_description_section'){
+                $image_des_elements = SectionElement::with('section')
                     ->where('page_section_id', $section->id)
                     ->first();
             }
@@ -110,7 +116,7 @@ class SectionElementController extends Controller
         }
 
 
-        return view('backend.pages.section_elements.create',compact( 'sections','list_1','list_2','list_3','basic_elements','call1_elements','bgimage_elements','call2_elements','flash_elements','header_descp_elements','accordian1_elements','accordian2_elements','slider_list_elements','id'));
+        return view('backend.pages.section_elements.create',compact( 'sections','image_des_elements','list_1','list_2','list_3','basic_elements','call1_elements','bgimage_elements','call2_elements','flash_elements','header_descp_elements','accordian1_elements','accordian2_elements','slider_list_elements','id'));
     }
 
     /**
@@ -138,6 +144,26 @@ class SectionElementController extends Controller
                 $name         = uniqid().'_basic_'.$image->getClientOriginalName();
                 $path         = base_path().'/public/images/uploads/section_elements/basic_section/';
                 $moved        = Image::make($image->getRealPath())->fit(570, 570)->orientate()->save($path.$name);
+                if ($moved){
+                    $data['image']= $name;
+                }
+            }
+            $status = SectionElement::create($data);
+        }
+        elseif($section_name == 'image_description_section'){
+            $data=[
+                'heading'                => $request->input('heading'),
+                'subheading'             => $request->input('subheading'),
+                'list_header'            => $request->input('list_header'),
+                'page_section_id'        => $section_id,
+                'description'            => $request->input('description'),
+                'created_by'             => Auth::user()->id,
+            ];
+            if(!empty($request->file('image'))){
+                $image        = $request->file('image');
+                $name         = uniqid().'_des_'.$image->getClientOriginalName();
+                $path         = base_path().'/public/images/uploads/section_elements/basic_section/';
+                $moved        = Image::make($image->getRealPath())->fit(570, 730)->orientate()->save($path.$name);
                 if ($moved){
                     $data['image']= $name;
                 }
@@ -348,6 +374,30 @@ class SectionElementController extends Controller
                 }
             }
             $status = $basic->update();
+        }
+        elseif($section_name == 'image_description_section'){
+            $imagedes                      = SectionElement::find($id);
+            $imagedes->heading             = $request->input('heading');
+            $imagedes->subheading          = $request->input('subheading');
+            $imagedes->page_section_id     = $section_id;
+            $imagedes->description         = $request->input('description');
+            $imagedes->list_header         = $request->input('list_header');
+            $imagedes->updated_by          = Auth::user()->id;
+            $oldimage                      = $imagedes->image;
+
+            if (!empty($request->file('image'))){
+                $image                = $request->file('image');
+                $name                 = uniqid().'_des_'.$image->getClientOriginalName();
+                $path                 = base_path().'/public/images/uploads/section_elements/basic_section/';
+                $moved                = Image::make($image->getRealPath())->fit(570, 730)->orientate()->save($path.$name);
+                if ($moved){
+                    $imagedes->image = $name;
+                    if (!empty($oldimage) && file_exists(public_path().'/images/uploads/section_elements/basic_section/'.$oldimage)){
+                        @unlink(public_path().'/images/uploads/section_elements/basic_section/'.$oldimage);
+                    }
+                }
+            }
+            $status = $imagedes->update();
         }
         elseif ($section_name == 'call_to_action_1'){
             $action                      = SectionElement::find($id);
