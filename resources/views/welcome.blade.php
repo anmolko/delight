@@ -52,6 +52,33 @@
         left: -50px;
     }
 
+    .award-block{
+        position: relative;
+        padding: 30px 15px;
+    }
+    .award-block .inner-box {
+        position: relative;
+        background-color: #fff;
+        padding: 30px;
+        text-align: center;
+        margin-bottom: 30px;
+        -webkit-box-shadow: 0px 0px 18px 0px rgb(0 0 0 / 10%);
+        box-shadow: 0px 0px 18px 0px rgb(0 0 0 / 10%);
+    }
+
+    .award-block .image {
+        margin-bottom: 20px;
+    }
+    .award-block .inner-box .name {
+        position: relative;
+        font-size: 22px;
+        font-weight: 500;
+        color: #223f98;
+    }
+
+    .award-block .inner-box {
+        height: 265px;
+    }
 </style>
 @endsection
 @section('content')
@@ -117,6 +144,37 @@
         </div>
     </section>
     <!-- End About Us -->
+    @endif
+
+    @if(count(@$awards) > 2)
+    <!-- Awards Section  -->
+    <section class="award-section style-two">
+        <div class="auto-container">
+            <div class="sec-title text-center">
+                <h2>Our Awards</h2>
+            </div>
+
+            <!-- Awards Carousel -->
+            <div class="row clearfix">
+                <!-- Awards Block  -->
+                <div class="award-carousel owl-carousel owl-theme" data-options='{"loop": true, "margin": 0, "autoheight":true, "lazyload":true, "nav": true, "dots": true, "autoplay": false, "autoplayTimeout": 6000, "smartSpeed": 300, "responsive":{ "0" :{ "items": "1" }, "600" :{ "items" : "2" }, "768" :{ "items" : "2" } , "992":{ "items" : "3" }, "1200":{ "items" : "4" }}}'>
+                    @foreach(@$awards as $award)
+                        <div class="award-block">
+                            <div class="inner-box">
+                                <div class="info-box">
+                                    <div class="image"><img src="{{ asset('/images/uploads/awards/'.$award->image) }}" alt="{{ucwords(@$award->name)}}"></div>
+                                    <h5 class="name">{{ucwords(@$award->name)}}</h5>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+
+            </div>
+           
+        </div>
+    </section>
+    <!--End Awards Section -->
     @endif
 
     @if(count($service_categories) > 3)
@@ -213,6 +271,7 @@
     </section>
     <!--End Call To Action -->
 
+    
 
     @if(count(@$testimonials) > 0)
     <!-- Testimonial Section -->

@@ -2863,6 +2863,10 @@ img {
     padding-bottom: 60px;
 }
 
+.award-section .award-carousel {
+    padding-bottom: 60px;
+}
+
 .service-block {
     position: relative;
     padding: 20px;
@@ -3132,7 +3136,12 @@ img {
     display: none;
 }
 
-.services-carousel .owl-dots {
+.award-carousel .owl-nav {
+    display: none;
+}
+
+.services-carousel .owl-dots,
+.award-carousel .owl-dots {
     position: absolute;
     left: 0;
     bottom: 0;
@@ -3141,7 +3150,9 @@ img {
 }
 
 .services-carousel .owl-dot,
-.services-carousel .owl-dot {
+.services-carousel .owl-dot,
+.award-carousel .owl-dot,
+.award-carousel .owl-dot {
     position: relative;
     display: inline-block;
     height: 12px;
@@ -3157,7 +3168,9 @@ img {
 }
 
 .services-carousel .owl-dot.active,
-.services-carousel .owl-dot:hover {
+.services-carousel .owl-dot:hover,
+.award-carousel .owl-dot.active,
+.award-carousel .owl-dot:hover {
     background-color: #223f98;
 }
 
@@ -12124,4 +12137,9 @@ form .response .text-info {
 .sec-title h3:hover {
     color: #353535;
     -webkit-text-stroke: 1px transparent;
+}
+
+section.award-section.style-two {
+    position: relative;
+    padding: 90px 0;
 }

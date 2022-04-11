@@ -236,6 +236,15 @@
         });
     }
 
+    if ($('.award-carousel').length) {
+        $(".award-carousel").each(function(index) {
+            var $owlAttr = { navText: ['<span class="fa fa-angle-left"></span>', '<span class="fa fa-angle-right"></span>'], },
+                $extraAttr = $(this).data("options");
+            $.extend($owlAttr, $extraAttr);
+            $(this).owlCarousel($owlAttr);
+        });
+    }
+
     //Testimonial Carousel
     if ($('.testimonial-carousel-two').length) {
         $('.testimonial-carousel-two').owlCarousel({
