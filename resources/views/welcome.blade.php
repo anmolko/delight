@@ -25,6 +25,33 @@
     .news-section{
         background-color: #fafafa;
     }
+
+    .fact-counter .inner-column .icon i {
+        font-size: 50px;
+    }
+
+    /* .call-to-action.homepage {
+        padding: 100px 0 0;
+    } */
+
+    .call-to-action.homepage:before {
+        background-color: unset;
+    }
+
+
+    .about-us .content-column .inner-column{
+        padding-left: 50px;
+    }
+
+    .about-us .image-column .inner-column {
+        padding-left: 0;
+    }
+
+    .about-us .image-column .inner-column:before{
+        right:0;
+        left: -50px;
+    }
+
 </style>
 @endsection
 @section('content')
@@ -65,38 +92,26 @@
         <div class="auto-container">
             <div class="row clearfix">
                 <!-- Content Column -->
+                
+                <div class="image-column col-lg-6 col-md-12 col-sm-12">
+                    <div class="inner-column">
+                        <div class="video-box wow fadeIn">
+                            <figure class="image"><img src="{{asset('assets/frontend/images/resource/about-us.jpg')}}" alt=""></figure>
+                        </div>
+                    </div>
+                </div>
                 <div class="content-column col-lg-6 col-md-12 col-sm-12">
                     <div class="inner-column">
                         <div class="sec-title">
                             <h2>About Us</h2>
                         </div>
-                        <div class="about-years"><span class="years">35</span><h3>Years Of Experience</h3></div>
                         <div class="text-box">
                             <p>Our commitment to bring <a href="#">professionalism</a>, good service & trust to the home repair service & maintenance business. We take immense pride in sending some of the most of professional handymen to yours homes to fix things that aren't workings. </p>
                         </div>
-                        <ul class="list-style-one">
-                            <li>Quis nostrud exer citation.</li>
-                            <li>Exercitation ullamco laboris nis.</li>
-                            <li>Commodo consequat duis autex.</li>
-                        </ul>
-                        <div class="bottom-box clearfix">
-                            <div class="signature"><img src="{{asset('assets/frontend/images/resource/signature.png')}}" alt=""></div>
-                            <h4 class="name">Virgina Pankow <span>Carpenter & Founder</span></h4>
-                            <div class="btn-box">
-                                <a href="#" class="theme-btn btn-style-one"><span class="btn-title">Read More</span></a>
-                            </div>
-                        </div>
+                       
                     </div>
                 </div>
 
-                <div class="image-column col-lg-6 col-md-12 col-sm-12">
-                    <div class="inner-column">
-                        <div class="video-box wow fadeIn">
-                            <figure class="image"><img src="{{asset('assets/frontend/images/resource/about-us.jpg')}}" alt=""></figure>
-                            <a href="https://www.youtube.com/watch?v=Fvae8nxzVz4" class="play-now" data-fancybox="gallery" data-caption=""><i class="icon flaticon-play-button-3" aria-hidden="true"></i><span class="ripple"></span></a>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
@@ -148,12 +163,8 @@
     @endif
 
     <!-- Call To Action -->
-    <section class="call-to-action alternate" style="background-image: url({{asset('assets/frontend/images/background/13.jpg')}});">
+    <section class="call-to-action alternate homepage" style="background-image: url({{asset('assets/frontend/images/icons/pattern-4.png')}});">
         <div class="auto-container">
-            <div class="content-box">
-                <h2>Find your dream job with us! <br>That Meets Your Expectation.</h2>
-                <div class="link-box"><a href="{{route('contact')}}" class="theme-btn btn-style-three"><span class="btn-title">Send us a message</span></a></div>
-            </div>
 
             <!-- Fact Counter -->
             <div class="fact-counter">
@@ -161,6 +172,7 @@
                     <!--Column-->
                     <div class="counter-column col-lg-3 col-md-6 col-sm-12 wow fadeInUp">
                         <div class="inner-column">
+                            <div class="icon"><i class="fas fa-users"></i></div>
                             <div class="count-box"><span class="count-text" data-speed="3000" data-stop="@if(!empty(@$setting_data->customer_served)) {{@$setting_data->customer_served}} @else 1892 @endif"></span>+</div>
                             <h4 class="counter-title">Customer Served</h4>
                         </div>
@@ -169,6 +181,7 @@
                     <!--Column-->
                     <div class="counter-column col-lg-3 col-md-6 col-sm-12 wow fadeInUp" data-wow-delay="300ms">
                         <div class="inner-column">
+                            <div class="icon"><i class="fas fa-user-check"></i></div>
                             <div class="count-box"><span class="count-text" data-speed="3000" data-stop="@if(!empty(@$setting_data->visa_approved)) {{@$setting_data->visa_approved}} @else 250 @endif"></span>+</div>
                             <h4 class="counter-title">Visa Approved</h4>
                         </div>
@@ -177,6 +190,7 @@
                     <!--Column-->
                     <div class="counter-column col-lg-3 col-md-6 col-sm-12 wow fadeInUp" data-wow-delay="600ms">
                         <div class="inner-column">
+                            <div class="icon"><i class="fas fa-thumbs-up"></i></div>
                             <div class="count-box"><span class="count-text" data-speed="3000" data-stop="@if(!empty(@$setting_data->success_stories)) {{@$setting_data->success_stories}} @else 1502 @endif"></span>+</div>
                             <h4 class="counter-title">Success Stories</h4>
                         </div>
@@ -185,6 +199,8 @@
                     <!--Column-->
                     <div class="counter-column col-lg-3 col-md-6 col-sm-12 wow fadeInUp" data-wow-delay="900ms">
                         <div class="inner-column">
+                            <div class="icon"><i class="far fa-smile"></i></div>
+
                             <div class="count-box"><span class="count-text" data-speed="3000" data-stop="@if(!empty(@$setting_data->happy_customers)) {{@$setting_data->happy_customers}} @else 1000 @endif"></span>+</div>
                             <h4 class="counter-title">Happy Customers</h4>
                         </div>
@@ -194,68 +210,6 @@
         </div>
     </section>
     <!--End Call To Action -->
-
-
-    <!--Fluid Section One-->
-    <section class="fluid-section-one">
-        <div class="outer-container clearfix">
-            <!--Content Column-->
-            <div class="content-column">
-                <div class="inner-column">
-                    <div class="sec-title">
-                        <h2>Why Choose Us?</h2>
-                    </div>
-                    <div class="text-box">
-                        <p>Dolor sit amet consectetur elit sed do eiusmod tempor incd idunt labore et dolore magna aliqua enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip exea commodo consequat.duis aute irure dolor in reprehen derit in voluptate velit esse cillum dolore eu fugiat nulla pariatur cepteur sint occaecat.</p>
-                    </div>
-                    <div class="row">
-                        <!-- Feature Block -->
-                        <div class="feature-block-two col-lg-6 col-md-6">
-                            <div class="inner-box">
-                                <span class="icon flaticon-24-hours"></span>
-                                <h4>Available 24/7</h4>
-                                <div class="text">Lorem ipsum dolor sit amet, consectetur adipisicing.</div>
-                            </div>
-                        </div>
-
-                        <!-- Feature Block -->
-                        <div class="feature-block-two col-lg-6 col-md-6">
-                            <div class="inner-box">
-                                <span class="icon flaticon-artificial-intelligence"></span>
-                                <h4>Creative ideas</h4>
-                                <div class="text">Lorem ipsum dolor sit amet, consectetur adipisicing.</div>
-                            </div>
-                        </div>
-
-                        <!-- Feature Block -->
-                        <div class="feature-block-two col-lg-6 col-md-6">
-                            <div class="inner-box">
-                                <span class="icon flaticon-handshake"></span>
-                                <h4>Customer Focused</h4>
-                                <div class="text">Lorem ipsum dolor sit amet, consectetur adipisicing.</div>
-                            </div>
-                        </div>
-
-                        <!-- Feature Block -->
-                        <div class="feature-block-two col-lg-6 col-md-6">
-                            <div class="inner-box">
-                                <span class="icon flaticon-rocket-ship"></span>
-                                <h4>Fast Delivery</h4>
-                                <div class="text">Lorem ipsum dolor sit amet, consectetur adipisicing.</div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-            <!--Image Column-->
-            <div class="image-column" style="background-image:url({{asset('assets/frontend/images/resource/image-2.jpg')}});">
-                <figure class="image-box"><img src="{{asset('assets/frontend/images/resource/image-2.jpg')}}" alt=""></figure>
-            </div>
-        </div>
-    </section>
-    <!-- End Fluid Section -->
 
 
     @if(count(@$testimonials) > 0)

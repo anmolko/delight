@@ -4166,6 +4166,7 @@ img {
 
 .about-us .content-column .text-box {
     margin-bottom: 25px;
+    text-align: justify;
 }
 
 .about-us .content-column .text-box p {
@@ -6017,7 +6018,7 @@ img {
 }
 
 .call-to-action.alternate {
-    margin-bottom: 220px;
+    /* margin-bottom: 220px; */
 }
 
 .call-to-action:before {
@@ -6051,8 +6052,8 @@ img {
 }
 
 .call-to-action .fact-counter {
-    position: relative;
-    transform: translateY(50%);
+    /* position: relative;
+    transform: translateY(50%); */
 }
 
 .call-to-action .counter-column {
@@ -12088,7 +12089,7 @@ form .response .text-info {
     width: -webkit-fill-available;
 }
 
-.sec-title h3{
+.sec-title h3 {
     position: relative;
     display: inline-block;
     font-size: 55px;
@@ -12108,7 +12109,8 @@ form .response .text-info {
     margin-left: 0;
 }
 
-.sec-title h3:before, .sec-title h3:after {
+.sec-title h3:before,
+.sec-title h3:after {
     position: absolute;
     left: 100%;
     bottom: 20%;
