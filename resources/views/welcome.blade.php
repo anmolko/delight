@@ -87,6 +87,7 @@
     <!--END Banner Section -->
     @endif
 
+    @if(!empty($welcome_settings->intro_heading))
     <!-- About Us -->
     <section class="about-us">
         <div class="auto-container">
@@ -96,17 +97,17 @@
                 <div class="image-column col-lg-6 col-md-12 col-sm-12">
                     <div class="inner-column">
                         <div class="video-box wow fadeIn">
-                            <figure class="image"><img src="{{asset('assets/frontend/images/resource/about-us.jpg')}}" alt=""></figure>
+                            <figure class="image"><img src="{{asset('images/uploads/settings/'.@$welcome_settings->intro_image2)}}" alt="about-us"></figure>
                         </div>
                     </div>
                 </div>
                 <div class="content-column col-lg-6 col-md-12 col-sm-12">
                     <div class="inner-column">
                         <div class="sec-title">
-                            <h2>About Us</h2>
+                            <h2>{{@$welcome_settings->intro_heading}}</h2>
                         </div>
                         <div class="text-box">
-                            <p>Our commitment to bring <a href="#">professionalism</a>, good service & trust to the home repair service & maintenance business. We take immense pride in sending some of the most of professional handymen to yours homes to fix things that aren't workings. </p>
+                            <p>{!! nl2br(@$welcome_settings->intro_description) !!}</p>
                         </div>
                        
                     </div>
@@ -116,6 +117,7 @@
         </div>
     </section>
     <!-- End About Us -->
+    @endif
 
     @if(count($service_categories) > 3)
     <!-- Services Section -->

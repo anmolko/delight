@@ -359,30 +359,13 @@
 
                                 <div class="form-group mb-3">
                                     <label>Welcome Message <span class="text-muted text-danger">*</span></label>
-                                    <textarea class="form-control" rows="6" maxlength="630" name="intro_description" required> {{@$settings->intro_description}} </textarea>
+                                    <textarea class="form-control" rows="10" maxlength="830" name="intro_description" required> {{@$settings->intro_description}} </textarea>
                                     <div class="invalid-feedback">
                                         Please write the introduction description.
                                     </div>
                                 </div>
 
-                                <label>Image One <span class="text-muted text-danger">*</span></label>
-                                <div class="row justify-content-center">
-                                    <div class="col-8 mb-4">
-                                        <div class="custom-file h-auto">
-                                            <div class="avatar-upload">
-                                                <div class="avatar-edit">
-                                                    <input type="file"  accept="image/png, image/jpeg" class="custom-file-input" hidden id="introimage"  onchange="loadbasicFile('introimage','current-intro-img',event)" name="intro_image" {{ (!empty($settings->intro_image)) ? "":"required"}}>
-                                                    <label for="introimage"></label>
-                                                    <div class="invalid-feedback" style="position: absolute; width: 45px;">
-                                                        Please select a image.
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <img id="current-intro-img" src="<?php if(!empty($settings->intro_image)){ echo '/images/uploads/settings/'.$settings->intro_image; } else{  echo '/images/uploads/default-placeholder.png'; } ?>" alt="{{@$settings->intro_heading}}" class="w-100 current-img">
-                                        </div>
-                                        <span class="ctm-text-sm">*use minimum of 400 x 360px for first image </span>
-                                    </div>
-                                </div>
+                           
                             </div>
 
 
@@ -397,10 +380,10 @@
                             </div>
                             <div class="card-body">
 
-                                <label>Image Two <span class="text-muted text-danger">*</span></label>
+                                <label>Image  <span class="text-muted text-danger">*</span></label>
 
                                 <div class="row justify-content-center">
-                                    <div class="col-8 mb-4">
+                                    <div class="col-8 mb-3">
                                         <div class="custom-file h-auto">
                                             <div class="avatar-upload">
                                                 <div class="avatar-edit">
@@ -413,7 +396,7 @@
                                             </div>
                                             <img id="current-intro2-img" src="<?php if(!empty($settings->intro_image2)){ echo '/images/uploads/settings/'.$settings->intro_image2; } else{  echo '/images/uploads/default-placeholder.png'; } ?>" alt="{{@$settings->intro_heading}}" class="w-100 current-img">
                                         </div>
-                                        <span class="ctm-text-sm">*use minimum of 420 x 360px for second image </span>
+                                        <span class="ctm-text-sm">*use minimum of 570 x 570px for  image </span>
                                     </div>
                                 </div>
 

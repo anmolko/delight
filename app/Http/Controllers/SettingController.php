@@ -162,26 +162,26 @@ class SettingController extends Controller
         $update_intro                           =  Setting::find($id);
         $update_intro->intro_heading            =  $request->input('intro_heading');
         $update_intro->intro_description        =  $request->input('intro_description');
-        $oldimage                               = $update_intro->intro_image;
+        // $oldimage                               = $update_intro->intro_image;
         $oldimage2                               = $update_intro->intro_image2;
-        if (!empty($request->file('intro_image'))){
-            $image     = $request->file('intro_image');
-            $name1     = uniqid().'_image1_'.$image->getClientOriginalName();
-            $path      = base_path().'/public/images/uploads/settings/';
-            $moved     = Image::make($image->getRealPath())->fit(400, 360)->orientate()->save($path.$name1);
+        // if (!empty($request->file('intro_image'))){
+        //     $image     = $request->file('intro_image');
+        //     $name1     = uniqid().'_image1_'.$image->getClientOriginalName();
+        //     $path      = base_path().'/public/images/uploads/settings/';
+        //     $moved     = Image::make($image->getRealPath())->fit(400, 360)->orientate()->save($path.$name1);
 
-            if ($moved){
-                $update_intro->intro_image= $name1;
-                if (!empty($oldimage) && file_exists(public_path().'/images/uploads/settings/'.$oldimage)){
-                    @unlink(public_path().'/images/uploads/settings/'.$oldimage);
-                }
-            }
-        }
+        //     if ($moved){
+        //         $update_intro->intro_image= $name1;
+        //         if (!empty($oldimage) && file_exists(public_path().'/images/uploads/settings/'.$oldimage)){
+        //             @unlink(public_path().'/images/uploads/settings/'.$oldimage);
+        //         }
+        //     }
+        // }
         if (!empty($request->file('intro_image2'))){
             $image     = $request->file('intro_image2');
             $name1     = uniqid().'_image2_'.$image->getClientOriginalName();
             $path      = base_path().'/public/images/uploads/settings/';
-            $moved     = Image::make($image->getRealPath())->resize(420, 360)->orientate()->save($path.$name1);
+            $moved     = Image::make($image->getRealPath())->resize(570, 570)->orientate()->save($path.$name1);
 
             if ($moved){
                 $update_intro->intro_image2= $name1;
