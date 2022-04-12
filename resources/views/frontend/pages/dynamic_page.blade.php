@@ -263,14 +263,14 @@
                         <div class="content-side col-lg-12 col-md-12 col-sm-12">
                             <div class="service-detail">
                                 <div class="content-box">
-                                    <h2 style="text-align: center;">{{$flash_elements[0]->heading}}</h2>
-                                    <p style="text-align: center;">{{$flash_elements[0]->subheading}}</p>
+                                    <h2 style="text-align: center;">{{@$flash_elements[0]->heading}}</h2>
+                                    <p style="text-align: center;">{{@$flash_elements[0]->subheading}}</p>
                                     <div class="service-tabs tabs-box">
                                         <!--Tab Btns-->
                                         <ul class="tab-btns tab-buttons clearfix">
                                             @foreach(@$flash_elements as $key=>$flash_element)
                                                 <li data-tab="#service-tab-{{$key}}" class="tab-btn {{($key==0) ? 'active-btn':''}}">
-                                                    {{ $flash_element->list_header }}
+                                                    {{ @$flash_element->list_header }}
                                                 </li>
 
                                             @endforeach
@@ -285,7 +285,7 @@
                                             <div class="tab {{($key==0) ? 'active-tab':''}}" id="service-tab-{{$key}}">
                                                 <div class="tab-inner">
                                                     <div class="text">
-                                                        {!! $flash_element->list_description !!}
+                                                        {!! @$flash_element->list_description !!}
                                                     </div>
                                                 </div>
                                             </div>
@@ -314,14 +314,14 @@
                     <div class="faq-column col-lg-12 col-md-12 col-sm-12">
                         <ul class="accordion-box">
                             <!--Block-->
-                            @foreach($accordian1_elements as $key=>$value)
+                            @foreach(@$accordian1_elements as $key=>$value)
                                 <li class="accordion block {{($key==0) ? 'active-block':''}}">
                                     <div class="acc-btn {{($key==0) ? 'active':''}}">
-                                        {{$value->list_header}}<div class="icon fa fa-plus-circle"></div></div>
+                                        {{@$value->list_header}}<div class="icon fa fa-plus-circle"></div></div>
                                     <div class="acc-content" style="display: {{($key==0) ? 'block':'none'}};">
                                         <div class="content">
                                             <div class="text">
-                                                {{$value->list_description}}
+                                                {{@$value->list_description}}
                                             </div>
                                         </div>
                                     </div>
@@ -414,7 +414,7 @@
 
                     <div class="services-carousel owl-carousel owl-theme">
 
-                        @foreach($slider_list_elements as $list)
+                        @foreach(@$slider_list_elements as $list)
                         <div class="service-block">
                             <div class="inner-box" >
                                 <div class="image-box">
