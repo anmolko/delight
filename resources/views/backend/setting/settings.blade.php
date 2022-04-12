@@ -255,7 +255,7 @@
                         <div class="card ctm-border-radius shadow-sm company-logo flex-fill grow">
                             <div class="card-header">
                                 <h4 class="card-title mb-0"> Main Logo</h4>
-                                <span class="ctm-text-sm">*Please use  165 x 50px of image for main logo</span>
+                                <span class="ctm-text-sm">*Please use  180 x 50px of image for main logo</span>
                             </div>
                             <div class="card-body">
                                 <div class="row justify-content-center">
@@ -283,7 +283,7 @@
                                 <div class="card ctm-border-radius shadow-sm grow flex-fill">
                                     <div class="card-header">
                                         <h4 class="card-title mb-0">White Logo</h4>
-                                        <span class="ctm-text-sm">*Please use 165 x 50px of image for White logo</span>
+                                        <span class="ctm-text-sm">*Please use 180 x 50px of image for White logo</span>
 
                                     </div>
                                     <div class="card-body text-center">
