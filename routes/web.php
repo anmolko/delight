@@ -115,6 +115,7 @@ Route::group(['prefix' => 'auth', 'middleware' => ['auth']], function () {
     Route::put('/setting/{id}/images', 'App\Http\Controllers\SettingController@imageupdate')->name('setting.imageupdate');
     Route::put('/settings/{id}/welcome', 'App\Http\Controllers\SettingController@welcomeupdate')->name('welcome.update');
     Route::put('/settings/{id}/status', 'App\Http\Controllers\SettingController@statusupdate')->name('status.update');
+    Route::put('/settings/{id}/brocher', 'App\Http\Controllers\SettingController@brocherupdate')->name('brocher.update');
 
     //End of General setting
 

@@ -381,7 +381,7 @@
                             <div class="blog-detail">
                                 <div class="inner-box">
                                     <div class="lower-content">
-                                        @if($header_descp_elements->heading !== null)
+                                        @if(@$header_descp_elements->heading !== null)
                                             <div class="sec-title text-center">
                                                 <h3>{{ucwords(@$header_descp_elements->heading)}}</h3>
                                                 </div>
@@ -437,6 +437,25 @@
         @endif
 
 
+        <!-- Brocher Section  -->
+        @if(@$page_detail->slug=="legal-documents" || @$page_detail->slug=="legal-document")
+                    
+                @if(@$setting_data->brocher)
+                <section class="services-section">
+                    <div class="auto-container">
+                        <div class="sec-title text-center">
+                            <h2>Brocher</h2>
+                        </div>
+                        <div class="row">
+                            <iframe src="{{url('/loadbrocher#magazineMode=true')}}" width="100%" height="400"></iframe>
+                        </div>
+                    </div>
+                </section>
+                                           
+
+                @endif
+            @endif
+        <!-- End Brocher Section  -->
 
     @endforeach
 

@@ -364,12 +364,11 @@
     </div>
   </div>
 </div>
-
+<input type="hidden" id="brocher-id" value="<?php echo @$theme_data->brocher ?>" />
     <script src="{{asset('assets/frontend/flip/web/compatibility.js')}}"></script>
 <!-- This snippet is used in production (included from viewer.html) -->
 <link rel="resource" type="application/l10n" href="{{asset('assets/frontend/flip/web/locale/locale.properties')}}"/>
 <script src="{{asset('assets/backend/js/jquery-3.2.1.min.js')}}"></script>
-
 <!-- turn.min.js, zoom.min.js, magazine.js -->
 <script src="{{asset('assets/frontend/flip/web/l10n.js')}}"></script>
 <script src="{{asset('assets/frontend/flip/build/pdf.js')}}"></script>

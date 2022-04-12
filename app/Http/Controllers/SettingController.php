@@ -136,6 +136,39 @@ class SettingController extends Controller
         return redirect()->back();
     }
 
+    public function brocherupdate(Request $request, $id)
+    {
+        $request->validate([
+            'brocher' => 'nullable|mimes:pdf|max:10240'
+            ]);
+        $update_theme                           =  Setting::find($id);
+        $update_theme->updated_by               =  Auth::user()->id;
+
+    
+            $oldpdf                               = $update_theme->brocher;
+            if (!empty($request->file('brocher'))){
+                $pdf     = $request->file('brocher');
+                $name1     = "delight_brocher_".uniqid(). '.' . $pdf->getClientOriginalExtension();;
+                $path      = base_path().'/public/assets/frontend/brocher/';
+                $moved= $pdf->move($path, $name1);
+
+                if ($moved){
+                    $update_theme->brocher= $name1;
+                    if (!empty($oldpdf) && file_exists(public_path().'/assets/frontend/brocher/'.$oldpdf)){
+                        @unlink(public_path().'/assets/frontend/brocher/'.$oldpdf);
+                    }
+                }
+            }
+        $status=$update_theme->update();
+
+        if($status){
+            Session::flash('success','Brocher Updated Successfully');
+        }
+        else{
+            Session::flash('error','Something Went Wrong. Brocher could not be Updated');
+        }
+        return redirect()->back();
+    }
 
     public function statusupdate(Request $request, $id)
     {

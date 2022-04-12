@@ -43,6 +43,11 @@
                     <li class="nav-item">
                         <a class="nav-link" id="pills-statuses-tab" data-toggle="pill" href="#pills-statuses" role="tab" aria-controls="pills-statuses" aria-selected="false">Status Section</a>
                     </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" id="pills-brocher-tab" data-toggle="pill" href="#pills-brocher" role="tab" aria-controls="pills-brocher" aria-selected="false">Brocher Section</a>
+                    </li>
+
                 </ul>
             </div>
         </div>
@@ -586,6 +591,54 @@
                 </div>
             </div>
 
+            <div class="tab-pane fade px-0" id="pills-brocher" role="tabpanel"
+                     aria-labelledby="pills-brocher-tab">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card ctm-border-radius shadow-sm grow flex-fill">
+                                    <div class="card-header">
+                                        <h4 class="card-title mb-0">
+                                            Upload Brocher(pdf only)
+                                        </h4>
+                                    </div>
+                                    @if(!empty($settings))
+                                        {!! Form::open(['url'=>route('brocher.update', @$settings->id),'method'=>'PUT','enctype'=>'multipart/form-data']) !!}
+                                    @else
+
+                                        <form action="{{ route('setting.store') }}" class="needs-validation" novalidate="" method="POST" enctype="multipart/form-data">
+                                        @csrf
+                                    @endif
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <input type="file" class="form-control form-control-lg"
+                                                                    id="brocher" name="brocher" {{(@$settings->brocher) ? "":"required";}}  >
+                                                        </div>
+                                                    </div>
+                                                    
+                                                </div>
+                                                
+                                                
+                                            </div>
+                                        </div>
+
+
+                                        <div class="text-center mt-3">
+                                            <input type="submit" value="Update Brocher" class="btn btn-theme text-white ctm-border-radius button-1"/>
+                                        </div>
+                                    </div>
+
+                                    {!! Form::close() !!}
+
+                                </div>
+                            </div>
+                            
+                        </div>
+                       
+                </div>
         </div>
    </div>
 

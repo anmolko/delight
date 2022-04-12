@@ -95,8 +95,8 @@ class FrontController extends Controller
 
     public function loadPdf()
     {
-        return view('frontend.brocher.brocher');
-
+        $theme_data = Setting::first();
+        return view('frontend.brocher.brocher',compact('theme_data')); 
     }
 
     public function team(){
