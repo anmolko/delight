@@ -31,10 +31,16 @@
 @endsection
 @section('content')
 
+
+
     <div class="col-xl-9 col-lg-8  col-md-12">
-
-
-        <div class="card shadow-sm ctm-border-radius grow">
+        <?php
+        $slug_to_disable = [];
+        if($desiredMenu !== null){
+            $slug_to_disable = get_slugs_to_disable($desiredMenu->slug);
+        }
+        ?>
+            <div class="card shadow-sm ctm-border-radius grow">
             <div class="card-body align-center">
                 <div class="row filter-row">
 
@@ -48,7 +54,7 @@
                                     <option disabled>Select a menu to edit</option>
                                     @foreach($menus as $menu)
                                         @if($desiredMenu !== '')
-                                            <option value="{{$menu->slug}}" @if($menu->id == $desiredMenu->id) selected @endif>{{$menu->title}}</option>
+                                            <option value="{{$menu->slug}}" @if($menu->id == $desiredMenu->id) selected @endif>{{$menu->name}}</option>
                                         @endif
                                     @endforeach
                                 </select>
@@ -90,13 +96,13 @@
                                         </a>
                                     </h4>
                                 </div>
-                                <div class="card-body p-0 {{(count($menus) == 0) ? 'disabled':''}}" id="menu-list">
+                                <div class="card-body p-0 {{(count($menus) == 0) ? 'disabled':''}}" id="pages-list">
                                     <div id="basic-one" class="ctm-padding collapse show" aria-labelledby="basic1" data-parent="#accordion-details" style="">
                                         @if(count($pages) !== 0)
                                             @foreach($pages as $page)
-                                                <div class="custom-control custom-checkbox mb-3">
-                                                    <input type="checkbox" class="custom-control-input" id="page-{{$page->id}}" value="{{$page->id}}" name="select-pages[]">
-                                                    <label class="custom-control-label" for="page-{{$page->id}}">
+                                                <div class="custom-control custom-checkbox mb-3 {{(in_array($page->slug, $slug_to_disable)) ? 'disabled':''}}">
+                                                    <input type="checkbox" class="custom-control-input" id="page-{{$page->id}}" value="{{$page->id}}" name="select-pages[]" {{(count($menus) == 0 || in_array($page->slug, $slug_to_disable)) ? 'disabled':''}}>
+                                                    <label class="custom-control-label {{(in_array($page->slug, $slug_to_disable)) ? 'disabled':''}}" for="page-{{$page->id}}">
                                                         <span class="h6">
                                                             {{ucfirst($page->name)}}</span>
                                                     </label>
@@ -109,7 +115,7 @@
                                         @endif
 
                                         <div class="text-center {{(count($pages) == 0) ? 'disabled':''}}">
-                                            <label class="pull-left btn-sm btn btn-theme button-1 ctm-border-radius text-white"><input type="checkbox" id="select-all-menus" class="hidden"> Select All</label>
+                                            <label class="pull-left btn-sm btn btn-theme button-1 ctm-border-radius text-white"><input type="checkbox" id="select-all-pages" class="hidden"> Select All</label>
                                             <button type="button" class="pull-right btn-sm btn btn-theme button-1 ctm-border-radius text-white" id="add-pages">Add to Menu</button>
                                         </div>
 
@@ -130,9 +136,9 @@
                                     <div id="term-office" class="ctm-padding collapse" aria-labelledby="headingThree" data-parent="#accordion-details" style="">
                                         @if(count($blogs) !== 0)
                                                 @foreach($blogs as $blog)
-                                                    <div class="custom-control custom-checkbox mb-3">
-                                                        <input type="checkbox" name="select-post[]" value="{{$blog->id}}" class="custom-control-input" id="posts-{{$blog->id}}">
-                                                        <label class="custom-control-label" for="posts-{{$blog->id}}">
+                                                    <div class="custom-control custom-checkbox mb-3 {{(in_array($blog->slug, $slug_to_disable)) ? 'disabled':''}}">
+                                                        <input type="checkbox" name="select-post[]" value="{{$blog->id}}" class="custom-control-input" id="posts-{{$blog->id}}" {{(count($menus) == 0 || in_array($blog->slug, $slug_to_disable)) ? 'disabled':''}}>
+                                                        <label class="custom-control-label {{(in_array($blog->slug, $slug_to_disable)) ? 'disabled':''}}" for="posts-{{$blog->id}}">
                                                             <span class="h6">{{$blog->title}}</span>
                                                         </label>
                                                     </div>
@@ -184,9 +190,7 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -210,7 +214,16 @@
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group">
-                                                        <label for="title" class="text-heading">Menu Name</label>
+                                                        <label for="name" class="text-heading">Menu Name</label>
+                                                        <input type="text" class="form-control form-control-lg" id="name" name="name" required>
+                                                        <div class="invalid-feedback">
+                                                            Please enter the menu name.
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label for="title" class="text-heading">Menu Title (for frontend display)</label>
                                                         <input type="text" class="form-control form-control-lg" id="title" name="title" required>
                                                         <div class="invalid-feedback">
                                                             Please enter the menu title.
@@ -235,7 +248,6 @@
                                 </div>
                           </div>
                         @else
-
                             <div id="menu-content">
                                 <div style="min-height: 240px;">
                                     <p>Select Posts, pages or add custom links to menus.</p>
@@ -271,13 +283,13 @@
                                                                                     Please enter the URL.
                                                                                 </div>
                                                                             </div>
-                                                                            <div class="custom-control custom-checkbox mb-3">
-                                                                                <input type="checkbox" name="target" value="_blank" id="main-{{$item->id}}"  @if($item->target == '_blank') checked @endif class="custom-control-input">
-                                                                                <label class="custom-control-label" for="main-{{$item->id}}">
-                                                                                    <span class="h6">Open in a new tab</span>
-                                                                                </label>
-                                                                            </div>
                                                                         @endif
+                                                                        <div class="custom-control custom-checkbox mb-3">
+                                                                            <input type="checkbox" name="target" value="_blank" id="main-{{$item->id}}"  @if($item->target == '_blank') checked @endif class="custom-control-input">
+                                                                            <label class="custom-control-label" for="main-{{$item->id}}">
+                                                                                <span class="h6">Open in a new tab</span>
+                                                                            </label>
+                                                                        </div>
                                                                         <div class="text-center">
                                                                         <button class="pull-right btn btn-sm btn-outline-success"><i class="lnr lnr-bookmark"></i> Save</button>
                                                                         <a href="{{url('auth/delete-menuitem')}}/{{$item->id}}/{{$key}}" class="pull-left btn btn-sm btn-outline-danger">
@@ -322,13 +334,13 @@
                                                                                                     Please enter the URL.
                                                                                                 </div>
                                                                                             </div>
-                                                                                            <div class="custom-control custom-checkbox mb-3">
-                                                                                                <input type="checkbox" name="target" value="_blank" id="main-{{$data->id}}"  @if($data->target == '_blank') checked @endif class="custom-control-input">
-                                                                                                <label class="custom-control-label" for="main-{{$data->id}}">
-                                                                                                    <span class="h6">Open in a new tab</span>
-                                                                                                </label>
-                                                                                            </div>
                                                                                         @endif
+                                                                                        <div class="custom-control custom-checkbox mb-3">
+                                                                                            <input type="checkbox" name="target" value="_blank" id="main-{{$data->id}}"  @if($data->target == '_blank') checked @endif class="custom-control-input">
+                                                                                            <label class="custom-control-label" for="main-{{$data->id}}">
+                                                                                                <span class="h6">Open in a new tab</span>
+                                                                                            </label>
+                                                                                        </div>
                                                                                         <div class="text-center">
                                                                                             <button class="pull-right btn btn-sm btn-outline-success"><i class="lnr lnr-bookmark"></i> Save</button>
                                                                                             <a href="{{url('auth/delete-menuitem')}}/{{$data->id}}/{{$key}}/{{$in}}" class="pull-left btn btn-sm btn-outline-danger">
@@ -341,7 +353,62 @@
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
+                                                                            <ul class="children-content">
+                                                                                @if(isset($data->children))
+                                                                                    @foreach($data->children as $o)
+                                                                                        @foreach($o as $keys=>$data1)
+                                                                                            <li data-id="{{$data1->id}}" class="menu-item mt-2"> <span class="menu-item-bar"><i class="lnr lnr-move"></i> @if(empty($data1->name)) {{$data1->title}} @else {{$data1->name}} @endif <a href="#collapse{{$data1->id}}" class="pull-right coll-arrow d-block text-dark collapsed" data-toggle="collapse"></a></span>
+                                                                                                <div class="collapse" id="collapse{{$data1->id}}">
+                                                                                                    <div class="card shadow-sm ctm-border-radius input-box">
+                                                                                                        <div class="card-header" id="basic4">
+                                                                                                            <h4 class="cursor-pointer mb-0">
+                                                                                                                <a class="d-block text-dark">
+                                                                                                                    Edit details
+                                                                                                                </a>
+                                                                                                            </h4>
+                                                                                                        </div>
+                                                                                                        <div class="card-body p-2">
+                                                                                                            {!! Form::open(['method'=>'post','url'=>route('menu.updatemenuitem', @$data1->id),'class'=>'needs-validation','novalidate'=>'']) !!}
+                                                                                                            <div class="form-group mb-3">
+                                                                                                                <label>Link Name </label>
+                                                                                                                <input type="text" class="form-control" name="name" value="@if(empty($data1->name)) {{$data1->title}} @else {{$data1->name}} @endif">
+                                                                                                                <div class="invalid-feedback">
+                                                                                                                    Please enter the Link Name.
+                                                                                                                </div>
+                                                                                                            </div>
 
+                                                                                                            @if($data1->type == 'custom')
+                                                                                                                <div class="form-group mb-3">
+                                                                                                                    <label>URL </label>
+                                                                                                                    <input type="text" class="form-control" name="slug" value="{{$data1->slug}}" required>
+                                                                                                                    <div class="invalid-feedback">
+                                                                                                                        Please enter the URL.
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                            @endif
+                                                                                                            <div class="custom-control custom-checkbox mb-3">
+                                                                                                                <input type="checkbox" name="target" value="_blank" id="main-{{$data1->id}}"  @if($data1->target == '_blank') checked @endif class="custom-control-input">
+                                                                                                                <label class="custom-control-label" for="main-{{$data1->id}}">
+                                                                                                                    <span class="h6">Open in a new tab</span>
+                                                                                                                </label>
+                                                                                                            </div>
+                                                                                                            <div class="text-center">
+                                                                                                                <button class="pull-right btn btn-sm btn-outline-success"><i class="lnr lnr-bookmark"></i> Save</button>
+                                                                                                                <a href="{{url('auth/delete-menuitem')}}/{{$data1->id}}/{{$key}}/{{$in}}/{{$keys}}" class="pull-left btn btn-sm btn-outline-danger">
+                                                                                                                    <span class="lnr lnr-trash"></span> Delete
+                                                                                                                </a>
+                                                                                                            </div>
+
+                                                                                                            {!! Form::close() !!}
+
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </li>
+                                                                                        @endforeach
+                                                                                    @endforeach
+                                                                                @endif
+                                                                            </ul>
                                                                         </li>
                                                                     @endforeach
                                                                 @endforeach
@@ -355,6 +422,13 @@
                                 </div>
 
                                 @if($desiredMenu != '')
+                                    <div class="form-group">
+                                        <label for="title" class="text-heading">Edit Title (for frontend display)</label>
+                                        <input type="text" class="form-control form-control-lg" id="title" name="title" value="{{$menuTitle}}" required>
+                                        <div class="invalid-feedback">
+                                            Please enter the menu title.
+                                        </div>
+                                    </div>
                                     <div class="form-group menulocation">
                                         <p class="mb-2">Select Menu Location: </p>
 
@@ -379,7 +453,6 @@
 
                                 @endif
                             </div>
-
                         @endif
                     </div>
                 </div>
@@ -402,7 +475,16 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="title" class="text-heading">Menu Name</label>
+                                <label for="name" class="text-heading">Menu Name</label>
+                                <input type="text" class="form-control form-control-lg" id="name" name="name" required>
+                                <div class="invalid-feedback">
+                                    Please enter the menu name.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="title" class="text-heading">Menu Title (for frontend display)</label>
                                 <input type="text" class="form-control form-control-lg" id="title" name="title" required>
                                 <div class="invalid-feedback">
                                     Please enter the menu title.
@@ -446,7 +528,7 @@
             isValidTarget: function ($item, container) {
                 //for limiting the depth of the UL child
                 var depth = 1, // Start with a depth of one (the element itself)
-                    maxDepth = 2,
+                    maxDepth = 3,
                     children = $item.find('ul').first().find('li');
 
 
@@ -496,7 +578,7 @@
             }
         });
 
-        $("#title").keyup(function(){
+        $("#name").keyup(function(){
             var Text = $(this).val();
             Text = Text.toLowerCase();
             var regExp = /\s+/g;
@@ -510,13 +592,13 @@
             $('#serialize_output').text(jsonString);
         });
 
-        $('#select-all-menus').click(function(event) {
+        $('#select-all-pages').click(function(event) {
             if(this.checked) {
-                $('#menu-list :checkbox').each(function() {
+                $('#pages-list :checkbox:not(:disabled)').each(function() {
                         this.checked = true;
                 });
             }else{
-                $('#menu-list :checkbox').each(function() {
+                $('#pages-list :checkbox:not(:disabled)').each(function() {
                     this.checked = false;
                 });
             }
@@ -524,11 +606,11 @@
 
         $('#select-all-posts').click(function(event) {
             if(this.checked) {
-                $('#posts-list :checkbox').each(function() {
+                $('#posts-list :checkbox:not(:disabled)').each(function() {
                     this.checked = true;
                 });
             }else{
-                $('#posts-list :checkbox').each(function() {
+                $('#posts-list :checkbox:not(:disabled)').each(function() {
                     this.checked = false;
                 });
             }
@@ -622,6 +704,11 @@
             $('#saveMenu').click(function(){
                 var menuid  = "{{$desiredMenu->id}}";
                 var location = $('input[name="location"]:checked').val();
+                var title = $('input[name="title"]').val();
+                if(title == ""){
+                    swal("Missing Title!", "Enter the title to save the menu", "info");
+                    return false;
+                }
                 if(location == null){
                     swal("Mission location!", "Select the location to save the menu", "info");
                     return false;
@@ -629,7 +716,7 @@
                 var data = JSON.parse($("#serialize_output").text());
                 $.ajax({
                     type:"get",
-                    data: {menuid:menuid,data:data,location:location},
+                    data: {menuid:menuid,data:data,location:location,title:title},
                     url: "{{route('menu.updateMenu')}}",
                     success:function(res){
                         window.location.reload();
