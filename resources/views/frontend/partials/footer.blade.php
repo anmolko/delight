@@ -108,7 +108,7 @@
     <!--Footer Bottom-->
     <div class="footer-bottom">
         <div class="auto-container">
-            <div class="copyright-text">Copyrights 2022. All Rights are Reserved by <a href="/">@if(!empty(@$setting_data->website_name)) {{ucwords(@$setting_data->website_name)}} @endif</a> | Developed  by <a
+            <div class="copyright-text">Copyrights {{date("Y")}}. All Rights are Reserved by <a href="/">@if(!empty(@$setting_data->website_name)) {{ucwords(@$setting_data->website_name)}} @endif</a> | Developed  by <a
 										rel="noopener" target="_blank" href="https://www.canosoft.com.np/">Canosoft Techonology </a></div>
         </div>
     </div>
