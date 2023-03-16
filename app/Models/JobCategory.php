@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class JobCategory extends Model
 {
@@ -17,5 +18,9 @@ class JobCategory extends Model
 
     public function service(){
         return $this->belongsTo('App\Models\ServiceCategory','service_category_id','id');
+    }
+
+    public function changeToSlug($name){
+        return Str::slug($name,'-');
     }
 }

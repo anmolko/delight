@@ -84,9 +84,8 @@
 
                                 <div class="card-body">
                                     <div class="form-group mb-3">
-                                        <label>Job Category <span class="text-muted text-danger">*</span></label>
-                                        <select class="form-control select select2" name="job_category_id" required>
-                                            <option value disabled selected>Select Job Category</option>
+                                        <label>Job Category </label>
+                                        <select class="form-control custom-select2 select2" name="job_category_id[]" multiple="multiple">
                                             @if(!empty(@$categories))
                                                 @foreach(@$categories as $categoryList)
                                                     <option value="{{ @$categoryList->id }}" >{{ ucwords(@$categoryList->name) }}</option>
@@ -100,22 +99,17 @@
 
                                     <div class="form-group mb-3">
                                         <label>Job Name <span class="text-muted text-danger">*</span></label>
-                                        <input type="text" class="form-control" name="name" id="job_name" onclick="slugMaker('job_name','job_slug')" required>
+                                        <input type="text" class="form-control" name="name" id="job_name"  required>
                                         <div class="invalid-feedback">
                                             Please enter the job name.
                                         </div>
                                     </div>
                                     <div class="form-group mb-3">
-                                        <label>Slug <span class="text-muted text-danger">*</span></label>
-                                        <input type="text" class="form-control" name="slug" id="job_slug" required>
+                                        <label>Job Display Title </label>
+                                        <input type="text" class="form-control" name="title" id="job_title">
                                         <div class="invalid-feedback">
-                                            Please enter the job Slug.
+                                            Please enter the job display title.
                                         </div>
-                                        @if($errors->has('slug'))
-                                            <div class="invalid-feedback">
-                                                {{$errors->first('slug')}}
-                                            </div>
-                                        @endif
                                     </div>
 
                                 </div>
@@ -139,7 +133,7 @@
                                                 <div class="custom-file h-auto">
                                                     <div class="avatar-upload">
                                                         <div class="avatar-edit">
-                                                            <input type="file"  accept="image/png, image/jpeg" class="custom-file-input" hidden id="imagejobUpload" onchange="loadbasicFile('imagejobUpload','current-job-img',event)"  name="image" required>
+                                                            <input type="file"  accept="image/png, image/jpeg" class="custom-file-input" hidden id="imagejobUpload" onchange="loadbasicFile('imagejobUpload','current-job-img',event)"  name="image">
                                                             <label for="imagejobUpload"></label>
                                                             <div class="invalid-feedback" style="position: absolute; width: 45px;">
                                                                 Please select a image.
@@ -148,7 +142,6 @@
                                                     </div>
                                                     <img id="current-job-img" src="{{asset('/images/uploads/default-placeholder.png')}}" alt="job_image" class="w-100 current-img">
                                                 </div>
-                                                <span class="ctm-text-sm">*use image minimum of 770 x 350px for Job</span>
                                             </div>
 
                                         </div>
@@ -162,78 +155,11 @@
                         </div>
                     </div>
 
-
-
                     <div class="row">
                         <div class="col-md-12">
                             <div class="card ctm-border-radius shadow-sm flex-fill">
 
                                 <div class="card-body">
-
-                                    <div class="form-group mb-3">
-                                        <label>LT Number </label>
-                                        <input type="text" class="form-control" name="lt_number">
-                                        <div class="invalid-feedback">
-                                            Please enter the LT Number.
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group mb-3">
-                                        <label>Select Company Name <span class="text-muted text-danger">*</span></label>
-                                        <select class="form-control" name="client_id" required>
-                                            <option value selected disabled>Select company name</option>
-                                            @if(!empty(@$clients))
-                                                @foreach(@$clients as $clientList)
-                                                    <option value="{{ @$clientList->id }}" >{{ ucwords(@$clientList->name) }}</option>
-                                                @endforeach
-                                            @endif
-                                        </select>
-                                        <div class="invalid-feedback">
-                                            Please select company name.
-                                        </div>
-                                    </div>
-
-
-                                    <div class="form-group mb-3">
-                                        <label>Required Number of Jobs <span class="text-muted text-danger">*</span></label>
-                                        <input type="text" class="form-control" name="required_number" required>
-                                        <div class="invalid-feedback">
-                                            Please enter the required number of jobs.
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group mb-3">
-                                        <label>Salary <span class="text-muted text-danger">*</span></label>
-                                        <input type="text" min="1" class="form-control" name="salary" required>
-                                        <div class="invalid-feedback">
-                                            Please enter the salary.
-                                        </div>
-                                    </div>
-                                    <div class="form-group mb-3">
-                                        <label>Min Qualification <span class="text-muted text-danger">*</span></label>
-                                        <select class="form-control shadow-none" name="min_qualification" required>
-                                            <option value disabled selected> Select Min Qualification</option>
-                                            <option value="none">None</option>
-                                            <option value="primary education">Primary Education </option>
-                                            <option value="secondary education">Secondary Education</option>
-                                            <option value="SEE pass">SEE Pass</option>
-                                            <option value="intermediate pass">Intermediate Pass</option>
-                                            <option value="bachelor pass">Bachelor Pass</option>
-                                            <option value="post graduate pass">Post Graduate Pass</option>
-                                        </select>
-                                        <div class="invalid-feedback">
-                                            Please enter the Min Qualification.
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group mb-3">
-                                        <label>Description <span class="text-muted text-danger">*</span></label>
-                                        <textarea class="form-control" rows="6" name="description" id="description_editor" required></textarea>
-                                        <div class="invalid-feedback">
-                                            Please enter the description.
-                                        </div>
-                                    </div>
-
                                     <div class="form-group mb-3">
                                         <label>Start Date <span class="text-muted text-danger">*</span></label>
                                         <input type="text" class="form-control datetimepicker" name="start_date" id="start_date" required>
@@ -250,6 +176,68 @@
                                         </div>
                                     </div>
 
+                                    <div class="form-group mb-3">
+                                        <label>LT Number </label>
+                                        <input type="text" class="form-control" name="lt_number">
+                                        <div class="invalid-feedback">
+                                            Please enter the LT Number.
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label>Select Company Name </label>
+                                        <select class="form-control custom-select2 select2" name="client_ids[]" multiple>
+                                            @if(!empty(@$clients))
+                                                @foreach(@$clients as $clientList)
+                                                    <option value="{{ @$clientList->id }}" >{{ ucwords(@$clientList->name) }}</option>
+                                                @endforeach
+                                            @endif
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            Please select company name.
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group mb-3">
+                                        <label>Additional Company Name </label>
+                                        <input type="text" class="form-control" name="extra_company">
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label>Required Number of Jobs </label>
+                                        <input type="text" class="form-control" name="required_number">
+                                        <div class="invalid-feedback">
+                                            Please enter the required number of jobs.
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label>Salary </label>
+                                        <input type="text" min="1" class="form-control" name="salary">
+                                        <div class="invalid-feedback">
+                                            Please enter the salary.
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label>Min Qualification </label>
+                                        <select class="form-control shadow-none" name="min_qualification">
+                                            <option value disabled selected> Select Min Qualification</option>
+                                            <option value="none">None</option>
+                                            <option value="primary education">Primary Education </option>
+                                            <option value="secondary education">Secondary Education</option>
+                                            <option value="SEE pass">SEE Pass</option>
+                                            <option value="intermediate pass">Intermediate Pass</option>
+                                            <option value="bachelor pass">Bachelor Pass</option>
+                                            <option value="post graduate pass">Post Graduate Pass</option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            Please enter the Min Qualification.
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label>Description </label>
+                                        <textarea class="form-control" rows="6" name="description" id="description_editor"></textarea>
+                                        <div class="invalid-feedback">
+                                            Please enter the description.
+                                        </div>
+                                    </div>
                                     <div class="form-group mb-3">
                                         <label> Form Link </label>
                                         <input type="url" class="form-control" name="formlink" id="formlink" >
@@ -273,6 +261,7 @@
                     </div>
                     {!! Form::close() !!}
 
+                    {{--jobs table--}}
                     <div class="row">
                         <div class="col-md-12">
                             <div class="company-doc">
@@ -288,6 +277,7 @@
                                                 <table id="job-index-table" class="table custom-table">
                                                     <thead>
                                                     <tr>
+                                                        <th>Image</th>
                                                         <th>Job Name</th>
                                                         <th>Job Category</th>
                                                         <th>Country</th>
@@ -301,25 +291,36 @@
                                                     @if(@$jobs)
                                                         @foreach($jobs as  $job)
                                                             <tr>
+                                                                <td class="align-middle pt-6 pb-4 px-6">
+                                                                    <div class="avatar-upload">
+                                                                        <div class="blog-preview">
+                                                                            <img id="blog-img" src="{{ ($job->image !== null) ? asset('/images/uploads/jobs/'.@$job->image): asset('assets/frontend/images/delight.png')   }}" alt="{{@$job->slug}}"/>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
                                                                 <td>{{ucfirst(@$job->name)}}</td>
-                                                                <td>{{ucfirst(@$job->category->name)}}</td>
-                                                                <td><?php
-                                                                    if(!empty($job->country)){
-                                                                        foreach ($countries as $key=>$value){
-                                                                            if($job->country == $key){
-                                                                                echo $value;
-                                                                            }
-                                                                        }
-                                                                    }
-                                                                    ?></td>
-                                                                <td>{{ucfirst(\App\Models\Client::find(@$job->client_id)->name)}}</td>
-                                                                <td>{{@$job->salary}}</td>
+                                                                <td>
+                                                                    {{ $job->getJobCategories($job->category_ids) }}
+                                                                </td>
+                                                                <td>  <?php $index = 0; ?>
+                                                                    @if($job->getCountryKey($job->client_ids))
+                                                                        @foreach ($job->getCountryKey($job->client_ids) as $value)
+                                                                            {{ $job->getCountryName($value)}} {{ ($loop->last) ? '':', ' }}
+                                                                        @endforeach
+                                                                    @endif
+                                                                </td>
+                                                                <td>{{ $job->getClientName($job->client_ids) }}
+                                                                    {{ ($job->extra_company !== null) ? ', '.$job->extra_company:"" }}
+                                                                </td>
+
+                                                                <td>{{@$job->salary ?? 'N/A'}}</td>
                                                                 <td>{{@\Carbon\Carbon::parse($job->start_date)->isoFormat('MMMM Do, YYYY')}} - {{@\Carbon\Carbon::parse($job->end_date)->isoFormat('MMMM Do, YYYY')}}</td>
                                                                 <td class="text-right">
                                                                     <div class="dropdown action-label drop-active">
                                                                         <a href="javascript:void(0)" class="btn btn-white btn-sm" data-toggle="dropdown" aria-expanded="false"> <span class="lnr lnr-cog"></span>
                                                                         </a>
                                                                         <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 31px, 0px);">
+                                                                            <a class="dropdown-item" href="{{route('job.single',$job->slug)}}" target="_blank"> Frontend view </a>
                                                                             <a class="dropdown-item action-job-edit" href="#" hrm-update-action="{{route('job.update',$job->id)}}" hrm-edit-action="{{route('job.edit',$job->id)}}"> Edit </a>
                                                                             @if(@$job->formlink)
                                                                                 <a class="dropdown-item" href="{{@$job->formlink}}" target="_blank" > View Form Submission </a>
@@ -360,7 +361,7 @@
 
                             <div class="card-body">
                                 <div class="form-group mb-3">
-                                    <label>Service Category <span class="text-muted text-danger">*</span></label>
+                                    <label>Service Category </label>
                                     <select class="form-control" name="service_category_id" required>
                                         <option value disabled selected>Select service Category</option>
                                         @if(!empty(@$service_categories))
@@ -375,40 +376,11 @@
                                 </div>
                                 <div class="form-group mb-3">
                                     <label>Category Name <span class="text-muted text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="name" onclick="slugMaker('name','slug')" id="name" required>
+                                    <input type="text" class="form-control" name="name" onkeyup="slugMaker('name','slug')" id="name" required>
                                     <div class="invalid-feedback">
                                         Please enter the category name.
                                     </div>
                                 </div>
-                                <div class="form-group mb-3">
-                                    <label>Slug <span class="text-muted text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="slug" id="slug" required>
-                                    <div class="invalid-feedback">
-                                        Please enter the category Slug.
-                                    </div>
-                                </div>
-
-                                <div class="card ctm-border-radius shadow-sm flex-fill">
-                                    <div class="row justify-content-center">
-                                        <div class="col-9 mb-4">
-                                            <div class="custom-file h-auto">
-                                                <div class="avatar-upload">
-                                                    <div class="avatar-edit">
-                                                        <input type="file"  accept="image/png, image/jpeg" class="custom-file-input" hidden id="imageUpload" onchange="loadbasicFile('imageUpload','current-img',event)"  name="image" required>
-                                                        <label for="imageUpload"></label>
-                                                        <div class="invalid-feedback" style="position: absolute; width: 45px;">
-                                                            Please select a image.
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <img id="current-img" src="{{asset('/images/uploads/default-placeholder.png')}}" alt="job_image" class="w-100 current-img">
-                                            </div>
-                                            <span class="ctm-text-sm">*use image minimum of 770 x 350px for Category</span>
-                                        </div>
-
-                                    </div>
-                                </div>
-
                                 <div class="text-center mt-3">
                                     <button type="submit" class="btn btn-theme text-white ctm-border-radius button-1">Add Category Information</button>
                                 </div>
@@ -433,7 +405,6 @@
                                         <table id="job-category-index" class="table custom-table">
                                             <thead>
                                             <tr>
-                                                <th>Image</th>
                                                 <th>Service Category</th>
                                                 <th>Name</th>
                                                 <th>Slug</th>
@@ -444,14 +415,6 @@
                                             @if(!empty($categories))
                                                 @foreach($categories as  $categoryList)
                                                     <tr>
-
-                                                        <td class="align-middle pt-6 pb-4 px-6">
-                                                            <div class="avatar-upload">
-                                                                <div class="blog-preview">
-                                                                    <img id="blog-img" src="{{asset('/images/uploads/job_categories/'.@$categoryList->image)}}" alt="{{@$categoryList->slug}}"/>
-                                                                </div>
-                                                            </div>
-                                                        </td>
                                                         <td>{{ ucwords(@\App\Models\ServiceCategory::find($categoryList->service_category_id)->name) }}</td>
                                                         <td>{{ ucwords(@$categoryList->name) }}</td>
                                                         <td>{{ @$categoryList->slug }}</td>
@@ -502,8 +465,8 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title mb-3">Edit Job Category</h4>
                     <div class="form-group mb-3">
-                        <label>Service Category <span class="text-muted text-danger">*</span></label>
-                        <select class="form-control" name="service_category_id" id="service_category_id" required>
+                        <label>Service Category</label>
+                        <select class="form-control" name="service_category_id" id="service_category_id">
                             <option value disabled selected>Select service Category</option>
                             @if(!empty(@$service_categories))
                                 @foreach(@$service_categories as $serviceList)
@@ -516,38 +479,10 @@
                         </div>
                     </div>
                     <div class="form-group mb-3">
-                        <label>Category Name <span class="text-muted text-danger">*</span></label>
-                        <input type="text" class="form-control" name="name" id="cat_name" onclick="slugMaker('cat_name','cat_slug')" required>
+                        <label>Category Name </label>
+                        <input type="text" class="form-control" name="name" id="cat_name" required>
                         <div class="invalid-feedback">
                             Please enter the category name.
-                        </div>
-                    </div>
-                    <div class="form-group mb-3">
-                        <label>Slug <span class="text-muted text-danger">*</span></label>
-                        <input type="text" class="form-control" name="slug" id="cat_slug" required>
-                        <div class="invalid-feedback">
-                            Please enter the category Slug.
-                        </div>
-                    </div>
-
-                    <div class="card ctm-border-radius shadow-sm flex-fill">
-                        <div class="row justify-content-center">
-                            <div class="col-9 mb-4">
-                                <div class="custom-file h-auto">
-                                    <div class="avatar-upload">
-                                        <div class="avatar-edit">
-                                            <input type="file"  accept="image/png, image/jpeg" class="custom-file-input" hidden id="imageUploadcat" onchange="loadbasicFile('imageUploadcat','current-cat-img',event)" name="image">
-                                            <label for="imageUploadcat"></label>
-                                            <div class="invalid-feedback" style="position: absolute; width: 45px;">
-                                                Please select a image.
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <img id="current-cat-img" src="{{asset('/images/uploads/default-placeholder.png')}}" alt="job_image" class="w-100 current-img">
-                                </div>
-                                <span class="ctm-text-sm">*use image minimum of 770 x 350px for Category</span>
-                            </div>
-
                         </div>
                     </div>
 
@@ -577,9 +512,8 @@
                     <h4 class="modal-title mb-3">Edit Job </h4>
 
                     <div class="form-group mb-3">
-                        <label>Job Category <span class="text-muted text-danger">*</span></label>
-                        <select class="form-control select select2" name="job_category_id" id="job_category_id" required>
-                            <option disabled>Select Job Category</option>
+                        <label>Job Category </label>
+                        <select class="form-control custom-select2 select2" name="job_category_id[]" id="job_category_id" multiple="multiple">
                             @if(!empty(@$categories))
                                 @foreach(@$categories as $categoryList)
                                     <option value="{{ @$categoryList->id }}" >{{ ucwords(@$categoryList->name) }}</option>
@@ -593,84 +527,16 @@
 
                     <div class="form-group mb-3">
                         <label>Job Name <span class="text-muted text-danger">*</span></label>
-                        <input type="text" class="form-control" name="name" id="job_update_name" onclick="slugMaker('job_update_name','job_update_slug')" required>
+                        <input type="text" class="form-control" name="name" id="job_update_name" required>
                         <div class="invalid-feedback">
                             Please enter the job name.
                         </div>
                     </div>
                     <div class="form-group mb-3">
-                        <label>Slug <span class="text-muted text-danger">*</span></label>
-                        <input type="text" class="form-control" name="slug" id="job_update_slug" required>
+                        <label>Job Display Title </label>
+                        <input type="text" class="form-control" name="title" id="job_update_title">
                         <div class="invalid-feedback">
-                            Please enter the job Slug.
-                        </div>
-                        @if($errors->has('slug'))
-                            <div class="invalid-feedback">
-                                {{$errors->first('slug')}}
-                            </div>
-                        @endif
-                    </div>
-
-                    <div class="form-group mb-3">
-                        <label>LT Number </label>
-                        <input type="text" class="form-control" name="lt_number" id="lt_number">
-                        <div class="invalid-feedback">
-                            Please enter the LT Number.
-                        </div>
-                    </div>
-
-                    <div class="form-group mb-3">
-                        <label>Select Company Name <span class="text-muted text-danger">*</span></label>
-                        <select class="form-control" name="client_id" id="client_id" required>
-                            <option value disabled selected>Select company name</option>
-                            @if(!empty(@$clients))
-                                @foreach(@$clients as $clientList)
-                                    <option value="{{ @$clientList->id }}" >{{ ucwords(@$clientList->name) }}</option>
-                                @endforeach
-                            @endif
-                        </select>
-                        <div class="invalid-feedback">
-                            Please select company name.
-                        </div>
-                    </div>
-
-                    <div class="form-group mb-3">
-                        <label>Required Number of Jobs <span class="text-muted text-danger">*</span></label>
-                        <input type="text" class="form-control" id="required_number" name="required_number" required>
-                        <div class="invalid-feedback">
-                            Please enter the required number of jobs.
-                        </div>
-                    </div>
-
-                    <div class="form-group mb-3">
-                        <label>Salary <span class="text-muted text-danger">*</span></label>
-                        <input type="text" class="form-control" id="salary" name="salary" required>
-                        <div class="invalid-feedback">
-                            Please enter the salary.
-                        </div>
-                    </div>
-                    <div class="form-group mb-3">
-                        <label>Min Qualification <span class="text-muted text-danger">*</span></label>
-                        <select class="form-control shadow-none" name="min_qualification" id="min_qualification" required>
-                            <option value disabled> Select Min Qualification</option>
-                            <option value="none">None</option>
-                            <option value="primary education">Primary Education </option>
-                            <option value="secondary education">Secondary Education</option>
-                            <option value="SEE pass">SEE Pass</option>
-                            <option value="intermediate pass">Intermediate Pass</option>
-                            <option value="bachelor pass">Bachelor Pass</option>
-                            <option value="post graduate pass">Post Graduate Pass</option>
-                        </select>
-                        <div class="invalid-feedback">
-                            Please enter the Min Qualification.
-                        </div>
-                    </div>
-
-                    <div class="form-group mb-3">
-                        <label>Description <span class="text-muted text-danger">*</span></label>
-                        <textarea class="form-control" rows="6" name="description" id="description_edit" required></textarea>
-                        <div class="invalid-feedback">
-                            Please enter the description.
+                            Please enter the job display title.
                         </div>
                     </div>
 
@@ -687,6 +553,73 @@
                         <input type="text" class="form-control datetimepicker" name="end_date" id="end_date_edit" required>
                         <div class="invalid-feedback">
                             Please Select the end date.
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label>LT Number </label>
+                        <input type="text" class="form-control" name="lt_number" id="lt_number">
+                        <div class="invalid-feedback">
+                            Please enter the LT Number.
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label>Select Company Name </label>
+                        <select class="form-control custom-select2 select2" name="client_ids[]" id="client_id" multiple>
+                            @if(!empty(@$clients))
+                                @foreach(@$clients as $clientList)
+                                    <option value="{{ @$clientList->id }}" >{{ ucwords(@$clientList->name) }}</option>
+                                @endforeach
+                            @endif
+                        </select>
+                        <div class="invalid-feedback">
+                            Please select company name.
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label>Additional Company Name </label>
+                        <input type="text" class="form-control" name="extra_company" id="extra_company">
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label>Required Number of Jobs </label>
+                        <input type="text" class="form-control" id="required_number" name="required_number">
+                        <div class="invalid-feedback">
+                            Please enter the required number of jobs.
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label>Salary </label>
+                        <input type="text" class="form-control" id="salary" name="salary">
+                        <div class="invalid-feedback">
+                            Please enter the salary.
+                        </div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label>Min Qualification </label>
+                        <select class="form-control shadow-none" name="min_qualification" id="min_qualification">
+                            <option value disabled> Select Min Qualification</option>
+                            <option value="none">None</option>
+                            <option value="primary education">Primary Education </option>
+                            <option value="secondary education">Secondary Education</option>
+                            <option value="SEE pass">SEE Pass</option>
+                            <option value="intermediate pass">Intermediate Pass</option>
+                            <option value="bachelor pass">Bachelor Pass</option>
+                            <option value="post graduate pass">Post Graduate Pass</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Please enter the Min Qualification.
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label>Description </label>
+                        <textarea class="form-control" rows="6" name="description" id="description_edit" ></textarea>
+                        <div class="invalid-feedback">
+                            Please enter the description.
                         </div>
                     </div>
 
@@ -714,7 +647,6 @@
                                     </div>
                                     <img id="current-update-job-img" src="{{asset('/images/uploads/default-placeholder.png')}}" alt="job_image" class="w-100 current-img">
                                 </div>
-                                <span class="ctm-text-sm">*use image minimum of 770 x 350px for Job</span>
                             </div>
 
                         </div>
@@ -738,22 +670,11 @@
     <script src="{{asset('assets/backend/plugins/ckeditor/ckeditor.js')}}"></script>
     <script type="text/javascript">
 
-    @if($errors->has('slug'))
-        toastr.options =
-        {
-            "closeButton" : true,
-            "progressBar" : true
-        }
-            toastr.error("{{ $errors->first('slug') }}");
-    @endif
-
         var loadbasicFile = function(id1,id2,event) {
             var image       = document.getElementById(id1);
             var replacement = document.getElementById(id2);
             replacement.src = URL.createObjectURL(event.target.files[0]);
         };
-
-
 
         function createEditor ( elementId ) {
             return ClassicEditor
@@ -767,6 +688,21 @@
                             'insertTable', 'blockQuote', '|',
                             'undo', 'redo'
                         ],
+                    },
+                    link: {
+                        // Automatically add target="_blank" and rel="noopener noreferrer" to all external links.
+                        addTargetToExternalLinks: true,
+
+                        // Let the users control the "download" attribute of each link.
+                        decorators: [
+                            {
+                                mode: 'manual',
+                                label: 'Downloadable',
+                                attributes: {
+                                    download: 'download'
+                                }
+                            }
+                        ]
                     },
                 } )
                 .then( editor => {
@@ -789,8 +725,10 @@
                 lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
             });
 
-
-
+            $('.custom-select2').select2({
+                placeholder: "Select here",
+                minimumResultsForSearch:-1,width:'100%'}
+            )
             createEditor('description_editor');
             createEditor('description_edit');
 
@@ -823,10 +761,8 @@
                     console.log(dataResult)
                     // $('#id').val(data.id);
                     $("#edit_job_category").modal("toggle");
-                    $('#current-cat-img').attr("src",'/images/uploads/job_categories/'+dataResult.edit.image);
                     $('#cat_name').attr('value',dataResult.edit.name);
                     $('#service_category_id option[value="'+dataResult.edit.service_category_id+'"]').prop('selected', true);
-                    $('#cat_slug').attr('value',dataResult.edit.slug);
                     $('.updatejobcategory').attr('action',action);
                 },
                 error: function(error){
@@ -902,25 +838,39 @@
                 success: function(dataResult){
                     // $('#id').val(data.id);
                     $("#edit_job").modal("toggle");
+                    console.log(dataResult);
+                    editor.setData('');
                     if(dataResult.edit.image != null){
                         $('#current-update-job-img').attr("src",'/images/uploads/jobs/'+dataResult.edit.image);
                     }
 
-                    $('#job_category_id option[value="'+dataResult.edit.job_category_id+'"]').prop('selected', true);
-                    $('#select2-job_category_id-container').text(dataResult.cat_name);
-                    $('#client_id option[value="'+dataResult.edit.client_id+'"]').prop('selected', true);
+                    if(dataResult.edit.category_ids !== null){
+                        let category_id = dataResult.edit.category_ids;
+                        const split_string = category_id.split(",");
+                        $("#job_category_id").val(split_string).trigger('change');
+                    }
+
+                    if(dataResult.edit.client_ids !== null){
+                        let client_id = dataResult.edit.client_ids;
+                        const split_string = client_id.split(",");
+                        $("#client_id").val(split_string).trigger('change');
+                    }
+
                     $('#min_qualification option[value="'+dataResult.edit.min_qualification+'"]').prop('selected', true);
                     $('#lt_number').attr('value',dataResult.edit.lt_number);
                     $('#job_update_name').attr('value',dataResult.edit.name);
-                    $('#job_update_slug').attr('value',dataResult.edit.slug);
+                    $('#job_update_title').attr('value',dataResult.edit.title);
                     $('#required_number').attr('value',dataResult.edit.required_number);
+                    $('#extra_company').attr('value',dataResult.edit.extra_company);
                     $('#salary').attr('value',dataResult.edit.salary);
                     $('#start_date_edit').attr('value',dataResult.start);
                     $('#end_date_edit').attr('value',dataResult.end);
                     if(dataResult.edit.formlink !== null){
                         $('#formlink_edit').attr('value',dataResult.edit.formlink);
                     }
-                    editor.setData( dataResult.edit.description );
+                    if(dataResult.edit.description !== null){
+                        editor.setData( dataResult.edit.description );
+                    }
                     $('.updatejob').attr('action',action);
 
                 },

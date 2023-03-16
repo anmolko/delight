@@ -86,9 +86,10 @@ class FrontController extends Controller
         $awards =$this->award->orderBy('name', 'asc')->get();
         $welcome_settings = $this->setting->first();
         $today = date('Y-m-d');
-        $alljobs = $this->job->orderBy('created_at', 'asc')->where('start_date','<=',$today)->where('end_date','>=',$today)->take(6)->get();
+        $alljobs = $this->job->orderBy('created_at', 'asc')->where('start_date','<=',$today)->take(3)->get();
+        $today = date('Y-m-d');
 
-        return view('welcome',compact('alljobs','welcome_settings','awards','sliders','service_categories','latestPosts','testimonials','countries','client_groups','clients'));
+        return view('welcome',compact('alljobs','today','welcome_settings','awards','sliders','service_categories','latestPosts','testimonials','countries','client_groups','clients'));
 
     }
 
@@ -96,7 +97,7 @@ class FrontController extends Controller
     public function loadPdf()
     {
         $theme_data = Setting::first();
-        return view('frontend.brocher.brocher',compact('theme_data')); 
+        return view('frontend.brocher.brocher',compact('theme_data'));
     }
 
     public function team(){
@@ -168,10 +169,10 @@ class FrontController extends Controller
     }
     public function jobs(){
         $today = date('Y-m-d');
-        $alljobs = $this->job->orderBy('created_at', 'asc')->where('start_date','<=',$today)->where('end_date','>=',$today)->paginate(6);
-        $latestJobs = $this->job->orderBy('created_at', 'DESC')->where('start_date','<=',$today)->where('end_date','>=',$today)->take(3)->get();
+        $alljobs = $this->job->orderBy('created_at', 'asc')->where('start_date','<=',$today)->paginate(6);
+        $latestJobs = $this->job->orderBy('created_at', 'DESC')->where('start_date','<=',$today)->take(3)->get();
 
-        return view('frontend.pages.jobs.index',compact('alljobs','latestJobs'));
+        return view('frontend.pages.jobs.index',compact('today','alljobs','latestJobs'));
     }
 
 
@@ -185,22 +186,22 @@ class FrontController extends Controller
         $today = date('Y-m-d');
         $service_categories = $this->S_category->orderBy('name', 'asc')->take(3)->get();
         $countries  = CountryState::getCountries();
-        $latestJobs = $this->job->orderBy('created_at', 'DESC')->where('start_date','<=',$today)->where('end_date','>=',$today)->take(3)->get();
+        $latestJobs = $this->job->orderBy('created_at', 'DESC')->where('start_date','<=',$today)->take(3)->get();
 
-        return view('frontend.pages.jobs.single',compact('countries','singleJob','latestJobs'));
+        return view('frontend.pages.jobs.single',compact('today','countries','singleJob','latestJobs'));
     }
 
     public function searchJob(Request $request)
     {
         $today = date('Y-m-d');
         $title = $request->s;
-        $alljobs = $this->job->with('category')
+        $alljobs = $this->job
                 ->where('name', 'LIKE', '%' . $title . '%')->orderBy('name', 'asc')
-                ->where('start_date','<=',$today)->where('end_date','>=',$today)
+                ->where('start_date','<=',$today)
                 ->paginate(6);
-        $latestJobs = $this->job->orderBy('created_at', 'DESC')->where('start_date','<=',$today)->where('end_date','>=',$today)->take(3)->get();
+        $latestJobs = $this->job->orderBy('created_at', 'DESC')->where('start_date','<=',$today)->take(3)->get();
 
-        return view('frontend.pages.jobs.search',compact('alljobs','title','latestJobs'));
+        return view('frontend.pages.jobs.search',compact('today','alljobs','title','latestJobs'));
     }
 
 

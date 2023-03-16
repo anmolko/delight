@@ -2,7 +2,7 @@
 @section('title') Jobs  @endsection
 @section('styles')
     <style>
- 
+
     </style>
 @endsection
 @section('content')
@@ -33,20 +33,31 @@
                                 <div class="inner-box">
                                     <div class="image-box">
                                         <figure class="image">
-                                            <a href="{{route('job.single',@$job->slug)}}"><img src="<?php if(@$job->image){?>{{asset('/images/uploads/jobs/'.@$job->image)}}<?php }?>" alt="{{@$job->slug}}"></a>
+                                            <a href="{{route('job.single',@$job->slug)}}">
+                                                <img src="{{ ($job->image !== null) ? asset('/images/uploads/jobs/'.@$job->image): asset('assets/frontend/images/delight.png')}}"></a>
                                         </figure>
                                     </div>
                                     <div class="lower-content">
-                                        <div class="post-date"><span class="far fa-calendar"></span> {{date('M j, Y',strtotime(@$job->start_date))}} - {{date('M j, Y',strtotime(@$job->end_date))}}</div>
+                                        <div class="post-date"><span class="far fa-calendar"></span>
+
+                                            @if(@$job->start_date <= $today && @$job->end_date >= $today)
+                                                {{date('M j, Y',strtotime(@$job->start_date))}} - {{date('M j, Y',strtotime(@$job->end_date))}}
+                                            @else
+                                                Expired
+                                            @endif
+
+                                        </div>
                                         <ul class="post-info">
-                                            <li><a href="#">{{ucwords(@$job->category->name)}}</a></li>
+                                            <li><a
+                                                    href="{{route('job.single',@$job->slug)}}">{{ucwords(@$job->getJobCategories($job->category_ids))}}</a>
+                                            </li>
                                         </ul>
                                         <h4><a href="{{route('job.single',@$job->slug)}}">{{ucwords($job->name)}}</a></h4>
-                                        <?php if(@$job->formlink){?>    
+                                        @if($job->formlink)
                                             <div class="btn-box"><a href="{{@$job->formlink}}" class="read-more">Apply Now <span class="fa fa-arrow-right"></span></a></div>
-                                        <?php }else{?>
+                                        @else
                                             <div class="btn-box"><a href="{{route('job.single',@$job->slug)}}" class="read-more">Read More<span class="fa fa-arrow-right"></span></a></div>
-                                        <?php } ?>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -61,19 +72,19 @@
                                 </div>
                             </section>
                         @endif
-                                                    
-                        
+
+
                     </div>
                     <div class="styled-pagination text-center">
-                        
+
                         {{ $alljobs->links('vendor.pagination.default') }}
                     </div>
                 </div>
                 <!--Sidebar Side-->
                 <div class="sidebar-side col-lg-4 ">
-                    @include('frontend.pages.jobs.index_sidebar')            
-            
-                    
+                    @include('frontend.pages.jobs.index_sidebar')
+
+
                 </div>
 
             </div>

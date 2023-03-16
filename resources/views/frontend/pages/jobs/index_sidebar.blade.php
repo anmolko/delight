@@ -20,14 +20,24 @@
                     @foreach($latestJobs as $index => $latest)
                         <article class="post">
                             <div class="post-thumb">
-                                <a href="{{route('job.single',@$latest->slug)}}"><img src="<?php if(@$latest->image){?>{{asset('/images/uploads/jobs/thumb/thumb_'.@$latest->image)}}<?php }?>" alt="{{@$latest->slug}}"></a>
+                                <a href="{{route('job.single',@$latest->slug)}}">
+                                    <img src="{{ ($latest->image !== null) ? asset('/images/uploads/jobs/'.@$latest->image): asset('assets/frontend/images/delight.png')   }}"
+                                         alt="{{@$latest->slug}}"></a>
                             </div>
-                            <h3><a href="{{route('job.single',@$latest->slug)}}">{{ucwords(@$latest->name)}}</a></h3>
-                            <div class="post-info">{{date('M j, Y',strtotime(@$latest->start_date))}} - {{date('M j, Y',strtotime(@$latest->end_date))}}</div>
+                            <h3><a href="{{route('job.single',@$latest->slug)}}">
+                                    {{ucwords(@$latest->name)}}
+                                </a></h3>
+                            <div class="post-info">
+                                @if(@$latest->start_date <= $today && @$latest->end_date >= $today)
+                                    {{date('M j, Y',strtotime(@$latest->start_date))}} - {{date('M j, Y',strtotime(@$latest->end_date))}}
+                                @else
+                                    Expired
+                                @endif
+                            </div>
                         </article>
                     @endforeach
                 @endif
-            
+
             </div>
         </div>
     @endif

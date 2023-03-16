@@ -120,7 +120,7 @@
         <div class="auto-container">
             <div class="row clearfix">
                 <!-- Content Column -->
-                
+
                 <div class="image-column col-lg-6 col-md-12 col-sm-12">
                     <div class="inner-column">
                         <div class="video-box wow fadeIn">
@@ -136,7 +136,7 @@
                         <div class="text-box">
                             <p>{!! nl2br(@$welcome_settings->intro_description) !!}</p>
                         </div>
-                       
+
                     </div>
                 </div>
 
@@ -171,7 +171,7 @@
                 </div>
 
             </div>
-           
+
         </div>
     </section>
     <!--End Awards Section -->
@@ -271,7 +271,69 @@
     </section>
     <!--End Call To Action -->
 
-    
+    @if(count(@$alljobs) > 0)
+    <!-- News Section -->
+    <section class="news-section" style="padding: 70px 0 90px;">
+        <div class="auto-container">
+            <div class="row">
+
+                <div class="col-lg-8 col-md-12">
+                    <div class="sec-title">
+                        <h2>Our Latest Job</h2>
+                        <div class="text">View or different job list</div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-12">
+                    <div class="right-btn text-right">
+                        <a href="{{route('job.list')}}" class="theme-btn btn-style-two"><span class="btn-title">All Jobs</span></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- News Block -->
+                @foreach($alljobs as $job)
+
+                    <div class="news-block col-lg-4 col-md-6 col-sm-12">
+                        <div class="inner-box">
+                            <div class="image-box">
+                                <figure class="image">
+                                    <a href="{{route('job.single',@$job->slug)}}">
+                                        <img src="{{ ($job->image !== null) ? asset('/images/uploads/jobs/'.@$job->image): asset('assets/frontend/images/delight.png')}}"></a>
+                                </figure>
+                            </div>
+                            <div class="lower-content">
+                                <div class="post-date"><span class="far fa-calendar"></span>
+
+                                    @if(@$job->start_date <= $today && @$job->end_date >= $today)
+                                        {{date('M j, Y',strtotime(@$job->start_date))}} - {{date('M j, Y',strtotime(@$job->end_date))}}
+                                    @else
+                                        Expired
+                                    @endif
+
+                                </div>
+                                <ul class="post-info">
+                                    <li><a
+                                            href="{{route('job.single',@$job->slug)}}">{{ucwords(@$job->getJobCategories($job->category_ids))}}</a>
+                                    </li>
+                                </ul>
+                                <h4><a href="{{route('job.single',@$job->slug)}}">{{ucwords($job->name)}}</a></h4>
+                                @if($job->formlink)
+                                    <div class="btn-box"><a href="{{@$job->formlink}}" class="read-more">Apply Now <span class="fa fa-arrow-right"></span></a></div>
+                                @else
+                                    <div class="btn-box"><a href="{{route('job.single',@$job->slug)}}" class="read-more">Read More<span class="fa fa-arrow-right"></span></a></div>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+
+
+            </div>
+        </div>
+    </section>
+    <!--End News Section Two -->
+    @endif
 
     @if(count(@$testimonials) > 0)
     <!-- Testimonial Section -->
@@ -301,14 +363,16 @@
                         </div>
                     </div>
                 @endforeach
-              
+
             </div>
         </div>
     </section>
     <!--End Testimonial Section -->
     @endif
 
-    @if(count(@$clients) > 3)
+
+
+    @if(count(@$clients) > 0)
     <!--Clients Section-->
     <section class="clients-section">
         <div class="auto-container">
@@ -317,14 +381,14 @@
                 @foreach(@$clients as $client)
                     <li class="slide-item"><figure class="image-box"><a href="{{@$client->link}}" title="{{ucwords(@$client->name)}}"><img src="{{ asset('/images/uploads/clients/'.$client->image) }}" alt="{{ucwords(@$client->name)}}"></a></figure></li>
                 @endforeach
-               
+
             </ul>
         </div>
     </section>
     <!--End Clients Section-->
     @endif
 
-    @if(count(@$latestPosts) > 2)
+    @if(count(@$latestPosts) > 0)
 
     <!-- News Section -->
     <section class="news-section">
@@ -365,7 +429,7 @@
                     </div>
                 @endforeach
 
-              
+
             </div>
         </div>
     </section>

@@ -18,7 +18,7 @@
 @endsection
 @section('styles')
 <style>
-       
+
         .row.features-job {
             margin-bottom: 0 !important;
         }
@@ -40,7 +40,7 @@
         .portfolio-meta-title-wrap {
             color: #252525;
         }
-       
+
         .portfolio-meta-title-wrap h6 {
             font-size: 15px;
             font-weight: 600;
@@ -66,7 +66,7 @@
 </style>
 @endsection
 @section('content')
- 
+
     <!-- Page Title -->
     <section class="page-title" style="background-image: url('{{asset('assets/frontend/images/background/7.jpg')}}');">
         <div class="auto-container">
@@ -78,9 +78,9 @@
                     <ul class="bread-crumb clearfix">
                         <li><a href="/">Home</a></li>
                         <li><a href="{{url('/jobs')}}">Jobs</a></li>
-                        <li>{{ucwords(@$singleJob->name)}} ({{date('M j, Y',strtotime(@$singleJob->start_date))}} - {{date('M j, Y',strtotime(@$singleJob->end_date))}})</li>
+                        <li>Job Detail </li>
                     </ul>
-                </div>                    
+                </div>
             </div>
         </div>
     </section>
@@ -96,15 +96,19 @@
                         <div class="news-block-two">
                             <div class="inner-box">
                                 <div class="image-box">
-                                    <figure class="image"><img src="{{ asset('/images/uploads/jobs/'.@$singleJob->image) }}" alt="{{@$singleJob->slug}}"></figure>
+                                    <figure class="image"><img
+                                            src="{{ ($singleJob->image !== null) ? asset('/images/uploads/jobs/'.@$singleJob->image): asset('assets/frontend/images/delight.png')}}"
+                                            alt="{{@$singleJob->slug}}"></figure>
                                 </div>
                                 <div class="post-share-options clearfix">
-                                    <div class="pull-left">
-                                        <p>Category : </p>
-                                        <ul class="tags">
-                                            <li><a href="#">{{ucwords($singleJob->category->name)}}</a></li>
-                                        </ul>                               
-                                    </div>
+                                    @if(@$singleJob->getJobCategories(@$singleJob->category_ids))
+                                        <div class="pull-left">
+                                            <p>Category : </p>
+                                            <ul class="tags">
+                                                <li><a>{{ucwords(@$singleJob->getJobCategories(@$singleJob->category_ids))}}</a></li>
+                                            </ul>
+                                        </div>
+                                    @endif
                                     <div class="pull-right">
                                         <p>Share : </p>
                                         <ul class="social-icon">
@@ -122,46 +126,57 @@
                                                 <ul class="portfolio-meta-list">
                                                     <li>
                                                         <div class="portfolio-meta-title-wrap">
-                                                            <h6><span class="portfolio-meta-icon"><i class="fa fa-building"></i></span>Company</h6>
-                                                        </div> <span class="entry-date">{{ucwords(@$singleJob->client->name)}}</span>
-                                                        </li>
+                                                            <h2>{{$singleJob->title}}</h2>
+                                                        </div>
+                                                    </li>
                                                     <li>
-                                                
+                                                    @if(@$singleJob->getClientName($singleJob->client_ids) !== 'N/A' || $singleJob->extra_company !== null)
+                                                        <li>
+                                                            <div class="portfolio-meta-title-wrap">
+                                                                <h6><span class="portfolio-meta-icon"><i class="fa fa-building"></i></span>Company</h6>
+                                                            </div> <span class="entry-date">{{ @$singleJob->getClientName($singleJob->client_ids) }}  {{ ($singleJob->extra_company !== null) ? ', '.$singleJob->extra_company:"" }}</span>
+                                                            </li>
+                                                        <li>
+                                                    @endif
+                                                    @if(@$singleJob->salary !== null)
                                                         <div class="portfolio-meta-title-wrap">
                                                             <h6><span class="portfolio-meta-icon"><i class="fas fa-hand-holding-usd"></i></span>Salary</h6>
-                                                        </div> <span class="entry-estimation">{{@$singleJob->salary}}</span>
+                                                        </div> <span class="entry-estimation">{{@$singleJob->salary ?? ''}}</span>
+                                                    @endif
                                                     </li>
-                                                
+
                                                 </ul>
                                             </div>
                                             <div class="col-lg-6 col-md-12 col-sm-12 ">
                                                 <ul class="portfolio-meta-list">
-                                                    
+                                                    @if($singleJob->getCountryKey($singleJob->client_ids)[0])
+
                                                     <li>
                                                         <div class="portfolio-meta-title-wrap">
                                                             <h6><span class="portfolio-meta-icon"><i class="fas fa-globe"></i></span>Place</h6>
                                                         </div> <span class="entry-place">
-                                                        <?php
-                                                            if(!empty($singleJob->country)){
-                                                                foreach ($countries as $key=>$value){
-                                                                    if($singleJob->country == $key){
-                                                                        echo $value;
-                                                                    }
-                                                                }
-                                                            }
-                                                        ?>
+                                                        <?php $index = 0; ?>
+                                                            @if($singleJob->getCountryKey($singleJob->client_ids))
+                                                                @foreach ($singleJob->getCountryKey($singleJob->client_ids) as $value)
+                                                                    {{ $singleJob->getCountryName($value)}} {{ ($loop->last) ? '':', ' }}
+                                                                @endforeach
+                                                            @endif
                                                         </span></li>
-                                                    <li>
-                                                        <div class="portfolio-meta-title-wrap">
-                                                            <h6><span class="portfolio-meta-icon"><i class="fas fa-users"></i></span>Required No.</h6>
-                                                        </div> <span class="entry-client">{{ucwords(@$singleJob->required_number)}}</span></li>
-                                                
-                                                    
-                                                    
-                                                
+                                                    @endif
+                                                    @if(@$singleJob->required_number!==null)
+                                                        <li>
+                                                            <div class="portfolio-meta-title-wrap">
+                                                                <h6><span class="portfolio-meta-icon"><i class="fas fa-users"></i></span>Required No.</h6>
+                                                            </div> <span class="entry-client">{{ucwords(@$singleJob->required_number)}}</span>
+                                                        </li>
+                                                    @endif
+
+
+
                                                 </ul>
                                             </div>
                                     </div>
+                                    @if(@$singleJob->min_qualification)
                                     <div class="row qualification">
                                         <div class="col">
                                             <ul class="portfolio-meta-list">
@@ -170,20 +185,19 @@
                                                         <h6><span class="portfolio-meta-icon"><i class="fas fa-graduation-cap"></i></span>Min. Qualification</h6>
                                                     </div> <span class="entry-duration">{{ucwords(@$singleJob->min_qualification)}}</span>
                                                 </li>
-                                                
-                                            
                                             </ul>
                                         </div>
                                     </div>
+                                    @endif
                                 </div>
 
                                 <div class="lower-content">
                                     {!! @$singleJob->description !!}
-                                    <?php if($singleJob->formlink){  ?>  
+                                    @if($singleJob->formlink)
                                         <div class="col-lg-12 col-md-12 col-sm-12 form-group text-center">
                                             <a class="theme-btn btn-style-one" href="{{@$singleJob->formlink}}" ><span class="btn-title">Apply Now</span></a>
                                         </div>
-                                    <?php } ?>
+                                    @endif
                                 </div>
 
                             </div>
@@ -197,7 +211,7 @@
 
                 <!--Sidebar Side-->
                 <div class="sidebar-side col-lg-4 col-md-12 col-sm-12">
-                    @include('frontend.pages.jobs.index_sidebar')            
+                    @include('frontend.pages.jobs.index_sidebar')
 
                 </div>
             </div>
@@ -209,16 +223,22 @@
 
 @section('js')
 <script>
-function fbShare(url) {
-  window.open("https://www.facebook.com/sharer/sharer.php?u=" + url, "_blank", "toolbar=no, scrollbars=yes, resizable=yes, top=200, left=500, width=600, height=400");
-}
-function twitShare(url, title) {
-    window.open("https://twitter.com/intent/tweet?text=" + encodeURIComponent(title) + "+" + url + "", "_blank", "toolbar=no, scrollbars=yes, resizable=yes, top=200, left=500, width=600, height=400");
-}
-function whatsappShare(url, title) {
-    message = title + " " + url;
-    window.open("https://api.whatsapp.com/send?text=" + message);
-}
-
+    function fbShare(url) {
+      window.open("https://www.facebook.com/sharer/sharer.php?u=" + url, "_blank", "toolbar=no, scrollbars=yes, resizable=yes, top=200, left=500, width=600, height=400");
+    }
+    function twitShare(url, title) {
+        window.open("https://twitter.com/intent/tweet?text=" + encodeURIComponent(title) + "+" + url + "", "_blank", "toolbar=no, scrollbars=yes, resizable=yes, top=200, left=500, width=600, height=400");
+    }
+    function whatsappShare(url, title) {
+        message = title + " " + url;
+        window.open("https://api.whatsapp.com/send?text=" + message);
+    }
+    $( document ).ready(function() {
+        let selector = $('.lower-content').find('table').length;
+        if(selector>0){
+            $('.lower-content').find('table').addClass('table table-bordered tbl-shopping-cart');
+        }
+        console.log(selector);
+    });
 </script>
 @endsection

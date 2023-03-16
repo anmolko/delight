@@ -16,9 +16,13 @@ class JobCategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function __construct()
+    protected $category = null;
+
+    public function __construct(JobCategory $category)
     {
         $this->middleware('auth');
+        $this->category = $category;
+
     }
 
     public function index()
@@ -47,7 +51,7 @@ class JobCategoryController extends Controller
     {
         $data=[
             'name'                  => $request->input('name'),
-            'slug'                  => $request->input('slug'),
+            'slug'                  => $this->category->changeToSlug($request->input('name')),
             'service_category_id'   => $request->input('service_category_id'),
             'created_by'             => Auth::user()->id,
         ];
@@ -106,7 +110,7 @@ class JobCategoryController extends Controller
     {
         $category                       = JobCategory::find($id);
         $category->name                 = $request->input('name');
-        $category->slug                 = $request->input('slug');
+        $category->slug                 = $this->category->changeToSlug($request->input('name'));
         $category->service_category_id  = $request->input('service_category_id');
         $category->updated_by           = Auth::user()->id;
         $oldimage                       = $category->image;

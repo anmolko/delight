@@ -23,15 +23,21 @@ class JobController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    protected $job = null;
+    public function __construct(Job $job)
+    {
+        $this->job = $job;
+    }
+
     public function index()
     {
 
-        $categories         = JobCategory::all();
-        $jobs               = Job::with('category')->get();
+        $categories         = JobCategory::orderBy('created_at','desc')->get();
+        $jobs               = Job::orderBy('created_at','desc')->get();
         $countries          = CountryState::getCountries();
-        $clients            = Client::all();
-        $service_categories = ServiceCategory::all();
-//        dd($jobs);
+        $clients            = Client::orderBy('created_at','desc')->get();
+        $service_categories = ServiceCategory::orderBy('created_at','desc')->get();
+
         return view('backend.job.index',compact('categories','jobs','countries','clients','service_categories'));
     }
 
@@ -51,19 +57,22 @@ class JobController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(JobCreateRequest $request)
+    public function store(Request $request)
     {
         $end     = Carbon::createFromFormat('d/m/Y', $request->end_date)->format('Y-m-d');
         $start   = Carbon::createFromFormat('d/m/Y', $request->start_date)->format('Y-m-d');
-        $country = Client::find($request->input('client_id'))->country;
+        $category_id = $request->job_category_id;
+        $client_id = $request->client_ids;
+
         $data=[
             'lt_number'            => $request->input('lt_number'),
-            'country'              => $country,
-            'job_category_id'      => $request->input('job_category_id'),
+            'category_ids'         => ($category_id !== null) ? implode(',', $category_id):null,
             'name'                 => $request->input('name'),
-            'slug'                 => $request->input('slug'),
-            'client_id'            => $request->input('client_id'),
+            'title'                => $request->input('title'),
+            'slug'                 => $this->job->changeToSlug($request->input('name')),
+            'client_ids'           => ($client_id !== null) ? implode(',', $client_id):null,
             'required_number'      => $request->input('required_number'),
+            'extra_company'        => $request->input('extra_company'),
             'salary'               => $request->input('salary'),
             'min_qualification'    => $request->input('min_qualification'),
             'description'          => $request->input('description'),
@@ -80,7 +89,7 @@ class JobController extends Controller
             $thumb_name     = 'thumb_'.$name;
             $path           = base_path().'/public/images/uploads/jobs/';
             $thumb_path     = base_path().'/public/images/uploads/jobs/thumb/';
-            $moved          = Image::make($image->getRealPath())->fit(770,350)->orientate()->save($path.$name);
+            $moved          = Image::make($image->getRealPath())->orientate()->save($path.$name);
             $thumb          = Image::make($image->getRealPath())->fit(70,70)->orientate()->save($thumb_path.$thumb_name);
 
             if ($moved && $thumb){
@@ -121,8 +130,8 @@ class JobController extends Controller
         $countries      = CountryState::getCountries();
         $end            = Carbon::createFromFormat('Y-m-d', $edit->end_date)->format('d/m/Y');
         $start          = Carbon::createFromFormat('Y-m-d', $edit->start_date)->format('d/m/Y');
-        $cat_name       = $edit->category->name;
-        return response()->json(["edit"=>$edit,"countries"=>$countries,"start"=>$start,"end"=>$end,"cat_name"=>$cat_name]);
+
+        return response()->json(["edit"=>$edit,"countries"=>$countries,"start"=>$start,"end"=>$end]);
     }
 
     /**
@@ -132,20 +141,21 @@ class JobController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(JobUpdateRequest $request, $id)
+    public function update(Request $request, $id)
     {
 
         $end     = Carbon::createFromFormat('d/m/Y', $request->end_date)->format('Y-m-d');
         $start   = Carbon::createFromFormat('d/m/Y', $request->start_date)->format('Y-m-d');
-        $country = Client::find($request->input('client_id'))->country;
+        $category_id = $request->job_category_id;
+        $client_id = $request->client_ids;
 
         $job                        = Job::find($id);
-        $job->job_category_id       = $request->input('job_category_id');
+        $job->category_ids          = ($category_id !== null) ? implode(',', $category_id):null;
         $job->name                  = $request->input('name');
-        $job->slug                  = $request->input('slug');
+        $job->title                 = $request->input('title');
         $job->lt_number             = $request->input('lt_number');
-        $job->country               = $country;
-        $job->client_id             = $request->input('client_id');
+        $job->client_ids            = ($client_id !== null) ? implode(',', $client_id):null;
+        $job->extra_company         = $request->input('extra_company');
         $job->required_number       = $request->input('required_number');
         $job->salary                = $request->input('salary');
         $job->min_qualification     = $request->input('min_qualification');
@@ -164,7 +174,7 @@ class JobController extends Controller
             $thumb_name     = 'thumb_'.$name;
             $path           = base_path().'/public/images/uploads/jobs/';
             $thumb_path     = base_path().'/public/images/uploads/jobs/thumb/';
-            $moved          = Image::make($image->getRealPath())->fit(770,350)->orientate()->save($path.$name);
+            $moved          = Image::make($image->getRealPath())->orientate()->save($path.$name);
             $thumb          = Image::make($image->getRealPath())->fit(70,70)->orientate()->save($thumb_path.$thumb_name);
 
             if ($moved && $thumb){
@@ -198,8 +208,13 @@ class JobController extends Controller
     {
         $delete       = Job::find($id);
         $rid          = $delete->id;
+        $thumbimage   = 'thumb_'.$delete->image;
+
         if (!empty($delete->image) && file_exists(public_path().'/images/uploads/jobs/'.$delete->image)){
             @unlink(public_path().'/images/uploads/jobs/'.$delete->image);
+        }
+        if (!empty($thumbimage) && file_exists(public_path().'/images/uploads/jobs/thumb/'.$thumbimage)){
+            @unlink(public_path().'/images/uploads/jobs/thumb/'.$thumbimage);
         }
         $delete->delete();
         return '#job_'.$rid;
