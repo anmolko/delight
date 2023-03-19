@@ -3,18 +3,18 @@
 @section('styles')
 <style>
     .slider-carousel .owl-stage-outer {
-        height: 500px;
+        height: 280px;
     }
 
     .auto-container.slider-content {
-        margin-top: -270px;
+        margin-top: 10px;
     }
 
     @media only screen and (max-width: 1024px){
 
-        .auto-container.slider-content {
-            margin-top: -270px;
-        }
+        /*.auto-container.slider-content {*/
+        /*    margin-top: -270px;*/
+        /*}*/
     }
 
     @media only screen and (max-width: 991px){
