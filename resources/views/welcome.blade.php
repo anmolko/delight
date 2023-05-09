@@ -3,7 +3,20 @@
 @section('styles')
 <style>
     .slider-carousel .owl-stage-outer {
-        height: 280px;
+        height: 480px;
+    }
+
+    .banner-section .slide-item .image-layer {
+        height: 95%!important;
+    }
+
+    .banner-section .slide-item .content-box {
+        position: relative;
+        height: 500px;
+        width: 100%;
+        display: table;
+        vertical-align: middle;
+        text-align: center;
     }
 
     .auto-container.slider-content {

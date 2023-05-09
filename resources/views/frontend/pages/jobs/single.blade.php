@@ -238,7 +238,6 @@
         if(selector>0){
             $('.lower-content').find('table').addClass('table table-bordered tbl-shopping-cart');
         }
-        console.log(selector);
     });
 </script>
 @endsection
