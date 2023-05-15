@@ -14,13 +14,13 @@ use Illuminate\Support\Str;
 class SensitiveComposer
 {
     public function compose(View $view){
-      
+
         $topNav           = Menu::where('location',1)->first();
         $footerMenu       = Menu::where('location',2)->first();
         $topNavItems      = json_decode(@$topNav->content);
         $footerMenuItems  = json_decode(@$footerMenu->content);
-        $topNavItems      = @$topNavItems[0]; 
-        $footerMenuItems  = @$footerMenuItems[0]; 
+        $topNavItems      = @$topNavItems[0];
+        $footerMenuItems  = @$footerMenuItems[0];
 
         if(!empty(@$topNavItems)){
           foreach($topNavItems as $menu){
@@ -36,7 +36,16 @@ class SensitiveComposer
                 $child->slug = MenuItem::where('id',$child->id)->value('slug');
                 $child->target = MenuItem::where('id',$child->id)->value('target');
                 $child->type = MenuItem::where('id',$child->id)->value('type');
-              }  
+                  if(!empty($child->children[0])){
+                      foreach ($child->children[0] as $lastchild) {
+                          $lastchild->title = MenuItem::where('id',$lastchild->id)->value('title');
+                          $lastchild->name = MenuItem::where('id',$lastchild->id)->value('name');
+                          $lastchild->slug = MenuItem::where('id',$lastchild->id)->value('slug');
+                          $lastchild->target = MenuItem::where('id',$lastchild->id)->value('target');
+                          $lastchild->type = MenuItem::where('id',$lastchild->id)->value('type');
+                      }
+                  }
+              }
             }
           }
 
@@ -55,7 +64,7 @@ class SensitiveComposer
 
         $latestPostsfooter = Blog::orderBy('created_at', 'DESC')->where('status','publish')->take(2)->get();
         $servicesfooter = ServiceCategory::orderBy(\DB::raw('RAND()'))->take(5)->get();
-        
+
 
         $theme_data = Setting::first();
         $view
@@ -64,7 +73,7 @@ class SensitiveComposer
         ->with('servicesfooter', $servicesfooter)
         ->with('footer_nav_data', $footerMenuItems)
         ->with('top_nav_data', $topNavItems);
-        
+
 
     }
 }

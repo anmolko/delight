@@ -187,9 +187,9 @@
                             $user_name          = \App\Models\User::find($created_by_id)->name;
                             ?>
                             <div class="notice-board">
-                                <div class="table-img">
-                                    <div class="e-avatar mr-3"><img class="img-fluid blog-list-image" src="<?php if(@$latest->image){?>{{asset('/images/uploads/blog/'.@$latest->image)}}<?php }?>" alt="{{@$latest->title}}"></div>
-                                </div>
+{{--                                <div class="table-img">--}}
+{{--                                    <div class="e-avatar mr-3"><img class="img-fluid blog-list-image" src="<?php if(@$latest->image){?>{{asset('/images/uploads/blog/'.@$latest->image)}}<?php }?>" alt="{{@$latest->title}}"></div>--}}
+{{--                                </div>--}}
                                 <div class="notice-body">
                                     <h6 class="mb-0"><a href="{{route('blog.single',@$latest->slug)}}" target="_blank">{{ucwords(@$latest->title)}}</a></h6>
                                     <span class="ctm-text-sm">{{ucwords(@$user_name)}} | {{date('j F, Y',strtotime(@$latest->created_at))}}</span>

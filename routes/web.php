@@ -227,7 +227,7 @@ Route::group(['prefix' => 'auth', 'middleware' => ['auth']], function () {
 
     //End of clients
 
-    //clients
+    //awards
 
     Route::get('/awards', 'App\Http\Controllers\AwardController@index')->name('awards.index');
     Route::get('/awards/create', 'App\Http\Controllers\AwardController@create')->name('awards.create');
@@ -236,7 +236,30 @@ Route::group(['prefix' => 'auth', 'middleware' => ['auth']], function () {
     Route::delete('/awards/{awards}', 'App\Http\Controllers\AwardController@destroy')->name('awards.destroy');
     Route::get('/awards/{awards}/edit', 'App\Http\Controllers\AwardController@edit')->name('awards.edit');
 
-    //End of clients
+    //End of awards
+
+    //Managing director
+
+    Route::get('/managing-director', 'App\Http\Controllers\ManagingDirectorController@index')->name('managing-director.index');
+    Route::get('/managing-director/create', 'App\Http\Controllers\ManagingDirectorController@create')->name('managing-director.create');
+    Route::post('/managing-director', 'App\Http\Controllers\ManagingDirectorController@store')->name('managing-director.store');
+    Route::put('/managing-director/{director}', 'App\Http\Controllers\ManagingDirectorController@update')->name('managing-director.update');
+    Route::delete('/managing-director/{director}', 'App\Http\Controllers\ManagingDirectorController@destroy')->name('managing-director.destroy');
+    Route::get('/managing-director/{director}/edit', 'App\Http\Controllers\ManagingDirectorController@edit')->name('managing-director.edit');
+    Route::post('/director-sortable','App\Http\Controllers\ManagingDirectorController@orderUpdateDirector')->name('director.order');
+
+    //End of managing director
+
+    //core values
+
+    Route::get('/core-values', 'App\Http\Controllers\CoreValuesController@index')->name('core-values.index');
+    Route::get('/core-values/create', 'App\Http\Controllers\CoreValuesController@create')->name('core-values.create');
+    Route::post('/core-values', 'App\Http\Controllers\CoreValuesController@store')->name('core-values.store');
+    Route::put('/core-values/{values}', 'App\Http\Controllers\CoreValuesController@update')->name('core-values.update');
+    Route::delete('/core-values/{values}', 'App\Http\Controllers\CoreValuesController@destroy')->name('core-values.destroy');
+    Route::get('/core-values/{values}/edit', 'App\Http\Controllers\CoreValuesController@edit')->name('core-values.edit');
+
+    //End of core values
 
     //teams
 

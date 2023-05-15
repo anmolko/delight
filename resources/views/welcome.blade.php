@@ -92,6 +92,9 @@
     .award-block .inner-box {
         height: 265px;
     }
+    .director-section:before {
+         background-color: transparent;
+    }
 </style>
 @endsection
 @section('content')
@@ -198,7 +201,7 @@
                 <div class="col-lg-8 col-md-12">
                     <div class="sec-title">
                         <h2>Our Services</h2>
-                        <div class="text">What We Provide For You check now and deside it<br> do you want now this</div>
+                        <div class="text">Our best services are here for your viewing. <br> You can browse through it</div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-12">
@@ -348,41 +351,124 @@
     <!--End News Section Two -->
     @endif
 
-    @if(count(@$testimonials) > 0)
-    <!-- Testimonial Section -->
-    <section class="testimonial-section" style="background-image: url({{asset('assets/frontend/images/background/2.jpg')}});">
-        <div class="auto-container">
-            <div class="sec-title light text-center">
-                <h2>What Clients Says</h2>
-            </div>
-
-            <!-- Testimonial Carousel -->
-            <div class="testimonial-carousel owl-carousel owl-theme">
-                <!-- Testimonial Block -->
-                @foreach(@$testimonials as $testimonial)
-                    <div class="testimonial-block">
-                        <div class="inner-box">
-                            <div class="thumb"><img src="{{ asset('/images/uploads/testimonials/'.$testimonial->image) }}" alt="{{ucwords(@$testimonial->title)}}"></div>
-                            <div class="text">
-                                <div class="inner">
-                                    <p>{{@$testimonial->testimonial}}</p>
+    @if(count($allcores) > 0)
+        <!-- Call To Action -->
+        <section class="call-to-action alternate homepage" style="background-image: url({{asset('assets/frontend/images/icons/pattern-4.png')}});">
+            <div class="auto-container">
+                <div class="sec-title text-center">
+                    <h2>Our core values</h2>
+                </div>
+                <!-- Fact Counter -->
+                <div class="fact-counter">
+                    <div class="row clearfix">
+                        <!--Column-->
+                        @foreach(@$allcores as $core)
+                            <div class="counter-column col-lg-4 col-md-6 col-sm-12 wow fadeInUp mt-4">
+                                <div class="inner-column" style="padding: 25px 25px;">
+                                    <div class="icon">
+                                        <img style="max-width: 70px;"
+                                            class="img-fluid"
+                                            src="{{ @$core->image ? asset('/images/uploads/values/'.@$core->image) :""}}"
+                                        >
+                                    </div>
+                                    <div class="count-box" style="margin-top: 14px;font-size: 26px;">
+                                        {{ucwords(@$core->heading)}}
+                                    </div>
+                                    <h4 class="counter-title">{{ucfirst(@$core->description)}}</h4>
                                 </div>
                             </div>
-                            <div class="info-box">
-                                <span class="icon fa fa-quote-left"></span>
-                                <h5 class="name">{{ucwords(@$testimonial->title)}}</h5>
-                                <span class="city">{{ucwords(@$testimonial->subtitle)}}</span>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
+                        @endforeach
 
+                    </div>
+                </div>
             </div>
-        </div>
-    </section>
-    <!--End Testimonial Section -->
+        </section>
+        <!--End Call To Action -->
+
     @endif
 
+
+    @if(count($directors) > 0)
+        <!-- Testimonial Section -->
+        <section class="testimonial-section director-section">
+            <div class="auto-container">
+                <div class="sec-title text-center">
+                    <h2>Director's Message</h2>
+                </div>
+
+                <!-- Testimonial Carousel -->
+                <div class="testimonial-carousel owl-carousel owl-theme">
+                    <!-- Testimonial Block -->
+                    @foreach(@$directors as $director)
+                        <div class="row clearfix">
+                            <!-- Content Column -->
+
+                            <div class="image-column col-lg-6 col-md-12 col-sm-12">
+                                <div class="inner-column">
+                                    <div class="video-box wow fadeIn">
+                                        <figure class="image"><img src="{{ asset('/images/uploads/director/'.$director->image) }}" alt="about-us"></figure>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="content-column col-lg-6 col-md-12 col-sm-12">
+                                <div class="inner-column">
+                                    <div class="sec-title" style="margin-bottom: 20px;">
+                                        <h2 style="font-size: 40px;">{{ucwords(@$director->heading)}}</h2>
+                                        <div class="text">{{ucwords(@$director->designation)}}</div>
+                                    </div>
+                                    </div>
+                                    <div class="text-box">
+                                        <p>{{@$director->description}}</p>
+                                    </div>
+                                @if(@$director->button)
+                                    <a href="{{@$director->link}}" class="theme-btn mt-2 btn-style-two"><span class="btn-title">
+                                            {{ucwords(@$director->button)}}</span><span></span> <span></span> <span></span> <span></span> <span></span></a>
+                                @endif
+                                </div>
+                            </div>
+                    @endforeach
+
+                </div>
+            </div>
+        </section>
+        <!--End Testimonial Section -->
+    @endif
+
+
+    @if(count(@$testimonials) > 0)
+        <!-- Testimonial Section -->
+        <section class="testimonial-section" style="background-image: url({{asset('assets/frontend/images/background/2.jpg')}});">
+            <div class="auto-container">
+                <div class="sec-title light text-center">
+                    <h2>What Clients Says</h2>
+                </div>
+
+                <!-- Testimonial Carousel -->
+                <div class="testimonial-carousel owl-carousel owl-theme">
+                    <!-- Testimonial Block -->
+                    @foreach(@$testimonials as $testimonial)
+                        <div class="testimonial-block">
+                            <div class="inner-box">
+                                <div class="thumb"><img src="{{ asset('/images/uploads/testimonials/'.$testimonial->image) }}" alt="{{ucwords(@$testimonial->title)}}"></div>
+                                <div class="text">
+                                    <div class="inner">
+                                        <p>{{@$testimonial->testimonial}}</p>
+                                    </div>
+                                </div>
+                                <div class="info-box">
+                                    <span class="icon fa fa-quote-left"></span>
+                                    <h5 class="name">{{ucwords(@$testimonial->title)}}</h5>
+                                    <span class="city">{{ucwords(@$testimonial->subtitle)}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+
+                </div>
+            </div>
+        </section>
+        <!--End Testimonial Section -->
+    @endif
 
 
     @if(count(@$clients) > 0)

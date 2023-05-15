@@ -95,6 +95,12 @@
                                         <a href="{{route('job.index')}}" class="{{(Request::segment(2) == 'jobs') ? "text-white active":"text-dark"}} p-4 ctm-border-right ctm-border-left"><span class="lnr lnr-link pr-0 pb-lg-2 font-23"></span><span class="">Jobs</span></a>
                                     </div>
                                     <div class="col-6 align-items-center shadow-none text-center">
+                                        <a href="{{route('managing-director.index')}}" class="{{(Request::segment(2) == 'managing-director') ? "text-white active":"text-dark"}} p-4 ctm-border-left"><span class="lnr lnr-mustache pr-0 pb-lg-2 font-23"></span><span class="">Director</span></a>
+                                    </div>
+                                    <div class="col-6 align-items-center shadow-none text-center">
+                                        <a href="{{route('core-values.index')}}" class="{{(Request::segment(2) == 'core-values') ? "text-white active":"text-dark"}} p-4 ctm-border-right ctm-border-left"><span class="lnr lnr-thumbs-up pr-0 pb-lg-2 font-23"></span><span class="">Values</span></a>
+                                    </div>
+                                    <div class="col-6 align-items-center shadow-none text-center">
                                         <a href="{{ route('formbuilder::forms.index') }}" class="{{(Request::segment(2) == 'forms') ? "text-white active":"text-dark"}} p-4 ctm-border-right"><span class="lnr lnr-chart-bars pr-0 pb-lg-2 font-23"></span><span class="">Applications</span></a>
                                     </div>
                                     <div class="col-6 align-items-center shadow-none text-center">

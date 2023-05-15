@@ -10,8 +10,10 @@ use App\Models\AlbumGallery;
 use App\Models\Blog;
 use App\Models\BlogCategory;
 use App\Models\Client;
+use App\Models\CoreValue;
 use App\Models\Job;
 use App\Models\JobCategory;
+use App\Models\ManagingDirector;
 use App\Models\Page;
 use App\Models\PageSection;
 use App\Models\PressRelease;
@@ -88,8 +90,10 @@ class FrontController extends Controller
         $today = date('Y-m-d');
         $alljobs = $this->job->orderBy('created_at', 'asc')->where('start_date','<=',$today)->take(3)->get();
         $today = date('Y-m-d');
+        $directors = ManagingDirector::orderBy('order', 'asc')->get();
+        $allcores =CoreValue::orderBy('heading', 'asc')->get();
 
-        return view('welcome',compact('alljobs','today','welcome_settings','awards','sliders','service_categories','latestPosts','testimonials','countries','client_groups','clients'));
+        return view('welcome',compact('alljobs','allcores','directors','today','welcome_settings','awards','sliders','service_categories','latestPosts','testimonials','countries','client_groups','clients'));
 
     }
 
