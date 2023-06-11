@@ -285,7 +285,7 @@ li {
     font-size: 16px;
     line-height: 24px;
     color: #223f98;
-    padding: 11px 30px 9px;
+    padding: 11px 12px 9px;
     font-weight: 600;
     border-radius: 5px;
     border: 3px solid #223f98;
@@ -793,7 +793,7 @@ img {
     position: relative;
     float: left;
     padding: 35px 0px;
-    margin-right: 25px;
+    margin-right: 18px;
     -webkit-transition: all 300ms ease;
     -moz-transition: all 300ms ease;
     -ms-transition: all 300ms ease;
@@ -4112,7 +4112,7 @@ img {
     position: absolute;
     right: 0;
     top: 0;
-    height: 100%;
+    height: 85%;
     width: 100%;
     content: "";
     background-image: url(../images/icons/pattern-4.png);
@@ -7728,6 +7728,21 @@ img {
 .clients-section {
     position: relative;
     padding: 75px 0;
+}
+
+.clients-section :before{
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    content: "";
+    background-image: url(../images/icons/pattern-4.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    opacity: .80;
+    transform: scaleX(-1);
 }
 
 .clients-section .sponsors-outer {

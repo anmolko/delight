@@ -299,6 +299,9 @@ class FrontController extends Controller
         $image_des_elements = "";
         $slider_list_elements = "";
         $accordian2_chunks = "";
+        $gallery_elements = "";
+        $heading = "";
+        $subheading = "";
 
 
         foreach ($page_section as $section){

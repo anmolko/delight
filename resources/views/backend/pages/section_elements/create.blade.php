@@ -711,7 +711,7 @@
                                                 </div>
                                                 <div class="form-group mb-3">
                                                     <label>Description <span class="text-muted text-danger">*</span></label>
-                                                    <textarea class="form-control" rows="6" name="description" id="header_descp_editor" required>{{@$header_descp_elements->description}}</textarea>
+                                                    <textarea class="form-control" rows="6" name="description" id="task-textarea1" required>{{@$header_descp_elements->description}}</textarea>
                                                     <div class="invalid-feedback">
                                                         Please write the short description for basic section.
                                                     </div>
@@ -1134,6 +1134,7 @@
 @endsection
 
 @section('js')
+    <script src="{{asset('assets/backend/plugins/ckeditor/ckeditor.js')}}"></script>
     @include('backend.ckeditor')
 
     <script src="{{asset('assets/backend/plugins/dropzone/dropzone.js')}}"></script>
@@ -1334,13 +1335,18 @@
 
 
         $(document).ready(function () {
+
+            CKEDITOR.replace('task-textarea1',{
+                allowedContent: true
+            });
+
             if(section_list.includes("basic_section")) {
                 createEditor('basic_editor');
             }
 
-            if(section_list.includes("simple_header_and_description")){
-                createEditor('header_descp_editor');
-            }
+            // if(section_list.includes("simple_header_and_description")){
+            //     createEditor('header_descp_editor');
+            // }
             if(section_list.includes("simple_tab_list")){
                 createEditor('tab_list_desc_1');
                 createEditor('tab_list_desc_2');
@@ -1456,6 +1462,9 @@
             $("#header-descp-form").submit(function(event){
                 event.preventDefault(); //prevent default action
                 if (!this.checkValidity()) { return false;}
+
+                var editor_data = CKEDITOR.instances['task-textarea1'].getData();
+                $('#task-textarea1').text(editor_data);
 
                 var post_url       = $(this).attr("action"); //get form action url
                 var request_method = $(this).attr("method"); //get form GET/POST method

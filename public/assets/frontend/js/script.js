@@ -105,7 +105,7 @@
             .append('<span></span> <span></span> <span></span> <span></span> <span></span>');
     }
 
-    // Banner Carousel / Owl Carousel 
+    // Banner Carousel / Owl Carousel
     if ($('.banner-carousel').length) {
         $('.banner-carousel').owlCarousel({
             animateOut: 'fadeOut',
@@ -302,9 +302,9 @@
             loop: true,
             margin: 0,
             nav: true,
-            smartSpeed: 700,
+            smartSpeed: 300,
             autoplay: true,
-            autoplayTimeout: 10000,
+            autoplayTimeout: 1000,
             responsive: {
                 0: {
                     items: 1
@@ -488,7 +488,7 @@
             });
 
 
-            // Isotope Filter 
+            // Isotope Filter
             $filter.find('li').on('click', function() {
                 var selector = $(this).attr('data-filter');
 

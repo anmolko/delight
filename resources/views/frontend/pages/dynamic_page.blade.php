@@ -97,7 +97,7 @@
 @endsection
 @section('content')
     <!-- Page Title -->
-    <section class="page-title" style="background-image:url({{asset('assets/frontend/images/background/7.jpg')}});">
+    <section class="page-title" style="background-image:url({{asset('assets/frontend/images/background/7.jpg')}}); margin-bottom: 30px">
         <div class="auto-container clearfix">
             <h1>{{ucwords(@$page_detail->name)}}</h1>
             <ul class="bread-crumb clearfix">
@@ -110,7 +110,7 @@
     @foreach($sorted_sections as $key=>$value)
 
         @if($value == "basic_section")
-            <section class="about-us">
+            <section class="about-us" style="padding: 120px 0 0px!important;">
                 <div class="auto-container">
                     <div class="row clearfix">
                         <!-- Content Column -->
@@ -157,7 +157,7 @@
                         <div class="content-column col-xl-7 col-lg-6 col-md-12 col-sm-12 order-2">
                             <div class="inner-column" style="height: 34rem;">
                                 <h2 style="font-size: 29px;word-break: break-all;width: 60%;">{{@$image_des_elements->list_header}}</h2>
-                                <div class="text" style="font-size: 17px;">
+                                <div class="text" style="font-size: 17px; text-align: justify">
                                     {{@$image_des_elements->description}}
                                 </div>
 
@@ -346,7 +346,7 @@
         @endif
 
         @if($value == "gallery")
-            <section class="faqs-section alternate">
+            <section class="faqs-section alternate" style="padding: 10px 0 100px!important;">
                 <div class="auto-container">
                     @if($heading!==null)
                         <div class="sec-title text-center">
@@ -419,7 +419,7 @@
         @endif
 
         @if($value == "simple_header_and_description")
-            <div class="sidebar-page-container"  style=" padding:{{ $page_detail->slug=="ceo-message" ?  '10px 0 75px':'110px 0 75px' }}!important;">
+            <div class="sidebar-page-container"  style=" padding:  0px 0 75px!important;">
                 <div class="auto-container">
                     <div class="row clearfix">
                         <!--Content Side-->
@@ -433,7 +433,10 @@
                                                 </div>
                                             </div>
                                         @endif
-                                        {!! @$header_descp_elements->description !!}
+                                        <div style="text-align: justify">
+                                            {!! @$header_descp_elements->description !!}
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>

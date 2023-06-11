@@ -475,6 +475,11 @@
     <!--Clients Section-->
     <section class="clients-section">
         <div class="auto-container">
+            <div class="col-lg-12 col-md-12">
+                <div class="sec-title text-center">
+                    <h2>Valuable Clients</h2>
+                </div>
+            </div>
             <!--Sponsors Carousel-->
             <ul class="sponsors-carousel owl-carousel owl-theme">
                 @foreach(@$clients as $client)
