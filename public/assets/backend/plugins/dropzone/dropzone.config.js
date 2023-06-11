@@ -14,9 +14,9 @@ Dropzone.options.myDropzone = {
 
         // Get images
         var myDropzone = this;
-        // console.log(album_id);
+        // console.log(page_section_id);
         $.ajax({
-            url: "/auth/album-gallery/" + album_id,
+            url: "/auth/section-elements/gallery/" + page_section_id,
             type: 'GET',
             dataType: 'json',
             success: function(data) {
@@ -45,7 +45,7 @@ Dropzone.options.myDropzone = {
                 // console.log(name);
                 $.ajax({
                     type: 'POST',
-                    url: '/auth/album-gallery/image-delete',
+                    url: '/auth/section-elements/image-delete',
                     data: { filename: name, _token: $('[name="_token"]').val() },
                     success: function(data) {
                         total_photos_counter--;

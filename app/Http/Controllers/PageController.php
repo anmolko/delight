@@ -6,7 +6,10 @@ use App\Models\Page;
 use App\Models\PageSection;
 use App\Models\SectionElement;
 use App\Models\SectionGallery;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
@@ -15,7 +18,7 @@ class PageController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
 
     public function __construct()
@@ -25,14 +28,14 @@ class PageController extends Controller
 
     public function index()
     {
-        $pages = Page::all();
+        $pages = Page::orderBy('created_at','desc')->get();
         return view('backend.pages.index',compact('pages'));
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
@@ -43,7 +46,7 @@ class PageController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function store(Request $request)
     {
@@ -60,6 +63,8 @@ class PageController extends Controller
         $listval1     = ($request->input('list_number_1')==null) ? 1:$request->input('list_number_1');
         $listval2     = ($request->input('list_number_2')==null) ? 2:$request->input('list_number_2');
         $listval3     = ($request->input('list_number_3')==null) ? 3:$request->input('list_number_3');
+        $gallery_heading = $request->input('gallery_heading');
+        $gallery_subheading = $request->input('gallery_subheading');
 
         if($sections !== null){
             foreach ($sections as $key=>$value){
@@ -94,6 +99,16 @@ class PageController extends Controller
                         'position'                      => $pos[$key],
                         'page_id'                       => $page->id,
                         'created_by'                    => Auth::user()->id,
+                    ]);
+                }elseif ($value == 'gallery') {
+                    $section_status = PageSection::create([
+                        'section_name' => $section_name,
+                        'section_slug' => $value,
+                        'gallery_heading' => $gallery_heading,
+                        'gallery_subheading' => $gallery_subheading,
+                        'position' => $pos[$key],
+                        'page_id' => $page->id,
+                        'created_by' => Auth::user()->id,
                     ]);
                 }
                 else{
@@ -131,7 +146,7 @@ class PageController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function show($id)
     {
@@ -142,7 +157,7 @@ class PageController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Application|\Illuminate\Contracts\View\Factory|View
      */
     public function edit($id)
     {
@@ -155,6 +170,8 @@ class PageController extends Controller
         $list2_id           = "";
         $list3              = "";
         $list3_id           = "";
+        $heading            = "";
+        $subheading         = "";
         foreach ($page->sections as $section){
             $sections[$section->id] = $section->section_slug;
             if( $section->section_slug == 'accordion_section_1'){
@@ -181,10 +198,14 @@ class PageController extends Controller
                 $ordered_sections[$section->section_slug] = 'calltoaction.png';
             }  elseif ($section->section_slug == 'basic_section'){
                 $ordered_sections[$section->section_slug] = 'basic_section.png';
+            } elseif ($section->section_slug == 'gallery'){
+                $ordered_sections[$section->section_slug] = 'gallery.png';
+                $heading = $section->gallery_heading;
+                $subheading = $section->gallery_subheading;
             }
         }
 
-        return view('backend.pages.edit',compact('page','ordered_sections','sections','list1','list2','list3','list1_id','list2_id','list3_id'));
+        return view('backend.pages.edit',compact('page','heading','subheading','ordered_sections','sections','list1','list2','list3','list1_id','list2_id','list3_id'));
     }
 
     /**
@@ -192,10 +213,11 @@ class PageController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function update(Request $request, $id)
     {
+
         $incoming_sections        = $request->input('sorted_sections');
         $section                  = PageSection::where('page_id',$id)->get()->toArray();
         $db_section_slug          = array_map(function($item){ return $item['section_slug']; }, $section);
@@ -212,7 +234,8 @@ class PageController extends Controller
         $listval1                 = ($request->input('list_number_1')==null) ? 1:$request->input('list_number_1');
         $listval2                 = ($request->input('list_number_2')==null) ? 2:$request->input('list_number_2');
         $listval3                 = ($request->input('list_number_3')==null) ? 3:$request->input('list_number_3');
-
+        $gallery_heading          = $request->input('gallery_heading');
+        $gallery_subheading       = $request->input('gallery_subheading');
 
         if($incoming_sections !== null) {
             foreach ($incoming_sections as $key=>$value) {
@@ -239,6 +262,17 @@ class PageController extends Controller
                             'created_by' => Auth::user()->id,
                         ]);
 
+                    }
+                    elseif ($value == 'gallery') {
+                        $section_status = PageSection::create([
+                            'section_name' => $section_name,
+                            'section_slug' => $value,
+                            'gallery_heading' => $gallery_heading,
+                            'gallery_subheading' => $gallery_subheading,
+                            'position' => $pos[$key],
+                            'page_id' => $page->id,
+                            'created_by' => Auth::user()->id,
+                        ]);
                     }
                     elseif ($value == 'slider_list') {
                         $section_status = PageSection::create([
@@ -272,6 +306,13 @@ class PageController extends Controller
                         $section_element->list_number_2   = $request->input('list_number_2');
                         $section_element->position        = $pos[$key];
                         $section_status                   = $section_element->update();
+                    }
+                    elseif ($value == 'gallery') {
+                        $section_element = PageSection::where('page_id', $id)->where('section_slug', $value)->first();
+                        $section_element->gallery_heading = $gallery_heading;
+                        $section_element->gallery_subheading = $gallery_subheading;
+                        $section_element->position = $pos[$key];
+                        $section_status = $section_element->update();
                     }
                     elseif ($value == 'slider_list'){
                         $section_element                  = PageSection::find($request->input('list_3_id'));
@@ -353,7 +394,7 @@ class PageController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function destroy($id)
     {

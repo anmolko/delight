@@ -2,6 +2,18 @@
 @section('title') {{ucwords(@$page_detail->name)}}  @endsection
 @section('styles')
     <style>
+
+        #gallery #image-gallery .img-wrapper {
+            height: 270px;
+        }
+        #gallery img.img-responsive {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+    <link rel="stylesheet" href="{{asset('assets/frontend/css/lightbox.css')}}">
+    <style>
         .about-us .content-column ol, .about-us .content-column ul, .tabs-content ul, .tabs-content ol,
         .sidebar-page-container .blog-detail ul, .sidebar-page-container .blog-detail ol{
             margin-bottom: 40px;
@@ -297,7 +309,6 @@
                     </div>
                 </div>
             </div>
-
         @endif
 
         @if($value == "accordion_section_1")
@@ -332,6 +343,42 @@
                 </div>
             </div>
         </section>
+        @endif
+
+        @if($value == "gallery")
+            <section class="faqs-section alternate">
+                <div class="auto-container">
+                    @if($heading!==null)
+                        <div class="sec-title text-center">
+                            <div class="text" style="word-break: break-all;width: 60%;margin: auto;padding-top: 40px;">{{$subheading ?? ''}}</div>
+                            <h2>{{ $heading ?? '' }}</h2>
+                        </div>
+                    @endif
+                    <div class="row">
+                        <div class="faq-column col-lg-12 col-md-12 col-sm-12">
+                            @if(count(@$gallery_elements) > 0)
+                                <div id="gallery" style="padding: 0px 30px 0 30px;">
+                                    <div id="image-gallery">
+                                        <div class="row">
+                                            @foreach(@$gallery_elements as $gallery_element)
+                                                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 image">
+                                                    <div class="{{  $page_detail->slug =='legal-document' || $page_detail->slug =='legal-documents' ? "":"img-wrapper"}}">
+                                                        <a href="{{asset('/images/uploads/section_elements/gallery/'.@$gallery_element->filename)}}">
+                                                            <img src="{{asset('/images/uploads/section_elements/gallery/'.@$gallery_element->filename)}}" class="img-responsive"></a>
+                                                        <div class="img-overlay">
+                                                            <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        </div><!-- End row -->
+                                    </div><!-- End image gallery -->
+                                </div><!-- End container -->
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </section>
         @endif
 
         @if($value == "accordion_section_2")
@@ -461,7 +508,6 @@
 
 @endsection
 @section('js')
-
-
+    <script src="{{asset('assets/frontend/js/lightbox.min.js')}}"></script>
 <script  src="{{asset('assets/frontend/js/bootstrap.min.js')}}"></script>
 @endsection

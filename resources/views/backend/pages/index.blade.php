@@ -247,7 +247,7 @@
             $('#page-index').DataTable({
                 paging: true,
                 searching: true,
-                ordering:  true,
+                ordering:  false,
                 lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
             });
 

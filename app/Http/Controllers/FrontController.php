@@ -358,10 +358,17 @@ class FrontController extends Controller
                     ->where('page_section_id', $section->id)
                     ->get();
             }
+            else if ($section->section_slug == 'gallery'){
+                $gallery_elements = SectionGallery::with('section')
+                    ->where('page_section_id', $section->id)
+                    ->get();
+                $heading    = $section->gallery_heading;
+                $subheading = $section->gallery_subheading;
+            }
         }
 
 
-        return view('frontend.pages.dynamic_page', compact('sorted_sections','image_des_elements','accordian2_chunks','page_detail','list_1','list_2','list_3','basic_elements','call1_elements','call2_elements','bgimage_elements','flash_elements','header_descp_elements','accordian1_elements','accordian2_elements','slider_list_elements'));
+        return view('frontend.pages.dynamic_page', compact('sorted_sections','heading','subheading','gallery_elements','image_des_elements','accordian2_chunks','page_detail','list_1','list_2','list_3','basic_elements','call1_elements','call2_elements','bgimage_elements','flash_elements','header_descp_elements','accordian1_elements','accordian2_elements','slider_list_elements'));
 
     }
 

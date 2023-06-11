@@ -301,6 +301,40 @@
 
                 <div class="card shadow-none">
                     <div class="card-header">
+                        <h5 class="card-title text-primary mb-0">Gallery </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group mb-3">
+                                    <label>Heading </label>
+                                    <input type="text" class="form-control" name="gallery_heading" value="{{@$heading}}" >
+                                    <div class="invalid-feedback">
+                                        Please enter the heading.
+                                    </div>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label>Subeading </label>
+                                    <input type="text" class="form-control" name="gallery_subheading" value="{{@$subheading}}">
+                                    <div class="invalid-feedback">
+                                        Please enter the subheading.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="image-checkbox">
+                                    <img class="img-responsive" src="{{asset('assets/backend/img/page_sections/gallery.png')}}" />
+                                    <input type="checkbox" name="section[]" value="gallery" id="gallery.png" />
+                                    <i class="fa fa-check hidden"></i>
+                                </label>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="card shadow-none">
+                    <div class="card-header">
                         <h5 class="card-title text-primary mb-0">Slider Lists</h5>
                     </div>
                     <div class="card-body">

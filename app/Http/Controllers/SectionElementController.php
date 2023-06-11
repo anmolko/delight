@@ -27,6 +27,8 @@ class SectionElementController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->photos_path   = public_path('/images/uploads/section_elements/gallery');
+
     }
 
 
@@ -671,5 +673,105 @@ class SectionElementController extends Controller
     {
         //
     }
+
+    public function getGallery(Request $request,$id)
+    {
+        $images = SectionGallery::where('page_section_id',$id)->get()->toArray();
+        if (count($images) > 0){
+            foreach($images as $image){
+                $tableImages[] = $image['filename'];
+            }
+            $storeFolder = public_path('images/uploads/section_elements/gallery/');
+            $file_path = public_path('images/uploads/section_elements/gallery/');
+            $files = scandir($storeFolder);
+            foreach ( $files as $file ) {
+                if ($file !='.' && $file !='..' && in_array($file,$tableImages)) {
+                    $obj['name'] = $file;
+                    $file_path = public_path('images/uploads/section_elements/gallery/').$file;
+                    $obj['size'] = filesize($file_path);
+                    $obj['path'] = url('/images/uploads/section_elements/gallery/'.$file);
+                    $data[] = $obj;
+                }
+
+            }
+            return response()->json($data);
+        }
+    }
+
+    public function uploadGallery(Request $request,$id)
+    {
+        $page_section                 =  PageSection::with('page')->find($id);
+        if($page_section==null || $page_section=="null"){
+
+            return Response::json([
+                'message' => 'Page Section ID Not Found'
+            ], 400);
+        }
+
+        $photos = $request->file('file');
+
+        if (!is_array($photos)) {
+            $photos = [$photos];
+        }
+
+        if (!is_dir($this->photos_path)) {
+            mkdir($this->photos_path, 0777);
+        }
+
+
+        for ($i = 0; $i < count($photos); $i++) {
+            $photo = $photos[$i];
+            $name = $page_section->page->slug."_page_gallery_".date('YmdHis') . uniqid();
+            $save_name = $name . '.' . $photo->getClientOriginalExtension();
+
+            $resize_name = "Thumb_".$name . '.' . $photo->getClientOriginalExtension();
+
+            Image::make($photo)
+                ->orientate()
+                // ->resize(500, 500)
+                ->save($this->photos_path . '/' . $resize_name);
+
+            $photo->move($this->photos_path, $save_name);
+
+            $upload = new SectionGallery();
+            $upload->page_section_id = $page_section->id;
+            $upload->upload_by = Auth::user()->id;
+            $upload->filename = $save_name;
+            $upload->resized_name = $resize_name;
+            $upload->original_name = basename($photo->getClientOriginalName());
+            $upload->save();
+        }
+
+        return response()->json(['success'=>$save_name]);
+
+    }
+
+    public function deleteGallery(Request $request)
+    {
+        $filename = $request->get('filename');
+        $uploaded_image = SectionGallery::where('filename', $filename)->first();
+
+        if (empty($uploaded_image)) {
+            return Response::json(['message' => 'Sorry file does not exist'], 400);
+        }
+
+        $file_path = $this->photos_path . '/' . $uploaded_image->filename;
+        $resized_file = $this->photos_path . '/' . $uploaded_image->resized_name;
+
+        if (file_exists($file_path)) {
+            @unlink($file_path);
+        }
+
+        if (file_exists($resized_file)) {
+            @unlink($resized_file);
+        }
+
+        if (!empty($uploaded_image)) {
+            $uploaded_image->delete();
+        }
+
+        return Response::json(['success' => $filename], 200);
+    }
+
 
 }
