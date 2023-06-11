@@ -134,12 +134,12 @@
         @endif
 
         @if($value == "image_description_section")
-            <section class="offer-section">
+            <section class="offer-section" style=" padding: {{ $page_detail->slug=="ceo-message" ?  '120px 0 0px':'120px 0 7px' }}!important;">
                 <div class="bg-pattern"></div>
                 <div class="auto-container">
                     <div class="sec-title">
-                        <h2>{{@$image_des_elements->heading}}</h2>
                         <div class="text" style="word-break: break-all;width: 60%;">{{@$image_des_elements->subheading}}</div>
+                        <h2>{{@$image_des_elements->heading}}</h2>
                     </div>
                     <div class="row no-gutters">
                         <div class="content-column col-xl-7 col-lg-6 col-md-12 col-sm-12 order-2">
@@ -259,12 +259,11 @@
             <div class="service-detail-section">
                 <div class="auto-container">
                     <div class="row">
-
                         <div class="content-side col-lg-12 col-md-12 col-sm-12">
                             <div class="service-detail">
                                 <div class="content-box">
-                                    <h2 style="text-align: center;">{{@$flash_elements[0]->heading}}</h2>
-                                    <p style="text-align: center;">{{@$flash_elements[0]->subheading}}</p>
+                                    <h2 style="text-align: center;">{{@$flash_elements[0]->heading ?? ''}}</h2>
+                                    <p style="text-align: center;">{{@$flash_elements[0]->subheading ?? ''}}</p>
                                     <div class="service-tabs tabs-box">
                                         <!--Tab Btns-->
                                         <ul class="tab-btns tab-buttons clearfix">
@@ -373,7 +372,7 @@
         @endif
 
         @if($value == "simple_header_and_description")
-            <div class="sidebar-page-container">
+            <div class="sidebar-page-container"  style=" padding:{{ $page_detail->slug=="ceo-message" ?  '10px 0 75px':'110px 0 75px' }}!important;">
                 <div class="auto-container">
                     <div class="row clearfix">
                         <!--Content Side-->
@@ -441,7 +440,7 @@
 
     <!-- Brocher Section  -->
     @if(@$page_detail->slug=="legal-documents" || @$page_detail->slug=="legal-document")
-                
+
             @if(@$setting_data->brocher)
             <section class="services-section">
                 <div class="auto-container">
@@ -453,7 +452,7 @@
                     </div>
                 </div>
             </section>
-                                        
+
 
             @endif
         @endif

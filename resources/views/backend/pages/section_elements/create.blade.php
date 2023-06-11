@@ -179,7 +179,7 @@
                                             <div class="card-body">
                                                 <div class="form-group mb-3">
                                                     <label>Heading <span class="text-muted text-danger">*</span></label>
-                                                    <input type="text" class="form-control" maxlength="15" name="heading" value="{{@$image_des_elements->heading}}" required>
+                                                    <input type="text" class="form-control" maxlength="30" name="heading" value="{{@$image_des_elements->heading}}" required>
                                                     <input type="hidden" class="form-control" value="{{$key}}" name="page_section_id" required>
                                                     <input type="hidden" class="form-control" value="{{$value}}" name="section_name" required>
                                                     <div class="invalid-feedback">
@@ -188,7 +188,7 @@
                                                 </div>
                                                 <div class="form-group mb-3">
                                                     <label>Sub Heading </label>
-                                                    <input type="text" class="form-control" maxlength="120" name="subheading" value="{{@$image_des_elements->subheading}}">
+                                                    <input type="text" class="form-control" maxlength="40" name="subheading" value="{{@$image_des_elements->subheading}}">
                                                     <div class="invalid-feedback">
                                                         Please enter the Sub heading.
                                                     </div>
@@ -201,10 +201,9 @@
                                                         Please enter the inner sub title.
                                                     </div>
                                                 </div>
-
                                                 <div class="form-group mb-3">
                                                     <label>Description <span class="text-muted text-danger">*</span></label>
-                                                    <textarea class="form-control" maxlength="790" rows="6" name="description" id="image_section_editor" required>{!! @$image_des_elements->description !!}</textarea>
+                                                    <textarea class="form-control" maxlength="1100" rows="6" name="description" id="image_section_editor" required>{!! @$image_des_elements->description !!}</textarea>
                                                     <div class="invalid-feedback">
                                                         Please write the description.
                                                     </div>
@@ -536,15 +535,15 @@
                                             <img class="img-responsive mb-2" src="{{asset('assets/backend/img/page_sections/mission_vision.png')}}" />
 
                                             <div class="form-group mb-3">
-                                                <label>Heading <span class="text-muted text-danger">*</span></label>
-                                                <input type="text" class="form-control" name="heading[]" maxlength="22" value="{{@$flash_elements[0]->heading}}" required>
+                                                <label>Heading </label>
+                                                <input type="text" class="form-control" name="heading[]" maxlength="22" value="{{@$flash_elements[0]->heading}}">
                                                 <div class="invalid-feedback">
                                                     Please enter the heading.
                                                 </div>
                                             </div>
                                             <div class="form-group mb-3">
-                                                <label>Sub Heading <span class="text-muted text-danger">*</span></label>
-                                                <input type="text" class="form-control" maxlength="140" name="subheading[]" value="{{@$flash_elements[0]->subheading}}" required>
+                                                <label>Sub Heading </label>
+                                                <input type="text" class="form-control" maxlength="140" name="subheading[]" value="{{@$flash_elements[0]->subheading}}">
                                                 <div class="invalid-feedback">
                                                     Please enter the sub heading.
                                                 </div>
@@ -572,14 +571,14 @@
                                                                             <input type="hidden" class="form-control" value="{{$key}}" name="page_section_id" required>
                                                                             <input type="hidden" class="form-control" value="{{@$flash_elements[0]->id}}" name="id[]">
                                                                             <input type="hidden" class="form-control" value="{{$value}}" name="section_name" required>
-                                                                            <input type="text" class="form-control" maxlength="20" name="list_header[]" value="{{@$flash_elements[0]->list_header}}" required>
+                                                                            <input type="text" class="form-control" maxlength="50" name="list_header[]" value="{{@$flash_elements[0]->list_header}}" required>
                                                                             <div class="invalid-feedback">
                                                                                 Please enter the Mission heading.
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group mb-3">
                                                                             <label>Description <span class="text-muted text-danger">*</span></label>
-                                                                            <textarea class="form-control" id="mission_one" rows="6" name="list_description[]" required>{{@$flash_elements[0]->list_description}}</textarea>
+                                                                            <textarea class="form-control" id="mission" rows="6" name="list_description[]" required>{{@$flash_elements[0]->list_description}}</textarea>
                                                                             <div class="invalid-feedback">
                                                                                 Please write the Mission description.
                                                                             </div>
@@ -612,14 +611,14 @@
                                                                         <div class="form-group mb-3">
                                                                             <label>Heading <span class="text-muted text-danger">*</span></label>
                                                                             <input type="hidden" class="form-control" value="{{@$flash_elements[1]->id}}" name="id[]">
-                                                                            <input type="text" class="form-control" maxlength="20" name="list_header[]" value="{{@$flash_elements[1]->list_header}}" required>
+                                                                            <input type="text" class="form-control" maxlength="50" name="list_header[]" value="{{@$flash_elements[1]->list_header}}" required>
                                                                             <div class="invalid-feedback">
                                                                                 Please enter the Vision heading.
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group mb-3">
                                                                             <label>Description <span class="text-muted text-danger">*</span></label>
-                                                                            <textarea class="form-control" id="vision_one" rows="6" name="list_description[]" required>{{@$flash_elements[1]->list_description}}</textarea>
+                                                                            <textarea class="form-control" id="vision" rows="6" name="list_description[]" required>{{@$flash_elements[1]->list_description}}</textarea>
                                                                             <div class="invalid-feedback">
                                                                                 Please write the Vision description.
                                                                             </div>
@@ -653,14 +652,14 @@
                                                                     <div class="form-group mb-3">
                                                                         <label>Heading <span class="text-muted text-danger">*</span></label>
                                                                         <input type="hidden" class="form-control" value="{{@$flash_elements[2]->id}}" name="id[]">
-                                                                        <input type="text" class="form-control" maxlength="12" name="list_header[]" value="{{@$flash_elements[2]->list_header}}" required>
+                                                                        <input type="text" class="form-control" maxlength="50" name="list_header[]" value="{{@$flash_elements[2]->list_header}}" required>
                                                                         <div class="invalid-feedback">
                                                                             Please enter the Goal heading.
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group mb-3">
                                                                         <label>Description <span class="text-muted text-danger">*</span></label>
-                                                                        <textarea class="form-control" rows="6" id="goal_one" name="list_description[]" required>{{@$flash_elements[2]->list_description}}</textarea>
+                                                                        <textarea class="form-control" rows="6" id="goal" name="list_description[]" required>{{@$flash_elements[2]->list_description}}</textarea>
                                                                         <div class="invalid-feedback">
                                                                             Please write the Goal description.
                                                                         </div>
