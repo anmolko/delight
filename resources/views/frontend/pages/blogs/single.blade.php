@@ -22,7 +22,7 @@
 @section('content')
 
         <!--Page Title-->
-    <section class="page-title" style="background-image:url('{{asset('assets/frontend/images/background/7.jpg')}}');">
+        <section class="page-title" style="background-image:url('{{asset('assets/frontend/images/background/11.jpeg')}}');">
 
         <div class="auto-container clearfix">
             <h1>{{ucwords(@$singleBlog->title)}}</h1>
@@ -54,7 +54,7 @@
                                             <p>Category : </p>
                                             <ul class="tags">
                                                 <li><a href="{{route('blog.category',$singleBlog->category->slug)}}">{{ucwords($singleBlog->category->name)}}</a></li>
-                                            </ul>                               
+                                            </ul>
                                         </div>
                                         <div class="pull-right">
                                             <p>Share : </p>
@@ -66,7 +66,7 @@
                                         </div>
                                     </div>
                                 <div class="lower-content">
-                                   
+
                                     {!! @$singleBlog->description !!}
                                 </div>
                             </div>
@@ -74,7 +74,7 @@
 
 
 
-                     
+
 
 
                     </div>
@@ -82,8 +82,8 @@
 
                 <!--Sidebar Side-->
                 <div class="sidebar-side col-lg-4 col-md-12 col-sm-12">
-                    @include('frontend.pages.blogs.sidebar')            
-                   
+                    @include('frontend.pages.blogs.sidebar')
+
                 </div>
             </div>
         </div>

@@ -30,7 +30,7 @@
 @section('content')
 
     <!--Page Title-->
-    <section class="page-title" style="background-image:url('{{asset('assets/frontend/images/background/7.jpg')}}');">
+    <section class="page-title" style="background-image:url('{{asset('assets/frontend/images/background/11.jpeg')}}');">
 
     <div class="auto-container clearfix">
         <h1>{{ucwords(@$singlePress->title)}}</h1>
@@ -61,7 +61,7 @@
                                             <p>Press Release On : </p>
                                             <ul class="tags">
                                                 <li><a href="#">{{date('F j, Y',strtotime(@$singlePress->created_at))}}</a></li>
-                                            </ul>                               
+                                            </ul>
                                         </div>
                                         <div class="pull-right">
                                             <p>Share : </p>
@@ -73,7 +73,7 @@
                                         </div>
                                     </div>
                                 <div class="lower-content">
-                                   
+
                                     {!! @$singlePress->description !!}
                                 </div>
                             </div>
@@ -85,8 +85,8 @@
 
                 <!--Sidebar Side-->
                 <div class="sidebar-side col-lg-4 col-md-12 col-sm-12">
-                    @include('frontend.pages.press_release.sidebar')            
-                   
+                    @include('frontend.pages.press_release.sidebar')
+
                 </div>
             </div>
         </div>

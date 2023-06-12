@@ -151,6 +151,7 @@
                         </div>
                         <div class="text-box">
                             <p>{!! nl2br(@$welcome_settings->intro_description) !!}</p>
+                            <a href="{{ route('contact') }}" class="theme-btn btn-style-one"><span class="btn-title">Contact Us</span> <span></span> <span></span> <span></span> <span></span> <span></span></a>
                         </div>
 
                     </div>
@@ -200,13 +201,13 @@
             <div class="row">
                 <div class="col-lg-8 col-md-12">
                     <div class="sec-title">
-                        <h2>Our Services</h2>
-                        <div class="text">Our best services are here for your viewing. <br> You can browse through it</div>
+                        <h2>Our Category</h2>
+                        <div class="text">Our best service category are here for your viewing. <br> You can browse through it</div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-12">
                     <div class="right-btn text-right">
-                        <a href="{{route('service.frontend')}}" class="theme-btn btn-style-two"><span class="btn-title">All Services</span></a>
+                        <a href="{{route('service.frontend')}}" class="theme-btn btn-style-two"><span class="btn-title">All Categories</span></a>
                     </div>
                 </div>
             </div>
@@ -501,8 +502,8 @@
 
                 <div class="col-lg-8 col-md-12">
                     <div class="sec-title">
-                    <h2>News & Updates</h2>
-                    <div class="text">You read now our latest blogs</div>
+                        <div class="text">You read now our latest blogs</div>
+                        <h2>News & Updates</h2>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-12">

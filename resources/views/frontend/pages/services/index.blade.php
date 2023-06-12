@@ -1,19 +1,19 @@
 @extends('frontend.layouts.master')
-@section('title') Our Services @endsection
+@section('title') Service Category @endsection
 @section('styles')
 <style>
-  
+
 </style>
 @endsection
 @section('content')
 
     <!--Page Title-->
-    <section class="page-title" style="background-image:url('{{asset('assets/frontend/images/background/7.jpg')}}');">
+    <section class="page-title" style="background-image:url('{{asset('assets/frontend/images/background/11.jpeg')}}');">
         <div class="auto-container clearfix">
-            <h1>Our Services</h1>
+            <h1>Our Category</h1>
             <ul class="bread-crumb clearfix">
                 <li><a href="/">Home</a></li>
-                <li>Services</li>
+                <li>Service Category</li>
             </ul>
         </div>
     </section>
@@ -25,10 +25,10 @@
             <div class="sec-title text-center">
                 <h2>Our Available Categories</h2>
             </div>
-                                   
+
             <div class="row">
                 <!-- Portfolio Block -->
-                @if(count(@$service_categories) > 0) 
+                @if(count(@$service_categories) > 0)
                     @foreach(@$service_categories as $service_category)
                     <div class="project-block-two col-lg-4 col-md-6 col-sm-12">
                         <div class="inner-box">
@@ -48,9 +48,9 @@
                     </div>
                     @endforeach
                 @endif
-                         
 
-                
+
+
             </div>
 
         </div>

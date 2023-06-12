@@ -2,14 +2,14 @@
 @section('title') Clients @endsection
 @section('styles')
 <style>
-   
- 
+
+
 </style>
 @endsection
 @section('content')
 
     <!-- Page Title -->
-    <section class="page-title" style="background-image: url({{asset('assets/frontend/images/background/7.jpg')}});">
+    <section class="page-title" style="background-image:url('{{asset('assets/frontend/images/background/11.jpeg')}}');">
         <div class="auto-container">
             <div class="content-box">
                 <div class="content-wrapper">
@@ -20,7 +20,7 @@
                         <li><a href="/">Home</a></li>
                         <li>Clients</li>
                     </ul>
-                </div>                    
+                </div>
             </div>
         </div>
     </section>
@@ -44,23 +44,23 @@
                        @endforeach
                     </ul>
                 </div>
-                                                            
+
                 <div class="items-container row">
                     <!-- Portfolio Block -->
-           
+
                     @foreach(@$client_groups as  $client)
-                    
+
                     <div class="project-block-two all masonry-item {{@$client->country}} col-lg-2 col-md-6 col-sm-12">
                         <div class="inner-box">
                             <div class="image-box">
                                 <figure class="image"><a href="{{@$client->link}}" target="_blank" title="{{ucwords(@$client->name)}}"><img src="<?php if(@$client->image){?>{{asset('/images/uploads/clients/'.@$client->image)}}<?php }?>" alt="{{ucwords(@$client->name)}}"></a></figure>
                             </div>
-                            
+
                         </div>
                     </div>
                     @endforeach
 
-                  
+
                 </div>
             </div>
         </div>

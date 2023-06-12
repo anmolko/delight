@@ -17,7 +17,7 @@
 @endsection
 @section('content')
 
-    <section class="page-title" style="background-image:url({{asset('assets/frontend/images/background/7.jpg')}});">
+    <section class="page-title" style="background-image:url('{{asset('assets/frontend/images/background/11.jpeg')}}');">
         <div class="auto-container clearfix">
             <h1>Service Detail</h1>
             <ul class="bread-crumb clearfix">

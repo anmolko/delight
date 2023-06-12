@@ -47,14 +47,14 @@
 
     .pricing-table .table-content ul.list li a {
         color: #0c2957;
-    } 
+    }
 </style>
 
 @endsection
 @section('content')
 
     <!-- Page Title -->
-    <section class="page-title" style="background-image: url({{asset('assets/frontend/images/background/7.jpg')}});">
+    <section class="page-title" style="background-image:url('{{asset('assets/frontend/images/background/11.jpeg')}}');">
         <div class="auto-container">
             <div class="content-box">
                 <div class="content-wrapper">
@@ -65,7 +65,7 @@
                         <li><a href="/">Home</a></li>
                         <li>Careers</li>
                     </ul>
-                </div>                    
+                </div>
             </div>
         </div>
     </section>
@@ -75,15 +75,15 @@
     <!-- Career Sectioin -->
     <section class="pricing-section">
         <div class="auto-container">
-           
+
             <!--Pricing Tabs-->
-            <div class="pricing-tabs tabs-box clearfix">                    
-      
+            <div class="pricing-tabs tabs-box clearfix">
+
                 <div class="row">
                     <!-- Pricing Table -->
                     @if(count(@$careers) > 0)
                         @foreach(@$careers as $career)
-                       
+
                         <div class="pricing-table col-lg-4 col-md-6 col-sm-12">
                             <div class="inner-box">
                                 @if(@$career->type == "full_time")
@@ -92,7 +92,7 @@
                                     <div class="time">Part time</div>
                                 @endif
                                 <div class="title">{{ucwords(@$career->name)}}</div>
-                                
+
                                 <div class="table-content">
                                     <ul class="list">
                                         <li><a href="#"><i class="fas fa-suitcase"></i>{{@$career->open_position}} Open Position</a></li>
@@ -120,10 +120,10 @@
                             </div>
                         </section>
                     @endif
-                   
-              
+
+
                 </div>
-              
+
             </div>
         </div>
     </section>

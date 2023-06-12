@@ -2,14 +2,14 @@
 @section('title') Search Blog  @endsection
 @section('styles')
     <style>
-   
+
     </style>
 @endsection
 @section('content')
-  
+
 
     <!--Page Title-->
-   <section class="page-title" style="background-image:url('{{asset('assets/frontend/images/background/7.jpg')}}');">
+    <section class="page-title" style="background-image:url('{{asset('assets/frontend/images/background/11.jpeg')}}');">
         <div class="auto-container clearfix">
             <h1>{{@$query}} </h1>
             <ul class="bread-crumb clearfix">
@@ -62,18 +62,18 @@
                         </section>
 
                         @endif
-                                                    
-                        
+
+
                     </div>
                     <div class="styled-pagination text-center">
-                        
+
                         {{ $allPosts->links('vendor.pagination.default') }}
                     </div>
                 </div>
                 <!--Sidebar Side-->
                 <div class="sidebar-side col-lg-4 ">
-                    @include('frontend.pages.blogs.sidebar')            
-                    
+                    @include('frontend.pages.blogs.sidebar')
+
                 </div>
 
             </div>

@@ -246,7 +246,7 @@
                                                         </div>
                                                     </td>
                                                     <td>{{$category->name}}</td>
-                                                    <td>{{$category->short_description}}</td>
+                                                    <td>{{ elipsis($category->short_description,20)}}</td>
                                                     <td>
                                                         <div class="list">
                                                             {!! $category->list !!}
@@ -381,6 +381,7 @@
 
 @section('js')
     <script src="{{asset('assets/backend/plugins/ckeditor/ckeditor.js')}}"></script>
+    @include('backend.ckeditor')
 
     <script type="text/javascript">
 

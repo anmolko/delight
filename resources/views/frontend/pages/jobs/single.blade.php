@@ -68,7 +68,7 @@
 @section('content')
 
     <!-- Page Title -->
-    <section class="page-title" style="background-image: url('{{asset('assets/frontend/images/background/7.jpg')}}');">
+    <section class="page-title" style="background-image:url('{{asset('assets/frontend/images/background/11.jpeg')}}');">
         <div class="auto-container">
             <div class="content-box">
                 <div class="content-wrapper">

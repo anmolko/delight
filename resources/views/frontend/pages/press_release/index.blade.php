@@ -12,7 +12,7 @@
 @endsection
 @section('content')
     <!-- Page Title -->
-    <section class="page-title" style="background-image: url('{{asset('assets/frontend/images/background/7.jpg')}}');">
+    <section class="page-title" style="background-image:url('{{asset('assets/frontend/images/background/11.jpeg')}}');">
         <div class="auto-container">
             <div class="content-box">
                 <div class="content-wrapper">
@@ -29,7 +29,7 @@
     </section>
     <!-- Page Title -->
 
-  
+
     <!-- News Section -->
     <section class="news-section">
         <div class="auto-container">
@@ -50,7 +50,7 @@
                                     </div>
                                     <div class="lower-content">
                                         <div class="post-date"><span class="far fa-calendar"></span> {{date('M j, Y',strtotime(@$press->created_at))}}</div>
-                                       
+
                                         <h4><a href="{{route('press.single',@$press->slug)}}">{{ucwords($press->title)}}</a></h4>
                                         <div class="btn-box"><a href="{{route('press.single',@$press->slug)}}" class="read-more">Read More <span class="fa fa-arrow-right"></span></a></div>
                                     </div>
@@ -67,18 +67,18 @@
                                 </div>
                             </section>
                         @endif
-                                                    
-                        
+
+
                     </div>
                     <div class="styled-pagination text-center">
-                        
+
                         {{ $allPress->links('vendor.pagination.default') }}
                     </div>
                 </div>
                 <!--Sidebar Side-->
                 <div class="sidebar-side col-lg-4 ">
-                    @include('frontend.pages.press_release.sidebar')            
-                    
+                    @include('frontend.pages.press_release.sidebar')
+
                 </div>
 
             </div>

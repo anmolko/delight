@@ -10,7 +10,7 @@
 <!-- Page Title -->
 
     <!--Page Title-->
-    <section class="page-title" style="background-image:url('{{asset('assets/frontend/images/background/7.jpg')}}');">
+    <section class="page-title" style="background-image:url('{{asset('assets/frontend/images/background/11.jpeg')}}');">
         <div class="auto-container clearfix">
             <h1>Our Team</h1>
             <ul class="bread-crumb clearfix">
@@ -35,7 +35,7 @@
                                 <h6 class="name">{{ucwords(@$team->name)}}</h6>
                                 <span class="designation">{{ucwords(@$team->post)}}</span>
                                 <ul class="social-links">
-                                  
+
                                     @if(!empty(@$team->fb))
                                         <li><a href="{{@$team->fb}}" target="_blank"><span class="fab fa-facebook-f"></span></a></li>
                                     @endif

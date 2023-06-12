@@ -16,7 +16,7 @@
 @section('content')
 
     <!--Page Title-->
-    <section class="page-title" style="background-image:url('{{asset('assets/frontend/images/background/7.jpg')}}');">
+    <section class="page-title" style="background-image:url('{{asset('assets/frontend/images/background/11.jpeg')}}');">
         <div class="auto-container clearfix">
             <h1>Contact Us</h1>
             <ul class="bread-crumb clearfix">
@@ -64,11 +64,11 @@
                                 <div class="form-group">
                                     <input type="text" name="subject" class="subject" placeholder="Your Subject *" required oninvalid="this.setCustomValidity('Enter a subject')" oninput="this.setCustomValidity('')">
                                 </div>
-                                
+
                                 <div class="form-group">
                                     <textarea name="message" class="message" placeholder="Text Message *" required oninvalid="this.setCustomValidity('Type a message')" oninput="this.setCustomValidity('')"></textarea>
                                 </div>
-                                
+
                                 <div class="form-group">
                                     <button class="theme-btn btn-style-two" type="submit"  ><span class="btn-title">Submit Now</span> </button>
                                 </div>
@@ -83,7 +83,7 @@
                         <div class="row no-gutters">
                             <div class="contact-info-block col-lg-6 col-md-6 col-sm-12">
                                 <div class="inner">
-                                    <span class="icon flaticon-worldwide"></span> 
+                                    <span class="icon flaticon-worldwide"></span>
                                     <h4>Address</h4>
                                     <p>@if(!empty(@$setting_data->address)) {{@$setting_data->address}} @else Kathmandu, Nepal @endif</p>
                                 </div>
@@ -91,7 +91,7 @@
 
                             <div class="contact-info-block col-lg-6 col-md-6 col-sm-12">
                                 <div class="inner">
-                                    <span class="icon flaticon-phone"></span> 
+                                    <span class="icon flaticon-phone"></span>
                                     <h4>Call Us</h4>
                                     <p><a href="tel:@if(!empty(@$setting_data->mobile)) {{@$setting_data->mobile}} @endif">@if(!empty(@$setting_data->mobile)) {{@$setting_data->mobile}} @endif</a></p>
                                     <p><a href="tel:@if(!empty(@$setting_data->phone)) {{@$setting_data->phone}} @endif">@if(!empty(@$setting_data->phone)) {{@$setting_data->phone}} @endif</a></p>
@@ -100,7 +100,7 @@
 
                             <div class="contact-info-block col-lg-6 col-md-6 col-sm-12">
                                 <div class="inner">
-                                    <span class="icon flaticon-email"></span> 
+                                    <span class="icon flaticon-email"></span>
                                     <h4>Mail Us</h4>
                                     <p><a href="mailto:@if(!empty(@$setting_data->email)) {{@$setting_data->email}} @else example@gmail.com @endif">@if(!empty(@$setting_data->email)) {{@$setting_data->email}} @else example@gmail.com @endif</a></p>
                                 </div>
@@ -108,7 +108,7 @@
 
                             <div class="contact-info-block col-lg-6 col-md-6 col-sm-12">
                                 <div class="inner">
-                                    <span class="icon flaticon-clock"></span> 
+                                    <span class="icon flaticon-clock"></span>
                                     <h4>Time Table</h4>
                                     <p>Sun - Sat: 9 AM to 5 PM</p>
                                     <p>Saturday - Close</p>
@@ -132,6 +132,6 @@
     <!-- End Map Section -->
 
 
-  
+
 @endsection
 

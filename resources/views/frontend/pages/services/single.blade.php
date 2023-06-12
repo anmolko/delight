@@ -39,12 +39,12 @@
 
 
     <!--Page Title-->
-    <section class="page-title" style="background-image:url('{{asset('assets/frontend/images/background/7.jpg')}}');">
+    <section class="page-title" style="background-image:url('{{asset('assets/frontend/images/background/11.jpeg')}}');">
         <div class="auto-container clearfix">
             <h1>{{ucwords(@$singleService->name)}}</h1>
             <ul class="bread-crumb clearfix">
                 <li><a href="/">Home</a></li>
-                <li><a href="{{route('service.frontend')}}">Services</a></li>
+                <li><a href="{{route('service.frontend')}}">Service Category</a></li>
                 <li>{{ucwords(@$singleService->name)}}</li>
             </ul>
         </div>
@@ -66,7 +66,7 @@
                         </div>
 
                         <!--Title Style One-->
-                        <div class="content-box"> 
+                        <div class="content-box">
                             <h2>{{ucwords(@$singleService->name)}}</h2>
                             <div class="text"><p>{{@$singleService->short_description}}</p></div>
 
@@ -79,8 +79,8 @@
 
                 <!--Sidebar Side-->
                 <div class="sidebar-side col-lg-4 col-md-12 col-sm-12">
-                    @include('frontend.pages.services.sidebar')            
-                  
+                    @include('frontend.pages.services.sidebar')
+
                 </div>
             </div>
         </div>

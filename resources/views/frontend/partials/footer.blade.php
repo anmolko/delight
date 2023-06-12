@@ -27,7 +27,7 @@
                     <div class="footer-widget links-widget">
                         <div class="row">
                             <div class="col-lg-7 col-md-6">
-                                <h2 class="widget-title">Services</h2>
+                                <h2 class="widget-title">Quick Links</h2>
                                 <!--Footer Column-->
                                 <div class="widget-content">
                                     <ul class="list-style-two">
@@ -51,7 +51,7 @@
                                                 @else
                                                     @if($nav->type == 'custom')
                                                         <li>
-                                                            @if(str_contains(@$nav->slug,'http'))    
+                                                            @if(str_contains(@$nav->slug,'http'))
 																<a href="{{$nav->slug}}"  @if($nav->target == NULL)  @else target="{{$nav->target}}" @endif>  @if($nav->name == NULL) {{$nav->title}} @else {{$nav->name}} @endif</a></li>
 															@else
                                                                 <a href="/{{$nav->slug}}"  @if($nav->target == NULL)  @else target="{{$nav->target}}" @endif>  @if($nav->name == NULL) {{$nav->title}} @else {{$nav->name}} @endif</a></li>
